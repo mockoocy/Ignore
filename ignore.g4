@@ -1,21 +1,34 @@
 grammar ignore;
-
 fragment DIGIT: [0-9];
+
+OPEN_CURLY: '{';
+CLOSE_CURLY: '}';
 
 LITERAL_BOOL: 'false' | 'true';
 LITERAL_INT: DIGIT+;
 LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
 
-LITERAL_STRING: '"' .* '"';
+LITERAL_STRING: '"' .*? '"'; // .*? "c"
 
-OPERATOR_ARITHMETIC: ('*' | '-' | '+' | '/' | '==' | '!=');
-OPERATOR_LOGIC: ('&&' | '||');
+OPERATOR_ARITHMETIC: (
+		' * '
+		| ' - '
+		| ' + '
+		| ' / '
+		| ' == '
+		| ' != '
+		| ' >= '
+		| ' > '
+		| ' < '
+		| ' <= '
+	);
+OPERATOR_LOGIC: (' && ' | ' || ');
 
-ID: [a-zA-Z_][a-zA-Z0-9_]*;
+fragment ID: [a-zA-Z_][a-zA-Z0-9_]*;
+NAME: ID;
 WS: [ \t\n\r]+ -> skip;
 OPEN_PROGRAM: '<program>';
 CLOSE_PROGRAM: '</program>';
-
 literalNumeric: (LITERAL_INT | LITERAL_FLOAT);
 literal:
 	LITERAL_INT
@@ -23,46 +36,51 @@ literal:
 	| LITERAL_STRING
 	| LITERAL_BOOL;
 
-// TU SĄ TOKENY!!!!!!!!!!!!!!!!!!!!!!!! TOKENY NA GÓRZE A STARA JAKUBA SPOCEŃCA KULTURALNEGO POD
-// STOŁEM (ROBI MI LODA) <3
+program: (function)* OPEN_PROGRAM (block)* CLOSE_PROGRAM (
+		function
+	)* EOF;
+statement: block | expr;
+property: NAME '=' ('{' expr '}' | NAME);
+openTag: '<' NAME;
+startTag: openTag (property)* '>';
+endTag: '</' NAME '>';
+block: startTag expr endTag | function | control_statement;
 
-program: OPEN_PROGRAM block CLOSE_PROGRAM EOF;
-block: statement+; //block ma zero lub wiecej statementów
-keyword: ioStmt | varDecl;
-statement: keyword | expr;
-OPEN_IO: '<io>';
-CLOSE_IO: '</io>';
-//expr : LITERAL_INT | LITERAL_FLOAT | ID | expr OPERATOR_ARITHMETIC expr | expr OPERATOR_LOGIC expr | expr (OPERATOR) expr | '(' expr ')'; //
+//expr : LITERAL_INT | LITERAL_FLOAT | NAME | expr OPERATOR_ARITHMETIC expr | expr OPERATOR_LOGIC expr | expr (OPERATOR) expr | '(' expr ')'; //
 
-function_call: ID '(' (expr | literal) ')' | ID '()';
+functionCall: NAME '(' (expr | literal) ')' | NAME '()';
+
+functionParam: NAME ':' NAME;
+// paramName: type. Could change to NAME : NAME = literal for default values of params.
+functionName: 'name=' NAME;
+functionReturnType: 'returnType=' NAME;
+functionStart:
+	'<function' functionName (functionParam)* functionReturnType '>';
+functionEnd: '</function>';
+function: functionStart block* functionEnd;
+
+condition: expr OPERATOR_LOGIC expr | expr | LITERAL_BOOL;
+if: '<if' 'condition=' '{' (condition) '}' '>';
+IF_END: '</if>';
+if_statement: if statement IF_END;
+elif: '<elif condition={' (condition) '} >';
+ELIF_END: '</elif>';
+elif_statement: elif statement ELIF_END;
+else: '<else>';
+ELSE_END: '</else>';
+else_statement: else statement ELSE_END;
+
+control_statement:
+	if_statement (elif_statement)* (else_statement)?;
 expr:
 	'(' expr ')'
-	| ID
+	| NAME
 	| literal
-	| function_call
+	| functionCall
 	| expr '*' expr
 	| expr '+' expr
-	// | expr (OPERATOR_ARITHMETIC) expr
+	| expr (OPERATOR_ARITHMETIC) expr
 	| expr OPERATOR_LOGIC expr;
 
-//IF_TAG: '<if>'; ENDIF_TAG: '</if>';
-
-//function : ID'('  ')';
-varDecl:
-	'<var' 'name' '=' LITERAL_STRING 'type' '=' type '>' expr '</var>';
-
-ioStmt: OPEN_IO expr CLOSE_IO;
 type: 'number'; // mozna pozniej dodac | 'string' | 'bool' ;
 string_expr: LITERAL_STRING | expr;
-
-/*
- 
- >>>> condition: expression OPERATOR_LOGIC expression | expression;
- control_statement:
- 'if' '('
- condition ')' statement (
- 'else if' '(' condition ')' statement
- )* 'else' statement
- | 'if' '('
- condition ')' statement;
- */
