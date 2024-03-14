@@ -24,6 +24,10 @@ OPERATOR_ARITHMETIC: (
 	);
 OPERATOR_LOGIC: (' && ' | ' || ');
 
+COMMENT: '/*' .*? '*/' -> skip;
+
+LINE_COMMENT: '//' ~[\r\n]* -> skip;
+
 fragment ID: [a-zA-Z_][a-zA-Z0-9_]*;
 NAME: ID;
 WS: [ \t\n\r]+ -> skip;

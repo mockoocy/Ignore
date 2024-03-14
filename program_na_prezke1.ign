@@ -1,0 +1,24 @@
+<function name=factorial n:int returnType=int>
+    <if condition={n < 0}>
+        <throw exceptionType=InvalidArgumentExeption>
+            "Factorial is not defined for negative numbers"
+        </throw>
+    </if>
+    <if condition={n == 0}>
+        <return>
+            1
+        </return>
+    </if>
+    <return>
+        n * factorial(n - 1)
+    </return>
+</function>
+
+<program>
+    <io>
+        print(factorial(5))
+    </io>
+    <io>
+        print(factorial(15))
+    </io>
+</program>
