@@ -1,23 +1,23 @@
 <program>
     <io>
-        print(2 < 3)
+        {print(2 < 3)}
     </io>
     
     <io>
-        print(2==3)
+        {print(2==3)}
     </io>
 
 
     <io>
-        print(2 == 3)
+        {print(2 == 3)}
     </io>
 
     <io>
-        print(2+2*3)
+        {print(2+2*3)}
     </io>
 
 
     <io>
-        print(5 < 3)
+        {print(5 < 3)}
     </io>
 </program>

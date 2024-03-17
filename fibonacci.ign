@@ -1,16 +1,16 @@
-<function name=fibonacci n:int returnType=int >
-    <if condition={ n < 0 }>
+<function name=fibonacci 🍌:int returnType=int >
+    <if condition={ 🍌 < 0 }>
         <throw exceptionType=InvalidArgumentExeption >
-                "😿😿😿There are no fib number below 0"
+                {"😿😿😿There are no fib number below 0"}
         </throw>
     </if>
-    <if condition={n == 1 || n == 0}> 
+    <if condition={🍌 == 1 || 🍌 == 0}> 
         <return>
-            n
+            {🍌}
         </return>
     </if>
     <return>
-        fibonacci(n - 1) + fibonacci(n - 2) // łota fibonacci
+        {fibonacci(🍌 - 1) + fibonacci(🍌 - 2)}
     </return>
 </function>
 /*
@@ -21,6 +21,6 @@ tarz
 */
 <program>
     <io>
-        print(fibonacci(2+2*3))
+        {print(fibonacci(2+2*3))}
     </io>
 </program>

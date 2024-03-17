@@ -14,24 +14,22 @@ literal:
 program: (function)* OPEN_PROGRAM (block)* CLOSE_PROGRAM (
 		function
 	)* EOF;
-statement: block | expr;
-property: NAME EQUALS (OPEN_CURLY expr CLOSE_CURLY | NAME);
-endTag: CLOSE_TAG NAME END_TAG;
+statement: block | wrapped_expr;
+property: PROPERTY_NAME (wrapped_expr | TAG_REFERENCE);
+endTag: CLOSE_TAG END_TAG;
 startTag: OPEN_TAG END_TAG | OPEN_TAG (property)+ END_TAG;
-block: startTag expr endTag | function | control_statement;
-
-//expr : LITERAL_INT | LITERAL_FLOAT | NAME | expr OPERATOR_ARITHMETIC expr | expr OPERATOR_LOGIC expr | expr (OPERATOR) expr | '(' expr ')'; //
+block:
+	startTag wrapped_expr endTag
+	| function
+	| control_statement;
 
 functionCall:
 	NAME OPEN_PAREN (expr | literal) CLOSE_PAREN
 	| NAME OPEN_PAREN CLOSE_PAREN;
 
-functionParam: NAME COLON NAME;
 // paramName: type. Could change to NAME : NAME = literal for default values of params.
-functionName: NAME_EQ NAME;
-functionReturnType: RETURN_TYPE_EQ NAME;
 functionStart:
-	FUNCTION_TAG_OPEN functionName (functionParam)* functionReturnType END_TAG;
+	FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* FUNCTION_RET_TYPE END_TAG;
 function: functionStart block* FUNCTION_TAG_END;
 
 condition: expr OPERATOR_LOGIC expr | expr | LITERAL_BOOL;
@@ -53,8 +51,6 @@ expr:
 	| functionCall
 	| expr (MUL | DIV) expr
 	| expr (ADD | SUB) expr
-	| expr (OPERATOR_ARITHMETIC) expr
 	| expr (OPERATOR_COMPARE) expr
 	| expr (OPERATOR_LOGIC) expr;
-
-string_expr: LITERAL_STRING | expr;
+wrapped_expr: OPEN_CURLY expr CLOSE_CURLY;

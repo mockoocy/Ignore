@@ -1,11 +1,11 @@
 <program>
     <twojaStara siemanko={2 + 2} elo=aaa>
-        2+2 
+        {2+2 }
     </twojaStara>
     <io>
-        print("siemanko")
+        {print("siemanko")}
     </io>
     <io>
-        print(2+2*3)
+        {print(2+2*3)}
     </io>
 </program>
