@@ -81,9 +81,8 @@ expr:
 	| NAME
 	| literal
 	| functionCall
-	| expr '*' expr
-	| expr '+' expr
-	| expr (OPERATOR_ARITHMETIC) expr
+	| expr ('*' | '/') expr
+	| expr ('+' | '-') expr
 	| expr OPERATOR_LOGIC expr;
 
 type: 'number'; // mozna pozniej dodac | 'string' | 'bool' ;

@@ -14,27 +14,8 @@ LITERAL_BOOL: 'false' | 'true';
 LITERAL_INT: DIGIT+;
 LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
 
-LITERAL_STRING: '"' .*? '"'; // .*? "c"
-
-OPERATOR_ARITHMETIC: (
-		' * '
-		| ' - '
-		| ' + '
-		| ' / '
-		| ' == '
-		| ' != '
-		| ' >= '
-		| ' > '
-		| ' < '
-		| ' <= '
-	);
-OPERATOR_LOGIC: (' && ' | ' || ');
-
-fragment ID: [a-zA-Z_][a-zA-Z0-9_]*;
-NAME: ID;
-WS: [ \t\n\r]+ -> skip;
-OPEN_PROGRAM: '<program>';
-CLOSE_PROGRAM: '</program>';
+FUNCTION_TAG_OPEN: '<function';
+FUNCTION_TAG_END: '</function>';
 
 NAME_EQ: 'name=';
 RETURN_TYPE_EQ: 'returnType=';
@@ -46,6 +27,19 @@ ELIF_TAG: '<elif';
 ELSE: '<else>';
 ELSE_END: '</else>';
 
+// TAGI
+OPEN_TAG: '<' ID;
+CLOSE_TAG: '</';
+END_TAG: '>';
+
+LITERAL_STRING: '"' .*? '"'; // .*? "c"
+
+fragment ID: [a-zA-Z_][a-zA-Z0-9_]*;
+NAME: ID;
+WS: [ \t\n\r]+ -> skip;
+OPEN_PROGRAM: '<program>';
+CLOSE_PROGRAM: '</program>';
+
 // OPERATORY
 EQUALS: '=';
 MUL: '*';
@@ -53,10 +47,5 @@ DIV: '/';
 ADD: '+';
 SUB: '-';
 
-// TAGI
-OPEN_TAG: '<';
-CLOSE_TAG: '</';
-END_TAG: '>';
-
-FUNCTION_TAG_OPEN: '<function';
-FUNCTION_TAG_END: '</function>';
+OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
+OPERATOR_LOGIC: ('&&' | '||');

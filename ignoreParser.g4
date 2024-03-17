@@ -16,9 +16,8 @@ program: (function)* OPEN_PROGRAM (block)* CLOSE_PROGRAM (
 	)* EOF;
 statement: block | expr;
 property: NAME EQUALS (OPEN_CURLY expr CLOSE_CURLY | NAME);
-openTag: OPEN_TAG NAME;
 endTag: CLOSE_TAG NAME END_TAG;
-startTag: openTag (property)* END_TAG;
+startTag: OPEN_TAG END_TAG | OPEN_TAG (property)+ END_TAG;
 block: startTag expr endTag | function | control_statement;
 
 //expr : LITERAL_INT | LITERAL_FLOAT | NAME | expr OPERATOR_ARITHMETIC expr | expr OPERATOR_LOGIC expr | expr (OPERATOR) expr | '(' expr ')'; //
@@ -55,6 +54,7 @@ expr:
 	| expr (MUL | DIV) expr
 	| expr (ADD | SUB) expr
 	| expr (OPERATOR_ARITHMETIC) expr
-	| expr OPERATOR_LOGIC expr;
+	| expr (OPERATOR_COMPARE) expr
+	| expr (OPERATOR_LOGIC) expr;
 
 string_expr: LITERAL_STRING | expr;
