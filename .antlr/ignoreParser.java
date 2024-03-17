@@ -20,9 +20,9 @@ public class ignoreParser extends Parser {
 		LITERAL_INT=7, LITERAL_FLOAT=8, LITERAL_STRING=9, OPERATOR_ARITHMETIC=10, 
 		OPERATOR_LOGIC=11, NAME=12, WS=13, OPEN_PROGRAM=14, CLOSE_PROGRAM=15, 
 		NAME_EQ=16, RETURN_TYPE_EQ=17, CONDITION_EQ=18, IF_TAG=19, IF_END=20, 
-		ELIF_END=21, ELIF_TAG=22, ELSE=23, ELSE_END=24, CONDITION_START=25, EQUALS=26, 
-		MUL=27, DIV=28, ADD=29, SUB=30, OPEN_TAG=31, CLOSE_TAG=32, END_TAG=33, 
-		FUNCTION_TAG_OPEN=34, FUNCTION_TAG_END=35;
+		ELIF_END=21, ELIF_TAG=22, ELSE=23, ELSE_END=24, EQUALS=25, MUL=26, DIV=27, 
+		ADD=28, SUB=29, OPEN_TAG=30, CLOSE_TAG=31, END_TAG=32, FUNCTION_TAG_OPEN=33, 
+		FUNCTION_TAG_END=34;
 	public static final int
 		RULE_literalNumeric = 0, RULE_literal = 1, RULE_program = 2, RULE_statement = 3, 
 		RULE_property = 4, RULE_openTag = 5, RULE_endTag = 6, RULE_startTag = 7, 
@@ -46,9 +46,9 @@ public class ignoreParser extends Parser {
 		return new String[] {
 			null, "':'", "'('", "')'", "'{'", "'}'", null, null, null, null, null, 
 			null, null, null, "'<program>'", "'</program>'", "'name='", "'returnType='", 
-			null, null, "'</if>'", "'</elif>'", null, "'<else>'", "'</else>'", null, 
-			"'='", "'*'", "'/'", "'+'", "'-'", "'<'", "'</'", "'>'", "'<function'", 
-			"'</function>'"
+			"'condition='", "'<if'", "'</if>'", "'</elif>'", "'<elif'", "'<else>'", 
+			"'</else>'", "'='", "'*'", "'/'", "'+'", "'-'", "'<'", "'</'", "'>'", 
+			"'<function'", "'</function>'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -58,8 +58,8 @@ public class ignoreParser extends Parser {
 			"LITERAL_BOOL", "LITERAL_INT", "LITERAL_FLOAT", "LITERAL_STRING", "OPERATOR_ARITHMETIC", 
 			"OPERATOR_LOGIC", "NAME", "WS", "OPEN_PROGRAM", "CLOSE_PROGRAM", "NAME_EQ", 
 			"RETURN_TYPE_EQ", "CONDITION_EQ", "IF_TAG", "IF_END", "ELIF_END", "ELIF_TAG", 
-			"ELSE", "ELSE_END", "CONDITION_START", "EQUALS", "MUL", "DIV", "ADD", 
-			"SUB", "OPEN_TAG", "CLOSE_TAG", "END_TAG", "FUNCTION_TAG_OPEN", "FUNCTION_TAG_END"
+			"ELSE", "ELSE_END", "EQUALS", "MUL", "DIV", "ADD", "SUB", "OPEN_TAG", 
+			"CLOSE_TAG", "END_TAG", "FUNCTION_TAG_OPEN", "FUNCTION_TAG_END"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -244,7 +244,7 @@ public class ignoreParser extends Parser {
 			setState(62);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 19327877120L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 9664200704L) != 0)) {
 				{
 				{
 				setState(59);
@@ -874,7 +874,7 @@ public class ignoreParser extends Parser {
 			setState(149);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 19327877120L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 9664200704L) != 0)) {
 				{
 				{
 				setState(146);
@@ -1053,7 +1053,7 @@ public class ignoreParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ElifContext extends ParserRuleContext {
 		public TerminalNode ELIF_TAG() { return getToken(ignoreParser.ELIF_TAG, 0); }
-		public TerminalNode CONDITION_START() { return getToken(ignoreParser.CONDITION_START, 0); }
+		public TerminalNode CONDITION_EQ() { return getToken(ignoreParser.CONDITION_EQ, 0); }
 		public TerminalNode OPEN_CURLY() { return getToken(ignoreParser.OPEN_CURLY, 0); }
 		public TerminalNode CLOSE_CURLY() { return getToken(ignoreParser.CLOSE_CURLY, 0); }
 		public TerminalNode END_TAG() { return getToken(ignoreParser.END_TAG, 0); }
@@ -1075,7 +1075,7 @@ public class ignoreParser extends Parser {
 			setState(173);
 			match(ELIF_TAG);
 			setState(174);
-			match(CONDITION_START);
+			match(CONDITION_EQ);
 			setState(175);
 			match(OPEN_CURLY);
 			{
@@ -1486,7 +1486,7 @@ public class ignoreParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001#\u00e6\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\"\u00e6\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1523,7 +1523,7 @@ public class ignoreParser extends Parser {
 		"\t\u0016\u0001\u0017\u0001\u0017\u0003\u0017\u00e4\b\u0017\u0001\u0017"+
 		"\u0000\u0001,\u0018\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014"+
 		"\u0016\u0018\u001a\u001c\u001e \"$&(*,.\u0000\u0004\u0001\u0000\u0007"+
-		"\b\u0001\u0000\u0006\t\u0001\u0000\u001b\u001c\u0001\u0000\u001d\u001e"+
+		"\b\u0001\u0000\u0006\t\u0001\u0000\u001a\u001b\u0001\u0000\u001c\u001d"+
 		"\u00e5\u00000\u0001\u0000\u0000\u0000\u00022\u0001\u0000\u0000\u0000\u0004"+
 		"7\u0001\u0000\u0000\u0000\u0006L\u0001\u0000\u0000\u0000\bN\u0001\u0000"+
 		"\u0000\u0000\nW\u0001\u0000\u0000\u0000\fZ\u0001\u0000\u0000\u0000\u000e"+
@@ -1547,15 +1547,15 @@ public class ignoreParser extends Parser {
 		"\u0000\u0000\u0000GE\u0001\u0000\u0000\u0000HI\u0005\u0000\u0000\u0001"+
 		"I\u0005\u0001\u0000\u0000\u0000JM\u0003\u0010\b\u0000KM\u0003,\u0016\u0000"+
 		"LJ\u0001\u0000\u0000\u0000LK\u0001\u0000\u0000\u0000M\u0007\u0001\u0000"+
-		"\u0000\u0000NO\u0005\f\u0000\u0000OU\u0005\u001a\u0000\u0000PQ\u0005\u0004"+
+		"\u0000\u0000NO\u0005\f\u0000\u0000OU\u0005\u0019\u0000\u0000PQ\u0005\u0004"+
 		"\u0000\u0000QR\u0003,\u0016\u0000RS\u0005\u0005\u0000\u0000SV\u0001\u0000"+
 		"\u0000\u0000TV\u0005\f\u0000\u0000UP\u0001\u0000\u0000\u0000UT\u0001\u0000"+
-		"\u0000\u0000V\t\u0001\u0000\u0000\u0000WX\u0005\u001f\u0000\u0000XY\u0005"+
-		"\f\u0000\u0000Y\u000b\u0001\u0000\u0000\u0000Z[\u0005 \u0000\u0000[\\"+
-		"\u0005\f\u0000\u0000\\]\u0005!\u0000\u0000]\r\u0001\u0000\u0000\u0000"+
+		"\u0000\u0000V\t\u0001\u0000\u0000\u0000WX\u0005\u001e\u0000\u0000XY\u0005"+
+		"\f\u0000\u0000Y\u000b\u0001\u0000\u0000\u0000Z[\u0005\u001f\u0000\u0000"+
+		"[\\\u0005\f\u0000\u0000\\]\u0005 \u0000\u0000]\r\u0001\u0000\u0000\u0000"+
 		"^b\u0003\n\u0005\u0000_a\u0003\b\u0004\u0000`_\u0001\u0000\u0000\u0000"+
 		"ad\u0001\u0000\u0000\u0000b`\u0001\u0000\u0000\u0000bc\u0001\u0000\u0000"+
-		"\u0000ce\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000ef\u0005!\u0000"+
+		"\u0000ce\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000ef\u0005 \u0000"+
 		"\u0000f\u000f\u0001\u0000\u0000\u0000gh\u0003\u000e\u0007\u0000hi\u0003"+
 		",\u0016\u0000ij\u0003\f\u0006\u0000jn\u0001\u0000\u0000\u0000kn\u0003"+
 		"\u001c\u000e\u0000ln\u0003*\u0015\u0000mg\u0001\u0000\u0000\u0000mk\u0001"+
@@ -1570,16 +1570,16 @@ public class ignoreParser extends Parser {
 		"\u0080\u0081\u0005\u0010\u0000\u0000\u0081\u0082\u0005\f\u0000\u0000\u0082"+
 		"\u0017\u0001\u0000\u0000\u0000\u0083\u0084\u0005\u0011\u0000\u0000\u0084"+
 		"\u0085\u0005\f\u0000\u0000\u0085\u0019\u0001\u0000\u0000\u0000\u0086\u0087"+
-		"\u0005\"\u0000\u0000\u0087\u008b\u0003\u0016\u000b\u0000\u0088\u008a\u0003"+
+		"\u0005!\u0000\u0000\u0087\u008b\u0003\u0016\u000b\u0000\u0088\u008a\u0003"+
 		"\u0014\n\u0000\u0089\u0088\u0001\u0000\u0000\u0000\u008a\u008d\u0001\u0000"+
 		"\u0000\u0000\u008b\u0089\u0001\u0000\u0000\u0000\u008b\u008c\u0001\u0000"+
 		"\u0000\u0000\u008c\u008e\u0001\u0000\u0000\u0000\u008d\u008b\u0001\u0000"+
-		"\u0000\u0000\u008e\u008f\u0003\u0018\f\u0000\u008f\u0090\u0005!\u0000"+
+		"\u0000\u0000\u008e\u008f\u0003\u0018\f\u0000\u008f\u0090\u0005 \u0000"+
 		"\u0000\u0090\u001b\u0001\u0000\u0000\u0000\u0091\u0095\u0003\u001a\r\u0000"+
 		"\u0092\u0094\u0003\u0010\b\u0000\u0093\u0092\u0001\u0000\u0000\u0000\u0094"+
 		"\u0097\u0001\u0000\u0000\u0000\u0095\u0093\u0001\u0000\u0000\u0000\u0095"+
 		"\u0096\u0001\u0000\u0000\u0000\u0096\u0098\u0001\u0000\u0000\u0000\u0097"+
-		"\u0095\u0001\u0000\u0000\u0000\u0098\u0099\u0005#\u0000\u0000\u0099\u001d"+
+		"\u0095\u0001\u0000\u0000\u0000\u0098\u0099\u0005\"\u0000\u0000\u0099\u001d"+
 		"\u0001\u0000\u0000\u0000\u009a\u009b\u0003,\u0016\u0000\u009b\u009c\u0005"+
 		"\u000b\u0000\u0000\u009c\u009d\u0003,\u0016\u0000\u009d\u00a1\u0001\u0000"+
 		"\u0000\u0000\u009e\u00a1\u0003,\u0016\u0000\u009f\u00a1\u0005\u0006\u0000"+
@@ -1587,13 +1587,13 @@ public class ignoreParser extends Parser {
 		"\u0000\u00a0\u009f\u0001\u0000\u0000\u0000\u00a1\u001f\u0001\u0000\u0000"+
 		"\u0000\u00a2\u00a3\u0005\u0013\u0000\u0000\u00a3\u00a4\u0005\u0012\u0000"+
 		"\u0000\u00a4\u00a5\u0005\u0004\u0000\u0000\u00a5\u00a6\u0003\u001e\u000f"+
-		"\u0000\u00a6\u00a7\u0005\u0005\u0000\u0000\u00a7\u00a8\u0005!\u0000\u0000"+
+		"\u0000\u00a6\u00a7\u0005\u0005\u0000\u0000\u00a7\u00a8\u0005 \u0000\u0000"+
 		"\u00a8!\u0001\u0000\u0000\u0000\u00a9\u00aa\u0003 \u0010\u0000\u00aa\u00ab"+
 		"\u0003\u0006\u0003\u0000\u00ab\u00ac\u0005\u0014\u0000\u0000\u00ac#\u0001"+
 		"\u0000\u0000\u0000\u00ad\u00ae\u0005\u0016\u0000\u0000\u00ae\u00af\u0005"+
-		"\u0019\u0000\u0000\u00af\u00b0\u0005\u0004\u0000\u0000\u00b0\u00b1\u0003"+
+		"\u0012\u0000\u0000\u00af\u00b0\u0005\u0004\u0000\u0000\u00b0\u00b1\u0003"+
 		"\u001e\u000f\u0000\u00b1\u00b2\u0005\u0005\u0000\u0000\u00b2\u00b3\u0005"+
-		"!\u0000\u0000\u00b3%\u0001\u0000\u0000\u0000\u00b4\u00b5\u0003$\u0012"+
+		" \u0000\u0000\u00b3%\u0001\u0000\u0000\u0000\u00b4\u00b5\u0003$\u0012"+
 		"\u0000\u00b5\u00b6\u0003\u0006\u0003\u0000\u00b6\u00b7\u0005\u0015\u0000"+
 		"\u0000\u00b7\'\u0001\u0000\u0000\u0000\u00b8\u00b9\u0005\u0017\u0000\u0000"+
 		"\u00b9\u00ba\u0003\u0006\u0003\u0000\u00ba\u00bb\u0005\u0018\u0000\u0000"+

@@ -42,11 +42,9 @@ CONDITION_EQ: 'condition=';
 IF_TAG: '<if';
 IF_END: '</if>';
 ELIF_END: '</elif>';
-ELIF_TAG: '<if';
+ELIF_TAG: '<elif';
 ELSE: '<else>';
 ELSE_END: '</else>';
-
-CONDITION_START: 'condition=';
 
 // OPERATORY
 EQUALS: '=';

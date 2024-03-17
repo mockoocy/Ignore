@@ -41,7 +41,7 @@ if:
 
 if_statement: if statement IF_END;
 elif:
-	ELIF_TAG CONDITION_START OPEN_CURLY (condition) CLOSE_CURLY END_TAG;
+	ELIF_TAG CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY END_TAG;
 elif_statement: elif statement ELIF_END;
 else_statement: ELSE statement ELSE_END;
 

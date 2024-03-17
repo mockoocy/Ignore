@@ -1,7 +1,7 @@
 <function name=fibonacci n:int returnType=int >
     <if condition={ n < 0 }>
         <throw exceptionType=InvalidArgumentExeption >
-                "😿😿😿There are no fib number below 0"
+                "😿😿😿There are no negative fib numbers "
         </throw>
     </if>
     <if condition={n == 1 || n == 0}> 
@@ -10,15 +10,10 @@
         </return>
     </if>
     <return>
-        fibonacci(n - 1) + fibonacci(n - 2) // łota fibonacci
+        fibonacci(n - 1) + fibonacci(n - 2)
     </return>
 </function>
-/*
-Wielo
-liniowy
-komen
-tarz
-*/
+
 <program>
     <io>
         print(fibonacci(2+2*3))
