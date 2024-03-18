@@ -16,7 +16,11 @@ COMMENT: '/*' .*? '*/' -> skip;
 
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
 
-fragment ID: [a-zA-Z_][a-zA-Z0-9_]* | [\p{Emoji}];
+// IT IS VERY IMPORTANT TO USE \pEmojiPresentation=EmojiDefault instead of \p{Emoji} the latter
+// matches numerous unwanted characters like '*' or digits, while the first one matches only the
+// ones with have "colorful emoji presentation".
+fragment ID: ([a-zA-Z] [a-zA-Z0-9_]*)
+	| [\p{EmojiPresentation=EmojiDefault} ];
 WS: [ \t\n\r]+ -> skip;
 OPEN_PROGRAM: '<program>';
 CLOSE_PROGRAM: '</program>';
@@ -36,8 +40,8 @@ PROPERTY_NAME: ID '=';
 
 OPEN_CURLY: '{' -> pushMode(expr);
 mode expr;
-NAME: ID;
 EXPR_WS: [ \t\n\r]+ -> skip;
+NAME: ID;
 
 LITERAL_STRING: '"' .*? '"'; // .*? "c"
 COLON: ':';

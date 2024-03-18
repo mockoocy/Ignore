@@ -1,6 +1,6 @@
 param(
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$path
 )
 
-&antlr4-parse ignoreParser.g4 ignoreLexer.g4 program -gui $path
+&antlr4-parse ignoreParser.g4 ignoreLexer.g4 program -tokens -gui $path

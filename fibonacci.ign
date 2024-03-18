@@ -21,6 +21,6 @@ tarz
 */
 <program>
     <io>
-        {print(fibonacci(2+2*3))}
+        {print(fibonacci(2+2 * 3))}
     </io>
 </program>

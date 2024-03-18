@@ -20,9 +20,10 @@ endTag: CLOSE_TAG END_TAG;
 startTag: OPEN_TAG END_TAG | OPEN_TAG (property)+ END_TAG;
 block:
 	startTag wrapped_expr endTag
+	| wrapped_expr
 	| function
 	| control_statement;
-
+callEmoji: EMOJI EOF;
 functionCall:
 	NAME OPEN_PAREN (expr | literal) CLOSE_PAREN
 	| NAME OPEN_PAREN CLOSE_PAREN;
@@ -46,11 +47,11 @@ control_statement:
 	if_statement (elif_statement)* (else_statement)?;
 expr:
 	OPEN_PAREN expr CLOSE_PAREN
-	| NAME
 	| literal
 	| functionCall
 	| expr (MUL | DIV) expr
 	| expr (ADD | SUB) expr
 	| expr (OPERATOR_COMPARE) expr
-	| expr (OPERATOR_LOGIC) expr;
+	| expr (OPERATOR_LOGIC) expr
+	| NAME;
 wrapped_expr: OPEN_CURLY expr CLOSE_CURLY;
