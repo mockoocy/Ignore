@@ -27,7 +27,6 @@ JDK >= 11
 To generate Lexer and Parser for our language run the following command using ANTLR CLI.
 
 ```bash
-antlr4 -Dlanguage=Python3 src/ignoreLexer.g4 src/ignoreParser.g4
-# or using bash:
-sh generate.sh
+sh generate.sh #Bash
+generate #Powershell
 ```

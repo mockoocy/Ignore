@@ -1,1 +1,1 @@
-antlr4-parse src/ignoreParser.g4 src/ignoreLexer.g4 program -tokens -gui $1
+antlr4-parse src/grammar/ignoreParser.g4 src/grammar/ignoreLexer.g4 program -tokens -gui -encoding utf-8 $path

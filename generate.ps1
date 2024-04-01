@@ -1,0 +1,1 @@
+Get-Content .\generate.sh | Invoke-Expression
