@@ -3,7 +3,6 @@ from antlr4 import *
 from ignoreLexer import ignoreLexer
 from ignoreParser import ignoreParser
 from ignoreParserListener import ignoreParserListener
-
 def main(argv):
     input_stream = FileStream(argv[1], encoding="utf-8")
     lexer = ignoreLexer(input_stream)

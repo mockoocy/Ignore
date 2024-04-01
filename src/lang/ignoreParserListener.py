@@ -1,12 +1,24 @@
 # Generated from src/grammar/ignoreParser.g4 by ANTLR 4.13.1
+
+from typing import Any, Dict
+from stdlib import builtins
 from antlr4 import *
 if "." in __name__:
     from .ignoreParser import ignoreParser
 else:
     from ignoreParser import ignoreParser
 
+
 # This class defines a complete listener for a parse tree produced by ignoreParser.
 class ignoreParserListener(ParseTreeListener):
+
+    variables: Dict[str, Any] = builtins 
+    """
+        stores our var decls. For now format: name -> value.
+        May move to format name -> variableSpecification 
+        (whatever it would be) if convenient.
+        By default stores many python functions.
+    """
 
     # Enter a parse tree produced by ignoreParser#literalNumeric.
     def enterLiteralNumeric(self, ctx:ignoreParser.LiteralNumericContext):
@@ -82,7 +94,13 @@ class ignoreParserListener(ParseTreeListener):
 
     # Enter a parse tree produced by ignoreParser#functionCall.
     def enterFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
-        pass
+
+        function_name = str(ctx.NAME())
+        argument = str(ctx.expr()) # only 1-arg functions allowed for now
+        if function_name not in self.variables.keys():
+            raise ValueError(f"function not defined {function_name}")
+        print(f"calling {function_name} with {argument}")
+        return self.variables[function_name](argument)
 
     # Exit a parse tree produced by ignoreParser#functionCall.
     def exitFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
