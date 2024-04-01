@@ -1,0 +1,1 @@
+antlr4 -Dlanguage=Python3 src/ignoreLexer.g4 src/ignoreParser.g4
