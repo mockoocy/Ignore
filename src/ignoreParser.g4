@@ -23,7 +23,7 @@ block:
 	| wrapped_expr
 	| function
 	| control_statement;
-callEmoji: EMOJI EOF;
+
 functionCall:
 	NAME OPEN_PAREN (expr | literal) CLOSE_PAREN
 	| NAME OPEN_PAREN CLOSE_PAREN;
