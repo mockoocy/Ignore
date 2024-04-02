@@ -3,7 +3,7 @@ param(
     [string]$path
 )
 
-$cmd = Get-Conetnt .\gui-parse.sh
+$cmd = Get-Content .\gui-parse.sh
 
 $finalCommand = "$command $path"
 
