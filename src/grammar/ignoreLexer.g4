@@ -11,6 +11,9 @@ ELIF_END: '</elif>';
 ELIF_TAG: '<elif';
 ELSE: '<else>';
 ELSE_END: '</else>';
+VAR_DECL_START: '<var';
+VAR_DECL_END: '</var>';
+VAR_DECL: VAR_DECL_START ID;
 
 COMMENT: '/*' .*? '*/' -> skip;
 

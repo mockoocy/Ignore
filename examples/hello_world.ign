@@ -1,6 +1,4 @@
 <program>
-  <io> // pozdrawiam dobre mordki
     {print("Hello World")}
-  </io>
-
+    {print("Hello World")}
 </program>

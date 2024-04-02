@@ -11,7 +11,7 @@ literal:
 	| LITERAL_STRING
 	| LITERAL_BOOL;
 
-program: (function)* OPEN_PROGRAM (block)* CLOSE_PROGRAM (
+program: (function)* OPEN_PROGRAM (block| var)* CLOSE_PROGRAM (
 		function
 	)* EOF;
 statement: block | wrapped_expr;
@@ -32,6 +32,10 @@ functionCall:
 functionStart:
 	FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* FUNCTION_RET_TYPE END_TAG;
 function: functionStart block* FUNCTION_TAG_END;
+
+
+varDecl: VAR_DECL FUNCTION_NAME END_TAG;
+var: varDecl wrapped_expr VAR_DECL_END; 
 
 condition: expr OPERATOR_LOGIC expr | expr | LITERAL_BOOL;
 if:

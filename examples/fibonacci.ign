@@ -20,7 +20,7 @@ komen
 tarz
 */
 <program>
-    <io>
-        {print(fibonacci(2+2 * 3))}
-    </io>
+    <var name=wynikFibonaciego>
+        {(fibonacci(2+2 * 3))}
+    </var>
 </program>

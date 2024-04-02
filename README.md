@@ -30,3 +30,9 @@ To generate Lexer and Parser for our language run the following command using AN
 sh generate.sh #Bash
 generate #Powershell
 ```
+
+To odpalić the program type the following thing:
+
+```bash
+python src/lang/Driver.py <filename>
+```
