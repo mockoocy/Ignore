@@ -21,6 +21,7 @@ sh gui-parse.sh <filename>
 ### Requiremens
 
 JDK >= 11
+Python >= 3.12
 
 ### Generating Lexer and Parser
 

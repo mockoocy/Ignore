@@ -1,18 +1,18 @@
 import sys
 from antlr4 import *
-from ignoreLexer import ignoreLexer
-from ignoreParser import ignoreParser
-from ignoreParserListener import ignoreParserListener
+from generated.ignoreLexer import ignoreLexer
+from Parser import Parser
+from Listener import Listener
 def main(argv):
     input_stream = FileStream(argv[1], encoding="utf-8")
     lexer = ignoreLexer(input_stream)
     stream = CommonTokenStream(lexer)
-    parser = ignoreParser(stream)
+    parser = Parser(stream)
     tree = parser.program()
     if parser.getNumberOfSyntaxErrors() > 0:
         print("syntax errors")
     else:
-        linterp = ignoreParserListener()
+        linterp = Listener()
         walker = ParseTreeWalker()
         walker.walk(linterp, tree)
 
