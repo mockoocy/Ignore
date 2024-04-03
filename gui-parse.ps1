@@ -5,6 +5,6 @@ param(
 
 $cmd = Get-Content .\gui-parse.sh
 
-$finalCommand = "$command $path"
+$finalCommand = "$cmd $path"
 
 & $finalCommand
