@@ -44,6 +44,7 @@ PROPERTY_NAME: ID '=';
 OPEN_CURLY: '{' -> pushMode(expr);
 mode expr;
 EXPR_WS: [ \t\n\r]+ -> skip;
+LITERAL_BOOL: 'False' | 'True';
 NAME: ID;
 
 LITERAL_STRING: '"' .*? '"'; // .*? "c"
@@ -52,7 +53,6 @@ COLON: ':';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 
-LITERAL_BOOL: 'false' | 'true';
 LITERAL_INT: DIGIT+;
 LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
 
