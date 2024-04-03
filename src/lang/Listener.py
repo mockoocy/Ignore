@@ -1,6 +1,5 @@
 from stdlib import builtins 
-from typing import Any, Dict, override
-from sys import path
+from typing import Any, Dict
 from generated.ignoreParserListener import ignoreParserListener
 from generated.ignoreParser import ignoreParser
 
