@@ -1,0 +1,5 @@
+<program>
+    {print("hello world")}
+    {print(1)}
+    {print(3.0)}
+</program>

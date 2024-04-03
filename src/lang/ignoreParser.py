@@ -262,10 +262,34 @@ class ignoreParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def check_type(self):
+            print(f"is LITERAL_STRING {self.LITERAL_STRING() is not None}")
+            print(f"is LITERAL_INT {self.LITERAL_INT() is not None }")
+            print(f"is LITERAL_BOOL{self.LITERAL_BOOL() is not None}")
+            print(f"is LITERAL_FLOAT {self.LITERAL_FLOAT() is not None}")
+            
+
         def evaluate(self):
+            # self.check_type()
+
             if self.LITERAL_STRING() is not None:
                 raw_string = str(self.LITERAL_STRING())
+                print("literal string")
                 return raw_string[1:-1] 
+            
+            elif self.LITERAL_INT() is not None:
+                print("literal int")
+                return str(self.LITERAL_INT())
+            
+            elif self.LITERAL_FLOAT() is not None:
+                print("literal float")
+                return str(self.LITERAL_FLOAT())
+            
+            # not working!
+            # elif self.LITERAL_BOOL() is not None:
+            #   print("literal bool")
+            #  return str(self.LITERAL_BOOL())
+            
             else:
                 raise NotImplementedError("Unsupported literal type")
         
@@ -1547,12 +1571,15 @@ class ignoreParser ( Parser ):
 
         def evaluate(self):
                 if self.literal() is not None:
+                    print("LITERAL!")
                     return self.literal().evaluate()
 
                 elif self.functionCall() is not None:
+                    print("function")
                     return self.functionCall().evaluate()
 
                 elif self.ADD() is not None or self.SUB() is not None or self.MUL() is not None or self.DIV() is not None:
+                    print("arithmetic")
                     left = self.expr(0).evaluate()
                     right = self.expr(1).evaluate()
                     if self.ADD() is not None:
