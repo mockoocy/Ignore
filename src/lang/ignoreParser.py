@@ -262,6 +262,13 @@ class ignoreParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def evaluate(self):
+            if self.LITERAL_STRING() is not None:
+                raw_string = str(self.LITERAL_STRING())
+                return raw_string[1:-1] 
+            else:
+                raise NotImplementedError("Unsupported literal type")
+        
         def LITERAL_INT(self):
             return self.getToken(ignoreParser.LITERAL_INT, 0)
 
@@ -1538,6 +1545,25 @@ class ignoreParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def evaluate(self):
+                if self.literal() is not None:
+                    return self.literal().evaluate()
+
+                elif self.functionCall() is not None:
+                    return self.functionCall().evaluate()
+
+                elif self.ADD() is not None or self.SUB() is not None or self.MUL() is not None or self.DIV() is not None:
+                    left = self.expr(0).evaluate()
+                    right = self.expr(1).evaluate()
+                    if self.ADD() is not None:
+                        return left + right
+                    elif self.SUB() is not None:
+                        return left - right
+                    elif self.MUL() is not None:
+                        return left * right
+                    elif self.DIV() is not None:
+                        return left / right  # division by zero?!
+                    
         def OPEN_PAREN(self):
             return self.getToken(ignoreParser.OPEN_PAREN, 0)
 
