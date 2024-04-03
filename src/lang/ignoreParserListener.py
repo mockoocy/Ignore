@@ -116,7 +116,7 @@ class ignoreParserListener(ParseTreeListener):
 
         print("enterFunctionCall")
         function_name = str(ctx.NAME())
-        argument = str(ctx.expr()) # only 1-arg functions allowed for now
+        argument = str(ctx.expr().evaluate()) # only 1-arg functions allowed for now
 
 
         if function_name not in self.variables.keys():
