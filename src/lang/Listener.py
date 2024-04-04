@@ -1,5 +1,5 @@
 from stdlib import builtins 
-from typing import Any, Dict
+from typing import Any, Dict, override
 from generated.ignoreParserListener import ignoreParserListener
 from generated.ignoreParser import ignoreParser
 
@@ -22,12 +22,24 @@ class Listener(ignoreParserListener):
 
     @override
     def enterFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
-
-        print("enterFunctionCall")
         function_name = str(ctx.NAME())
-        argument = str(ctx.expr().evaluate()) # only 1-arg functions allowed for now
-
-
+        argument = ctx.expr().evaluate() # only 1-arg functions allowed for now
         if function_name not in self.variables.keys():
             raise ValueError(f"function not defined {function_name}")
         return self.variables[function_name](argument)
+    
+
+    @override
+    def enterVarDecl(self, ctx:ignoreParser.VarDeclContext):
+        var_name = str(ctx.FUNCTION_NAME())[5:]
+        expression = ctx.parentCtx.wrapped_expr().expr().evaluate()
+
+        # jesli expression to name to byla proba przypisania wartosci jednej zmiennej do drugiej
+        if ctx.parentCtx.wrapped_expr().expr().NAME() is not None:
+            if str(expression) not in self.variables.keys():
+                raise ValueError(f"No such variable declared {str(expression)}")
+            self.variables[var_name] = self.variables[str(expression)]
+        else:
+            self.variables[var_name] = expression
+        
+    

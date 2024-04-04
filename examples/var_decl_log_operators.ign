@@ -1,0 +1,29 @@
+<program>
+    <var name=true_var>
+        {True}
+    </var> 
+
+    <var name=false_var>
+        {False}
+    </var>  
+
+    <var name=add>
+        {2 + 3}
+    </var>  
+    <var name=div>
+        {10/2}
+    </var>  
+    <var name=bigger>
+        {9.089}
+    </var>  
+    <var name=smaller>
+        {6.71}
+    </var>  
+{print(true_var && false_var)}
+{print(true_var || false_var)}
+{print(add + div)}
+{print(add == div)}
+{print(div != add)}
+{print(bigger >  smaller)}
+{print(bigger <= smaller)}
+</program>

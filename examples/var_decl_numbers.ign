@@ -1,0 +1,15 @@
+<program>
+    <var name=num1>
+        {2 + 3*4}
+    </var>  
+    <var name=num2>
+        {10/3}
+    </var>  
+    <var name=diff>
+        {num1 - num2}
+    </var>  
+{print(num1)}
+{print(num2)}
+{print(diff)}
+
+</program>
