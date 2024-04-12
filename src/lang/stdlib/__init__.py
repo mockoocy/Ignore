@@ -1,14 +1,13 @@
 from inspect import getmembers
 import contextlib
 import io
-modules =[
-    "builtins",
-    "collections"
-]
+
+modules = ["builtins", "collections"]
 
 """
     defition of built in variable declarations and function definitions
 """
+
 
 def get_all_members(modulename: str):
     return __import__(modulename).__dict__

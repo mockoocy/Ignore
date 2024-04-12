@@ -12,10 +12,9 @@ from Listener import Listener
 
 def evaluate_expr(expr: ignoreParser.ExprContext):
 
-
     if expr.literal() is not None:
         return expr.literal().evaluate()
-    
+
     elif expr.NAME() is not None:
         if str(expr.NAME()) not in Listener.variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
@@ -24,7 +23,12 @@ def evaluate_expr(expr: ignoreParser.ExprContext):
     elif expr.functionCall() is not None:
         return expr.functionCall().evaluate()
 
-    elif expr.ADD() is not None or expr.SUB() is not None or expr.MUL() is not None or expr.DIV() is not None :
+    elif (
+        expr.ADD() is not None
+        or expr.SUB() is not None
+        or expr.MUL() is not None
+        or expr.DIV() is not None
+    ):
         left = expr.expr(0).evaluate()
         right = expr.expr(1).evaluate()
 
@@ -39,24 +43,24 @@ def evaluate_expr(expr: ignoreParser.ExprContext):
     elif expr.OPERATOR_COMPARE() is not None:
         left = expr.expr(0).evaluate()
         right = expr.expr(1).evaluate()
-        if str(expr.OPERATOR_COMPARE()) == '==':
+        if str(expr.OPERATOR_COMPARE()) == "==":
             return left == right
-        elif str(expr.OPERATOR_COMPARE()) == '!=':
+        elif str(expr.OPERATOR_COMPARE()) == "!=":
             return left != right
-        elif str(expr.OPERATOR_COMPARE()) == '>':
+        elif str(expr.OPERATOR_COMPARE()) == ">":
             return left > right
-        elif str(expr.OPERATOR_COMPARE()) == '<':
+        elif str(expr.OPERATOR_COMPARE()) == "<":
             return left < right
-        elif str(expr.OPERATOR_COMPARE()) == '>=':
+        elif str(expr.OPERATOR_COMPARE()) == ">=":
             return left >= right
-        elif str(expr.OPERATOR_COMPARE()) == '<=':
+        elif str(expr.OPERATOR_COMPARE()) == "<=":
             return left <= right
     elif expr.OPERATOR_LOGIC() is not None:
         left = expr.expr(0).evaluate()
         right = expr.expr(1).evaluate()
-        if str(expr.OPERATOR_LOGIC()) == '&&':
+        if str(expr.OPERATOR_LOGIC()) == "&&":
             return left and right
-        elif str(expr.OPERATOR_LOGIC()) == '||':
+        elif str(expr.OPERATOR_LOGIC()) == "||":
             return left or right
     else:
         raise NotImplementedError("Unsupported expression syntax")
@@ -66,31 +70,29 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
 
     if literal.LITERAL_STRING() is not None:
         raw_string = str(literal.LITERAL_STRING())
-        return raw_string[1:-1] 
-    
+        return raw_string[1:-1]
+
     elif literal.LITERAL_INT() is not None:
         return int(str(literal.LITERAL_INT()))
-    
+
     elif literal.LITERAL_FLOAT() is not None:
         return float(str(literal.LITERAL_FLOAT()))
-    
+
     elif literal.LITERAL_BOOL() is not None:
         bool_str = str(literal.LITERAL_BOOL())
-        if bool_str == 'True':
+        if bool_str == "True":
             return True
-        elif bool_str == 'False':
+        elif bool_str == "False":
             return False
-
 
     else:
         raise NotImplementedError("Unsupported literal type")
-    
 
 
 ignoreParser.ExprContext.evaluate = evaluate_expr
 ignoreParser.LiteralContext.evaluate = evaluate_literal
-#zacomentowalem mozna by przepisac cale evaluate_expr
+# zacomentowalem mozna by przepisac cale evaluate_expr
 # ale to kopiowanie kodu bezsensu
 # wystarczy zamiast wrapped_expr.evaluate() pisac wrapped_expression.expression().evaluate()
-#ignoreParser.Wrapped_exprContext.evaluate = evaluate_wrapped_expr
+# ignoreParser.Wrapped_exprContext.evaluate = evaluate_wrapped_expr
 Parser = ignoreParser
