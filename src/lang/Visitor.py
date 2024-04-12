@@ -12,7 +12,6 @@ class Visitor(ignoreParserVisitor):
         self.variables = variables
         super().__init__()  # Call parent class constructor
 
-    variables: Dict[str, Any] = builtins
     """
         stores our var decls. For now format: name -> value.
         May move to format name -> variableSpecification 
@@ -20,31 +19,70 @@ class Visitor(ignoreParserVisitor):
         By default stores many python functions.
     """
 
-    @override
-    def visitProgram(self, ctx: ignoreParser.ProgramContext):
-        print("sieman")
-        print(self.visitChildren(ctx))
-        return self.visitChildren(ctx)
+    # @override
+    # def visitTerminal(self, node):
+    #     print(f">>{node}")
+    #     return super().visitTerminal(node)
 
-    @override
-    def visitExpr(self, ctx: ignoreParser.ExprContext):
-        return ctx.expr().evaluate()
+    # @override
+    # def visitLiteral(self, ctx: ignoreParser.LiteralContext):
+    #     if ctx.LITERAL_STRING() is not None:
+    #         raw_string = str(ctx.LITERAL_STRING())
+    #         return raw_string[1:-1]
 
-    @override
-    def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
-        print("asasd")
-        function_name = str(ctx.NAME())
-        # I think we will want to use this kind of syntax now
-        # It seems to be pattern to work with visitors in antlr4 isntead of accessing ctx directly.
-        argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
-        if function_name not in self.variables.keys():
-            raise ValueError(f"function not defined {function_name}")
-        return self.variables[function_name](argument)
+    #     elif ctx.LITERAL_INT() is not None:
+    #         return int(str(ctx.LITERAL_INT()))
 
-    @override
-    def visitCondition(self, ctx: ignoreParser.ConditionContext):
-        return super().visitCondition(ctx)
+    #     elif ctx.LITERAL_FLOAT() is not None:
+    #         return float(str(ctx.LITERAL_FLOAT()))
 
-    @override
-    def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
-        return super().visitControl_statement(ctx)
+    #     elif ctx.LITERAL_BOOL() is not None:
+    #         bool_str = str(ctx.LITERAL_BOOL())
+    #         if bool_str == "True":
+    #             return True
+    #         elif bool_str == "False":
+    #             return False
+
+    #     else:
+    #         raise NotImplementedError("Unsupported literal type")
+
+    # @override
+    # def visitProgram(self, ctx: ignoreParser.ProgramContext):
+    #     print("sieman")
+    #     print(self.visitChildren(ctx))
+    #     return self.visitChildren(ctx)
+
+    # @override
+    # def visitExpr(self, ctx: ignoreParser.ExprContext):
+    #     print("exprs")
+    #     print(ctx.expr().__dict__)
+    #     return ctx.expr().evaluate()
+
+    # @override
+    # def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
+    #     print("asasd")
+    #     function_name = str(ctx.NAME())
+    #     # I think we will want to use this kind of syntax now
+    #     # It seems to be pattern to work with visitors in antlr4 isntead of accessing ctx directly.
+    #     argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
+    #     if function_name not in self.variables.keys():
+    #         raise ValueError(f"function not defined {function_name}")
+    #     return self.variables[function_name](argument)
+
+    # @override
+    # def visitWrapped_expr(self, ctx: ignoreParser.Wrapped_exprContext):
+    #     print("wrapped")
+    #     return super().visitWrapped_expr(ctx)
+
+    # @override
+    # def visitBlock(self, ctx: ignoreParser.BlockContext):
+    #     print("blok")
+    #     return super().visitBlock(ctx)
+
+    # @override
+    # def visitCondition(self, ctx: ignoreParser.ConditionContext):
+    #     return super().visitCondition(ctx)
+
+    # @override
+    # def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
+    #     return super().visitControl_statement(ctx)
