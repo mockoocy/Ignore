@@ -1,6 +1,8 @@
 lexer grammar ignoreLexer;
 
 fragment DIGIT: [0-9];
+fragment NEGATIVE_SIGN: '-';
+
 
 FUNCTION_TAG_OPEN: '<function';
 FUNCTION_TAG_END: '</function>';
@@ -54,8 +56,8 @@ COLON: ':';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 
-LITERAL_INT: DIGIT+;
-LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
+LITERAL_INT: NEGATIVE_SIGN?DIGIT+;
+LITERAL_FLOAT: NEGATIVE_SIGN? DIGIT+ '.' DIGIT*;
 
 EQUALS: '=';
 MUL: '*';
