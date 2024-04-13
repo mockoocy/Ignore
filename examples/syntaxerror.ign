@@ -1,0 +1,5 @@
+<program>
+  <function nasme=safsdfa>
+    {print(2++2)}
+  </function>
+</program>
