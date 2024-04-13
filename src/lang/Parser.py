@@ -1,4 +1,4 @@
-"""This cursed file is a workaround around the fact that any change to grammar causes regeneration 
+"""This cursed file is a workaround around the fact that VariableInfo change to grammar causes regeneration 
     of antlr files. A reccomended apprach is to create a subclass that is overriding methods
     exposed by the generated classes. While this approach works well with Listeners, there is no simple way
     to override nested ParserRuleContext subclasses of the ignoreParser classes. For example 
@@ -6,20 +6,21 @@
     the overridden class member:) 
 """
 
-from typing import Any, Dict
+from typing import Dict
 from generated.ignoreParser import ignoreParser
 from Listener import Listener
+from utils.VariableInfo import VariableInfo
 
 
-def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, Any]):
+def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
 
     if expr.literal() is not None:
         return expr.literal().evaluate()
 
     elif expr.NAME() is not None:
-        if str(expr.NAME()) not in Listener.variables.keys():
+        if str(expr.NAME()) not in variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
-        return Listener.variables[str(expr.NAME())]
+        return variables[str(expr.NAME())].value
 
     elif expr.functionCall() is not None:
         return expr.functionCall().evaluate()
@@ -90,7 +91,7 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
         raise NotImplementedError("Unsupported literal type")
 
 
-def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict[str, Any]):
+def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict[str, VariableInfo]):
     function_name = str(ctx.NAME())
     argument = ctx.expr().evaluate()  # only 1-arg functions allowed for now
     if function_name not in variables:
