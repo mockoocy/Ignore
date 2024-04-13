@@ -34,7 +34,7 @@ functionStart:
 function: functionStart block* FUNCTION_TAG_END;
 
 
-varDecl: VAR_DECL FUNCTION_NAME END_TAG;
+varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
 var: varDecl wrapped_expr VAR_DECL_END; 
 
 condition: expr OPERATOR_LOGIC expr | expr | LITERAL_BOOL;

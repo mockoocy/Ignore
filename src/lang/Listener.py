@@ -26,24 +26,22 @@ class Listener(ignoreParserListener):
     def exitProgram(self, ctx: ignoreParser.ProgramContext):
         print("\x1b[46;20;20m" + "Ended first phase of interpreting" + "\x1b[0m")
 
-    # @override
-    # def enterFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
-    #     function_name = str(ctx.NAME())
-    #     argument = ctx.expr().evaluate() # only 1-arg functions allowed for now
-    #     if function_name not in self.variables.keys():
-    #         raise ValueError(f"function not defined {function_name}")
-    #     return self.variables[function_name](argument)
 
     @override
     def enterVarDecl(self, ctx: ignoreParser.VarDeclContext):
         var_name = str(ctx.FUNCTION_NAME())[5:]
         expression = ctx.parentCtx.wrapped_expr().expr().evaluate()
 
+
+        if var_name not in self.variables:
+            self.variables[var_name] = expression
+        else:
+            raise ReferenceError(f"variable {var_name} is already defined!")
         # jesli expression to name to byla proba przypisania wartosci jednej zmiennej do drugiej
         # ... wspieramy przypisania?
-        if ctx.parentCtx.wrapped_expr().expr().NAME() is not None:
-            if str(expression) not in self.variables.keys():
-                raise ValueError(f"No such variable declared {str(expression)}")
-            self.variables[var_name] = self.variables[str(expression)]
-        else:
-            self.variables[var_name] = expression
+        # if ctx.parentCtx.wrapped_expr().expr().NAME() is not None:
+        #     if str(expression) not in self.variables.keys():
+        #         raise ValueError(f"No such variable declared {str(expression)}")
+        #     self.variables[var_name] = self.variables[str(expression)]
+        # else:
+        #     self.variables[var_name] = expression

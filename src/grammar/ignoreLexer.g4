@@ -13,6 +13,7 @@ ELSE: '<else>';
 ELSE_END: '</else>';
 VAR_DECL_START: '<var';
 VAR_DECL_END: '</var>';
+VAR_DECL_TYPE: 'type=' ID;
 VAR_DECL: VAR_DECL_START ID;
 
 COMMENT: '/*' .*? '*/' -> skip;

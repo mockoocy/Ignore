@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,45,221,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,46,224,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,1,0,1,0,1,1,1,1,1,2,5,2,50,8,2,10,2,12,2,53,9,2,1,
@@ -20,71 +20,72 @@ def serializedATN():
         1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,103,8,7,1,8,1,8,1,8,1,8,3,8,109,
         8,8,1,8,1,8,1,8,1,8,1,8,3,8,116,8,8,1,9,1,9,1,9,5,9,121,8,9,10,9,
         12,9,124,9,9,1,9,1,9,1,9,1,10,1,10,5,10,131,8,10,10,10,12,10,134,
-        9,10,1,10,1,10,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,13,1,13,
-        1,13,1,13,1,13,1,13,3,13,152,8,13,1,14,1,14,1,14,1,14,1,14,1,14,
-        1,14,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,17,
-        1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,19,1,19,5,19,182,8,19,10,19,
-        12,19,185,9,19,1,19,3,19,188,8,19,1,20,1,20,1,20,1,20,1,20,1,20,
-        1,20,1,20,3,20,198,8,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,
-        1,20,1,20,1,20,1,20,5,20,212,8,20,10,20,12,20,215,9,20,1,21,1,21,
-        1,21,1,21,1,21,0,1,40,22,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,
-        30,32,34,36,38,40,42,0,4,1,0,34,35,3,0,28,28,30,30,34,35,1,0,37,
-        38,1,0,39,40,224,0,44,1,0,0,0,2,46,1,0,0,0,4,51,1,0,0,0,6,73,1,0,
-        0,0,8,75,1,0,0,0,10,80,1,0,0,0,12,93,1,0,0,0,14,102,1,0,0,0,16,115,
-        1,0,0,0,18,117,1,0,0,0,20,128,1,0,0,0,22,137,1,0,0,0,24,141,1,0,
-        0,0,26,151,1,0,0,0,28,153,1,0,0,0,30,160,1,0,0,0,32,164,1,0,0,0,
-        34,171,1,0,0,0,36,175,1,0,0,0,38,179,1,0,0,0,40,197,1,0,0,0,42,216,
-        1,0,0,0,44,45,7,0,0,0,45,1,1,0,0,0,46,47,7,1,0,0,47,3,1,0,0,0,48,
-        50,3,20,10,0,49,48,1,0,0,0,50,53,1,0,0,0,51,49,1,0,0,0,51,52,1,0,
-        0,0,52,54,1,0,0,0,53,51,1,0,0,0,54,59,5,15,0,0,55,58,3,14,7,0,56,
-        58,3,24,12,0,57,55,1,0,0,0,57,56,1,0,0,0,58,61,1,0,0,0,59,57,1,0,
-        0,0,59,60,1,0,0,0,60,62,1,0,0,0,61,59,1,0,0,0,62,66,5,16,0,0,63,
-        65,3,20,10,0,64,63,1,0,0,0,65,68,1,0,0,0,66,64,1,0,0,0,66,67,1,0,
-        0,0,67,69,1,0,0,0,68,66,1,0,0,0,69,70,5,0,0,1,70,5,1,0,0,0,71,74,
-        3,14,7,0,72,74,3,42,21,0,73,71,1,0,0,0,73,72,1,0,0,0,74,7,1,0,0,
-        0,75,78,5,25,0,0,76,79,3,42,21,0,77,79,5,19,0,0,78,76,1,0,0,0,78,
-        77,1,0,0,0,79,9,1,0,0,0,80,81,5,17,0,0,81,82,5,24,0,0,82,11,1,0,
-        0,0,83,84,5,18,0,0,84,94,5,24,0,0,85,87,5,18,0,0,86,88,3,8,4,0,87,
-        86,1,0,0,0,88,89,1,0,0,0,89,87,1,0,0,0,89,90,1,0,0,0,90,91,1,0,0,
-        0,91,92,5,24,0,0,92,94,1,0,0,0,93,83,1,0,0,0,93,85,1,0,0,0,94,13,
-        1,0,0,0,95,96,3,12,6,0,96,97,3,42,21,0,97,98,3,10,5,0,98,103,1,0,
-        0,0,99,103,3,42,21,0,100,103,3,20,10,0,101,103,3,38,19,0,102,95,
-        1,0,0,0,102,99,1,0,0,0,102,100,1,0,0,0,102,101,1,0,0,0,103,15,1,
-        0,0,0,104,105,5,29,0,0,105,108,5,32,0,0,106,109,3,40,20,0,107,109,
-        3,2,1,0,108,106,1,0,0,0,108,107,1,0,0,0,109,110,1,0,0,0,110,111,
-        5,33,0,0,111,116,1,0,0,0,112,113,5,29,0,0,113,114,5,32,0,0,114,116,
-        5,33,0,0,115,104,1,0,0,0,115,112,1,0,0,0,116,17,1,0,0,0,117,118,
-        5,1,0,0,118,122,5,20,0,0,119,121,5,22,0,0,120,119,1,0,0,0,121,124,
-        1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,1,0,0,0,124,122,
-        1,0,0,0,125,126,5,21,0,0,126,127,5,24,0,0,127,19,1,0,0,0,128,132,
-        3,18,9,0,129,131,3,14,7,0,130,129,1,0,0,0,131,134,1,0,0,0,132,130,
-        1,0,0,0,132,133,1,0,0,0,133,135,1,0,0,0,134,132,1,0,0,0,135,136,
-        5,2,0,0,136,21,1,0,0,0,137,138,5,11,0,0,138,139,5,20,0,0,139,140,
-        5,24,0,0,140,23,1,0,0,0,141,142,3,22,11,0,142,143,3,42,21,0,143,
-        144,5,10,0,0,144,25,1,0,0,0,145,146,3,40,20,0,146,147,5,42,0,0,147,
-        148,3,40,20,0,148,152,1,0,0,0,149,152,3,40,20,0,150,152,5,28,0,0,
-        151,145,1,0,0,0,151,149,1,0,0,0,151,150,1,0,0,0,152,27,1,0,0,0,153,
-        154,5,3,0,0,154,155,5,23,0,0,155,156,5,26,0,0,156,157,3,26,13,0,
-        157,158,5,44,0,0,158,159,5,24,0,0,159,29,1,0,0,0,160,161,3,28,14,
-        0,161,162,3,6,3,0,162,163,5,4,0,0,163,31,1,0,0,0,164,165,5,6,0,0,
-        165,166,5,23,0,0,166,167,5,26,0,0,167,168,3,26,13,0,168,169,5,44,
-        0,0,169,170,5,24,0,0,170,33,1,0,0,0,171,172,3,32,16,0,172,173,3,
-        6,3,0,173,174,5,5,0,0,174,35,1,0,0,0,175,176,5,7,0,0,176,177,3,6,
-        3,0,177,178,5,8,0,0,178,37,1,0,0,0,179,183,3,30,15,0,180,182,3,34,
-        17,0,181,180,1,0,0,0,182,185,1,0,0,0,183,181,1,0,0,0,183,184,1,0,
-        0,0,184,187,1,0,0,0,185,183,1,0,0,0,186,188,3,36,18,0,187,186,1,
-        0,0,0,187,188,1,0,0,0,188,39,1,0,0,0,189,190,6,20,-1,0,190,191,5,
-        32,0,0,191,192,3,40,20,0,192,193,5,33,0,0,193,198,1,0,0,0,194,198,
-        3,2,1,0,195,198,3,16,8,0,196,198,5,29,0,0,197,189,1,0,0,0,197,194,
-        1,0,0,0,197,195,1,0,0,0,197,196,1,0,0,0,198,213,1,0,0,0,199,200,
-        10,5,0,0,200,201,7,2,0,0,201,212,3,40,20,6,202,203,10,4,0,0,203,
-        204,7,3,0,0,204,212,3,40,20,5,205,206,10,3,0,0,206,207,5,41,0,0,
-        207,212,3,40,20,4,208,209,10,2,0,0,209,210,5,42,0,0,210,212,3,40,
-        20,3,211,199,1,0,0,0,211,202,1,0,0,0,211,205,1,0,0,0,211,208,1,0,
-        0,0,212,215,1,0,0,0,213,211,1,0,0,0,213,214,1,0,0,0,214,41,1,0,0,
-        0,215,213,1,0,0,0,216,217,5,26,0,0,217,218,3,40,20,0,218,219,5,44,
-        0,0,219,43,1,0,0,0,19,51,57,59,66,73,78,89,93,102,108,115,122,132,
-        151,183,187,197,211,213
+        9,10,1,10,1,10,1,11,1,11,1,11,3,11,141,8,11,1,11,1,11,1,12,1,12,
+        1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,13,3,13,155,8,13,1,14,1,14,
+        1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,
+        1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,19,1,19,
+        5,19,185,8,19,10,19,12,19,188,9,19,1,19,3,19,191,8,19,1,20,1,20,
+        1,20,1,20,1,20,1,20,1,20,1,20,3,20,201,8,20,1,20,1,20,1,20,1,20,
+        1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,5,20,215,8,20,10,20,12,20,
+        218,9,20,1,21,1,21,1,21,1,21,1,21,0,1,40,22,0,2,4,6,8,10,12,14,16,
+        18,20,22,24,26,28,30,32,34,36,38,40,42,0,4,1,0,35,36,3,0,29,29,31,
+        31,35,36,1,0,38,39,1,0,40,41,228,0,44,1,0,0,0,2,46,1,0,0,0,4,51,
+        1,0,0,0,6,73,1,0,0,0,8,75,1,0,0,0,10,80,1,0,0,0,12,93,1,0,0,0,14,
+        102,1,0,0,0,16,115,1,0,0,0,18,117,1,0,0,0,20,128,1,0,0,0,22,137,
+        1,0,0,0,24,144,1,0,0,0,26,154,1,0,0,0,28,156,1,0,0,0,30,163,1,0,
+        0,0,32,167,1,0,0,0,34,174,1,0,0,0,36,178,1,0,0,0,38,182,1,0,0,0,
+        40,200,1,0,0,0,42,219,1,0,0,0,44,45,7,0,0,0,45,1,1,0,0,0,46,47,7,
+        1,0,0,47,3,1,0,0,0,48,50,3,20,10,0,49,48,1,0,0,0,50,53,1,0,0,0,51,
+        49,1,0,0,0,51,52,1,0,0,0,52,54,1,0,0,0,53,51,1,0,0,0,54,59,5,16,
+        0,0,55,58,3,14,7,0,56,58,3,24,12,0,57,55,1,0,0,0,57,56,1,0,0,0,58,
+        61,1,0,0,0,59,57,1,0,0,0,59,60,1,0,0,0,60,62,1,0,0,0,61,59,1,0,0,
+        0,62,66,5,17,0,0,63,65,3,20,10,0,64,63,1,0,0,0,65,68,1,0,0,0,66,
+        64,1,0,0,0,66,67,1,0,0,0,67,69,1,0,0,0,68,66,1,0,0,0,69,70,5,0,0,
+        1,70,5,1,0,0,0,71,74,3,14,7,0,72,74,3,42,21,0,73,71,1,0,0,0,73,72,
+        1,0,0,0,74,7,1,0,0,0,75,78,5,26,0,0,76,79,3,42,21,0,77,79,5,20,0,
+        0,78,76,1,0,0,0,78,77,1,0,0,0,79,9,1,0,0,0,80,81,5,18,0,0,81,82,
+        5,25,0,0,82,11,1,0,0,0,83,84,5,19,0,0,84,94,5,25,0,0,85,87,5,19,
+        0,0,86,88,3,8,4,0,87,86,1,0,0,0,88,89,1,0,0,0,89,87,1,0,0,0,89,90,
+        1,0,0,0,90,91,1,0,0,0,91,92,5,25,0,0,92,94,1,0,0,0,93,83,1,0,0,0,
+        93,85,1,0,0,0,94,13,1,0,0,0,95,96,3,12,6,0,96,97,3,42,21,0,97,98,
+        3,10,5,0,98,103,1,0,0,0,99,103,3,42,21,0,100,103,3,20,10,0,101,103,
+        3,38,19,0,102,95,1,0,0,0,102,99,1,0,0,0,102,100,1,0,0,0,102,101,
+        1,0,0,0,103,15,1,0,0,0,104,105,5,30,0,0,105,108,5,33,0,0,106,109,
+        3,40,20,0,107,109,3,2,1,0,108,106,1,0,0,0,108,107,1,0,0,0,109,110,
+        1,0,0,0,110,111,5,34,0,0,111,116,1,0,0,0,112,113,5,30,0,0,113,114,
+        5,33,0,0,114,116,5,34,0,0,115,104,1,0,0,0,115,112,1,0,0,0,116,17,
+        1,0,0,0,117,118,5,1,0,0,118,122,5,21,0,0,119,121,5,23,0,0,120,119,
+        1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,
+        1,0,0,0,124,122,1,0,0,0,125,126,5,22,0,0,126,127,5,25,0,0,127,19,
+        1,0,0,0,128,132,3,18,9,0,129,131,3,14,7,0,130,129,1,0,0,0,131,134,
+        1,0,0,0,132,130,1,0,0,0,132,133,1,0,0,0,133,135,1,0,0,0,134,132,
+        1,0,0,0,135,136,5,2,0,0,136,21,1,0,0,0,137,138,5,12,0,0,138,140,
+        5,21,0,0,139,141,5,11,0,0,140,139,1,0,0,0,140,141,1,0,0,0,141,142,
+        1,0,0,0,142,143,5,25,0,0,143,23,1,0,0,0,144,145,3,22,11,0,145,146,
+        3,42,21,0,146,147,5,10,0,0,147,25,1,0,0,0,148,149,3,40,20,0,149,
+        150,5,43,0,0,150,151,3,40,20,0,151,155,1,0,0,0,152,155,3,40,20,0,
+        153,155,5,29,0,0,154,148,1,0,0,0,154,152,1,0,0,0,154,153,1,0,0,0,
+        155,27,1,0,0,0,156,157,5,3,0,0,157,158,5,24,0,0,158,159,5,27,0,0,
+        159,160,3,26,13,0,160,161,5,45,0,0,161,162,5,25,0,0,162,29,1,0,0,
+        0,163,164,3,28,14,0,164,165,3,6,3,0,165,166,5,4,0,0,166,31,1,0,0,
+        0,167,168,5,6,0,0,168,169,5,24,0,0,169,170,5,27,0,0,170,171,3,26,
+        13,0,171,172,5,45,0,0,172,173,5,25,0,0,173,33,1,0,0,0,174,175,3,
+        32,16,0,175,176,3,6,3,0,176,177,5,5,0,0,177,35,1,0,0,0,178,179,5,
+        7,0,0,179,180,3,6,3,0,180,181,5,8,0,0,181,37,1,0,0,0,182,186,3,30,
+        15,0,183,185,3,34,17,0,184,183,1,0,0,0,185,188,1,0,0,0,186,184,1,
+        0,0,0,186,187,1,0,0,0,187,190,1,0,0,0,188,186,1,0,0,0,189,191,3,
+        36,18,0,190,189,1,0,0,0,190,191,1,0,0,0,191,39,1,0,0,0,192,193,6,
+        20,-1,0,193,194,5,33,0,0,194,195,3,40,20,0,195,196,5,34,0,0,196,
+        201,1,0,0,0,197,201,3,2,1,0,198,201,3,16,8,0,199,201,5,30,0,0,200,
+        192,1,0,0,0,200,197,1,0,0,0,200,198,1,0,0,0,200,199,1,0,0,0,201,
+        216,1,0,0,0,202,203,10,5,0,0,203,204,7,2,0,0,204,215,3,40,20,6,205,
+        206,10,4,0,0,206,207,7,3,0,0,207,215,3,40,20,5,208,209,10,3,0,0,
+        209,210,5,42,0,0,210,215,3,40,20,4,211,212,10,2,0,0,212,213,5,43,
+        0,0,213,215,3,40,20,3,214,202,1,0,0,0,214,205,1,0,0,0,214,208,1,
+        0,0,0,214,211,1,0,0,0,215,218,1,0,0,0,216,214,1,0,0,0,216,217,1,
+        0,0,0,217,41,1,0,0,0,218,216,1,0,0,0,219,220,5,27,0,0,220,221,3,
+        40,20,0,221,222,5,45,0,0,222,43,1,0,0,0,20,51,57,59,66,73,78,89,
+        93,102,108,115,122,132,140,154,186,190,200,214,216
     ]
 
 class ignoreParser ( Parser ):
@@ -100,25 +101,26 @@ class ignoreParser ( Parser ):
     literalNames = [ "<INVALID>", "'<function'", "'</function>'", "'<if'", 
                      "'</if>'", "'</elif>'", "'<elif'", "'<else>'", "'</else>'", 
                      "'<var'", "'</var>'", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'<program>'", "'</program>'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'<program>'", "'</program>'", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'condition='", "'>'", "<INVALID>", "'{'", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'condition='", "'>'", "<INVALID>", 
+                     "'{'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "':'", "'('", "')'", "<INVALID>", "<INVALID>", "'='", 
                      "'*'", "'/'", "'+'", "'-'", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "'}'" ]
 
     symbolicNames = [ "<INVALID>", "FUNCTION_TAG_OPEN", "FUNCTION_TAG_END", 
                       "IF_TAG", "IF_END", "ELIF_END", "ELIF_TAG", "ELSE", 
-                      "ELSE_END", "VAR_DECL_START", "VAR_DECL_END", "VAR_DECL", 
-                      "COMMENT", "LINE_COMMENT", "WS", "OPEN_PROGRAM", "CLOSE_PROGRAM", 
-                      "CLOSE_TAG", "OPEN_TAG", "TAG_REFERENCE", "FUNCTION_NAME", 
-                      "FUNCTION_RET_TYPE", "FUNCTION_PARAM", "CONDITION_EQ", 
-                      "END_TAG", "PROPERTY_NAME", "OPEN_CURLY", "EXPR_WS", 
-                      "LITERAL_BOOL", "NAME", "LITERAL_STRING", "COLON", 
-                      "OPEN_PAREN", "CLOSE_PAREN", "LITERAL_INT", "LITERAL_FLOAT", 
-                      "EQUALS", "MUL", "DIV", "ADD", "SUB", "OPERATOR_COMPARE", 
-                      "OPERATOR_LOGIC", "EXPR_COMMENT", "CLOSE_CURLY", "EXPR_LINE_COMMENT" ]
+                      "ELSE_END", "VAR_DECL_START", "VAR_DECL_END", "VAR_DECL_TYPE", 
+                      "VAR_DECL", "COMMENT", "LINE_COMMENT", "WS", "OPEN_PROGRAM", 
+                      "CLOSE_PROGRAM", "CLOSE_TAG", "OPEN_TAG", "TAG_REFERENCE", 
+                      "FUNCTION_NAME", "FUNCTION_RET_TYPE", "FUNCTION_PARAM", 
+                      "CONDITION_EQ", "END_TAG", "PROPERTY_NAME", "OPEN_CURLY", 
+                      "EXPR_WS", "LITERAL_BOOL", "NAME", "LITERAL_STRING", 
+                      "COLON", "OPEN_PAREN", "CLOSE_PAREN", "LITERAL_INT", 
+                      "LITERAL_FLOAT", "EQUALS", "MUL", "DIV", "ADD", "SUB", 
+                      "OPERATOR_COMPARE", "OPERATOR_LOGIC", "EXPR_COMMENT", 
+                      "CLOSE_CURLY", "EXPR_LINE_COMMENT" ]
 
     RULE_literalNumeric = 0
     RULE_literal = 1
@@ -160,41 +162,42 @@ class ignoreParser ( Parser ):
     ELSE_END=8
     VAR_DECL_START=9
     VAR_DECL_END=10
-    VAR_DECL=11
-    COMMENT=12
-    LINE_COMMENT=13
-    WS=14
-    OPEN_PROGRAM=15
-    CLOSE_PROGRAM=16
-    CLOSE_TAG=17
-    OPEN_TAG=18
-    TAG_REFERENCE=19
-    FUNCTION_NAME=20
-    FUNCTION_RET_TYPE=21
-    FUNCTION_PARAM=22
-    CONDITION_EQ=23
-    END_TAG=24
-    PROPERTY_NAME=25
-    OPEN_CURLY=26
-    EXPR_WS=27
-    LITERAL_BOOL=28
-    NAME=29
-    LITERAL_STRING=30
-    COLON=31
-    OPEN_PAREN=32
-    CLOSE_PAREN=33
-    LITERAL_INT=34
-    LITERAL_FLOAT=35
-    EQUALS=36
-    MUL=37
-    DIV=38
-    ADD=39
-    SUB=40
-    OPERATOR_COMPARE=41
-    OPERATOR_LOGIC=42
-    EXPR_COMMENT=43
-    CLOSE_CURLY=44
-    EXPR_LINE_COMMENT=45
+    VAR_DECL_TYPE=11
+    VAR_DECL=12
+    COMMENT=13
+    LINE_COMMENT=14
+    WS=15
+    OPEN_PROGRAM=16
+    CLOSE_PROGRAM=17
+    CLOSE_TAG=18
+    OPEN_TAG=19
+    TAG_REFERENCE=20
+    FUNCTION_NAME=21
+    FUNCTION_RET_TYPE=22
+    FUNCTION_PARAM=23
+    CONDITION_EQ=24
+    END_TAG=25
+    PROPERTY_NAME=26
+    OPEN_CURLY=27
+    EXPR_WS=28
+    LITERAL_BOOL=29
+    NAME=30
+    LITERAL_STRING=31
+    COLON=32
+    OPEN_PAREN=33
+    CLOSE_PAREN=34
+    LITERAL_INT=35
+    LITERAL_FLOAT=36
+    EQUALS=37
+    MUL=38
+    DIV=39
+    ADD=40
+    SUB=41
+    OPERATOR_COMPARE=42
+    OPERATOR_LOGIC=43
+    EXPR_COMMENT=44
+    CLOSE_CURLY=45
+    EXPR_LINE_COMMENT=46
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -247,7 +250,7 @@ class ignoreParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 44
             _la = self._input.LA(1)
-            if not(_la==34 or _la==35):
+            if not(_la==35 or _la==36):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -309,7 +312,7 @@ class ignoreParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 46
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 52881784832) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 105763569664) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -402,15 +405,15 @@ class ignoreParser ( Parser ):
             self.state = 59
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 67373066) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134746122) != 0):
                 self.state = 57
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [1, 3, 18, 26]:
+                if token in [1, 3, 19, 27]:
                     self.state = 55
                     self.block()
                     pass
-                elif token in [11]:
+                elif token in [12]:
                     self.state = 56
                     self.var()
                     pass
@@ -557,11 +560,11 @@ class ignoreParser ( Parser ):
             self.state = 78
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [26]:
+            if token in [27]:
                 self.state = 76
                 self.wrapped_expr()
                 pass
-            elif token in [19]:
+            elif token in [20]:
                 self.state = 77
                 self.match(ignoreParser.TAG_REFERENCE)
                 pass
@@ -699,7 +702,7 @@ class ignoreParser ( Parser ):
                     self.state = 89 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not (_la==25):
+                    if not (_la==26):
                         break
 
                 self.state = 91
@@ -771,7 +774,7 @@ class ignoreParser ( Parser ):
             self.state = 102
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [18]:
+            if token in [19]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 95
                 self.startTag()
@@ -780,7 +783,7 @@ class ignoreParser ( Parser ):
                 self.state = 97
                 self.endTag()
                 pass
-            elif token in [26]:
+            elif token in [27]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 99
                 self.wrapped_expr()
@@ -962,7 +965,7 @@ class ignoreParser ( Parser ):
             self.state = 122
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==22:
+            while _la==23:
                 self.state = 119
                 self.match(ignoreParser.FUNCTION_PARAM)
                 self.state = 124
@@ -1035,7 +1038,7 @@ class ignoreParser ( Parser ):
             self.state = 132
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 67371018) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134742026) != 0):
                 self.state = 129
                 self.block()
                 self.state = 134
@@ -1069,6 +1072,9 @@ class ignoreParser ( Parser ):
         def END_TAG(self):
             return self.getToken(ignoreParser.END_TAG, 0)
 
+        def VAR_DECL_TYPE(self):
+            return self.getToken(ignoreParser.VAR_DECL_TYPE, 0)
+
         def getRuleIndex(self):
             return ignoreParser.RULE_varDecl
 
@@ -1093,13 +1099,22 @@ class ignoreParser ( Parser ):
 
         localctx = ignoreParser.VarDeclContext(self, self._ctx, self.state)
         self.enterRule(localctx, 22, self.RULE_varDecl)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 137
             self.match(ignoreParser.VAR_DECL)
             self.state = 138
             self.match(ignoreParser.FUNCTION_NAME)
-            self.state = 139
+            self.state = 140
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==11:
+                self.state = 139
+                self.match(ignoreParser.VAR_DECL_TYPE)
+
+
+            self.state = 142
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1154,11 +1169,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 24, self.RULE_var)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 141
+            self.state = 144
             self.varDecl()
-            self.state = 142
+            self.state = 145
             self.wrapped_expr()
-            self.state = 143
+            self.state = 146
             self.match(ignoreParser.VAR_DECL_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1214,28 +1229,28 @@ class ignoreParser ( Parser ):
         localctx = ignoreParser.ConditionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 26, self.RULE_condition)
         try:
-            self.state = 151
+            self.state = 154
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 145
+                self.state = 148
                 self.expr(0)
-                self.state = 146
+                self.state = 149
                 self.match(ignoreParser.OPERATOR_LOGIC)
-                self.state = 147
+                self.state = 150
                 self.expr(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 149
+                self.state = 152
                 self.expr(0)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 150
+                self.state = 153
                 self.match(ignoreParser.LITERAL_BOOL)
                 pass
 
@@ -1301,18 +1316,18 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_if)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 153
+            self.state = 156
             self.match(ignoreParser.IF_TAG)
-            self.state = 154
+            self.state = 157
             self.match(ignoreParser.CONDITION_EQ)
-            self.state = 155
+            self.state = 158
             self.match(ignoreParser.OPEN_CURLY)
 
-            self.state = 156
+            self.state = 159
             self.condition()
-            self.state = 157
+            self.state = 160
             self.match(ignoreParser.CLOSE_CURLY)
-            self.state = 158
+            self.state = 161
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1367,11 +1382,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_if_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 160
+            self.state = 163
             self.if_()
-            self.state = 161
+            self.state = 164
             self.statement()
-            self.state = 162
+            self.state = 165
             self.match(ignoreParser.IF_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1434,18 +1449,18 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_elif)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 164
+            self.state = 167
             self.match(ignoreParser.ELIF_TAG)
-            self.state = 165
+            self.state = 168
             self.match(ignoreParser.CONDITION_EQ)
-            self.state = 166
+            self.state = 169
             self.match(ignoreParser.OPEN_CURLY)
 
-            self.state = 167
+            self.state = 170
             self.condition()
-            self.state = 168
+            self.state = 171
             self.match(ignoreParser.CLOSE_CURLY)
-            self.state = 169
+            self.state = 172
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1500,11 +1515,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_elif_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 171
+            self.state = 174
             self.elif_()
-            self.state = 172
+            self.state = 175
             self.statement()
-            self.state = 173
+            self.state = 176
             self.match(ignoreParser.ELIF_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1558,11 +1573,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 36, self.RULE_else_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 175
+            self.state = 178
             self.match(ignoreParser.ELSE)
-            self.state = 176
+            self.state = 179
             self.statement()
-            self.state = 177
+            self.state = 180
             self.match(ignoreParser.ELSE_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1622,23 +1637,23 @@ class ignoreParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 179
+            self.state = 182
             self.if_statement()
-            self.state = 183
+            self.state = 186
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==6:
-                self.state = 180
+                self.state = 183
                 self.elif_statement()
-                self.state = 185
+                self.state = 188
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 187
+            self.state = 190
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==7:
-                self.state = 186
+                self.state = 189
                 self.else_statement()
 
 
@@ -1729,114 +1744,114 @@ class ignoreParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 197
+            self.state = 200
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
             if la_ == 1:
-                self.state = 190
+                self.state = 193
                 self.match(ignoreParser.OPEN_PAREN)
-                self.state = 191
+                self.state = 194
                 self.expr(0)
-                self.state = 192
+                self.state = 195
                 self.match(ignoreParser.CLOSE_PAREN)
                 pass
 
             elif la_ == 2:
-                self.state = 194
+                self.state = 197
                 self.literal()
                 pass
 
             elif la_ == 3:
-                self.state = 195
+                self.state = 198
                 self.functionCall()
                 pass
 
             elif la_ == 4:
-                self.state = 196
+                self.state = 199
                 self.match(ignoreParser.NAME)
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 213
+            self.state = 216
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,18,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 211
+                    self.state = 214
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
                     if la_ == 1:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 199
+                        self.state = 202
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 200
+                        self.state = 203
                         _la = self._input.LA(1)
-                        if not(_la==37 or _la==38):
+                        if not(_la==38 or _la==39):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 201
+                        self.state = 204
                         self.expr(6)
                         pass
 
                     elif la_ == 2:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 202
+                        self.state = 205
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 203
+                        self.state = 206
                         _la = self._input.LA(1)
-                        if not(_la==39 or _la==40):
+                        if not(_la==40 or _la==41):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 204
+                        self.state = 207
                         self.expr(5)
                         pass
 
                     elif la_ == 3:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 205
+                        self.state = 208
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
 
-                        self.state = 206
+                        self.state = 209
                         self.match(ignoreParser.OPERATOR_COMPARE)
-                        self.state = 207
+                        self.state = 210
                         self.expr(4)
                         pass
 
                     elif la_ == 4:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 208
+                        self.state = 211
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
 
-                        self.state = 209
+                        self.state = 212
                         self.match(ignoreParser.OPERATOR_LOGIC)
-                        self.state = 210
+                        self.state = 213
                         self.expr(3)
                         pass
 
              
-                self.state = 215
+                self.state = 218
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,18,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1890,11 +1905,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_wrapped_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 216
+            self.state = 219
             self.match(ignoreParser.OPEN_CURLY)
-            self.state = 217
+            self.state = 220
             self.expr(0)
-            self.state = 218
+            self.state = 221
             self.match(ignoreParser.CLOSE_CURLY)
         except RecognitionException as re:
             localctx.exception = re

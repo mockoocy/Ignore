@@ -1,0 +1,8 @@
+<program>
+  <var name=num1 type=int>
+      {2 + 3*4}
+  </var>  
+  <var name=num1 type=int>
+      {2 + 3*5}
+  </var>  
+</program>
