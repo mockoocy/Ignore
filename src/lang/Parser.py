@@ -6,11 +6,12 @@
     the overridden class member:) 
 """
 
+from typing import Any, Dict
 from generated.ignoreParser import ignoreParser
 from Listener import Listener
 
 
-def evaluate_expr(expr: ignoreParser.ExprContext):
+def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, Any]):
 
     if expr.literal() is not None:
         return expr.literal().evaluate()
@@ -89,8 +90,16 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
         raise NotImplementedError("Unsupported literal type")
 
 
-ignoreParser.ExprContext.evaluate = evaluate_expr
+def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict[str, Any]):
+    function_name = str(ctx.NAME())
+    argument = ctx.expr().evaluate()  # only 1-arg functions allowed for now
+    if function_name not in variables:
+        raise ValueError(f"function not defined {function_name}")
+    return variables[function_name](argument)
+
+ignoreParser.ExprContext.evaluate = lambda expr: evaluate_expr(expr, Listener.variables)
 ignoreParser.LiteralContext.evaluate = evaluate_literal
+ignoreParser.FunctionCallContext.evaluate = lambda call: evaluate_functioncall(call, Listener.variables)
 # zacomentowalem mozna by przepisac cale evaluate_expr
 # ale to kopiowanie kodu bezsensu
 # wystarczy zamiast wrapped_expr.evaluate() pisac wrapped_expression.expression().evaluate()

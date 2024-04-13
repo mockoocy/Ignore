@@ -18,9 +18,7 @@ def main(argv):
     firstPhaseInterpreter = Listener()
     walker = ParseTreeWalker()
     walker.walk(firstPhaseInterpreter, tree)
-    visitor = Visitor(firstPhaseInterpreter.variables)
-    some = visitor.visit(tree)
-    # print(some)
+    visitor = Visitor(firstPhaseInterpreter.variables).visit(tree)
 
 
 if __name__ == '__main__':
