@@ -64,6 +64,8 @@ MUL: '*';
 DIV: '/';
 ADD: '+';
 SUB: '-';
+MOD: '%';
+INT_DIV: '//';
 
 OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
 OPERATOR_LOGIC: ('&&' | '||');

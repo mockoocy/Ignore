@@ -3,7 +3,7 @@ from stdlib import builtins
 from typing import Any, Dict, override
 from generated.ignoreParserListener import ignoreParserListener
 from generated.ignoreParser import ignoreParser
-
+from utils.evaluate import evaluate_expr
 
 class Listener(ignoreParserListener):
 
@@ -41,11 +41,12 @@ class Listener(ignoreParserListener):
     @override
     def enterVarDecl(self, ctx: ignoreParser.VarDeclContext):
         var_name = str(ctx.FUNCTION_NAME())[5:]
-        expression = ctx.parentCtx.wrapped_expr().expr().evaluate()
+        expression = evaluate_expr(ctx.parentCtx.wrapped_expr().expr(), self.variables)
 
 
         if var_name not in self.variables:
             self.variables[var_name] = VariableInfo(expression, scope=self.current_scope)
+            print(f"assigned {var_name} with value {self.variables[var_name]}")
         else:
             raise ReferenceError(f"variable {var_name} is already defined!")
         # jesli expression to name to byla proba przypisania wartosci jednej zmiennej do drugiej

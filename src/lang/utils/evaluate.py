@@ -1,38 +1,29 @@
-"""This cursed file is a workaround around the fact that VariableInfo change to grammar causes regeneration 
-    of antlr files. A reccomended apprach is to create a subclass that is overriding methods
-    exposed by the generated classes. While this approach works well with Listeners, there is no simple way
-    to override nested ParserRuleContext subclasses of the ignoreParser classes. For example 
-    overriding ExprContext in custom Parser class would not make functionCallContext's expr() method return 
-    the overridden class member:) 
-"""
-
 from typing import Dict
 from generated.ignoreParser import ignoreParser
-from Listener import Listener
 from utils.VariableInfo import VariableInfo
 
 
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
-
     if expr.literal() is not None:
-        return expr.literal().evaluate()
-
+        return evaluate_literal(expr.literal())
     elif expr.NAME() is not None:
         if str(expr.NAME()) not in variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
         return variables[str(expr.NAME())].value
 
     elif expr.functionCall() is not None:
-        return expr.functionCall().evaluate()
-
+        # print(evaluate_functioncall(expr.functionCall(), variables))
+        return evaluate_functioncall(expr.functionCall(), variables)
     elif (
         expr.ADD() is not None
         or expr.SUB() is not None
         or expr.MUL() is not None
         or expr.DIV() is not None
+        or expr.MOD() is not None
+        or expr.INT_DIV() is not None # cant just omit this and go to ifs directly?
     ):
-        left = expr.expr(0).evaluate()
-        right = expr.expr(1).evaluate()
+        left = evaluate_expr(expr.expr(0), variables)
+        right = evaluate_expr(expr.expr(1), variables)
 
         if expr.ADD() is not None:
             return left + right
@@ -42,9 +33,13 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
             return left * right
         elif expr.DIV() is not None:
             return left / right  # division by zero?!
+        elif expr.MOD() is not None:
+            return left % right
+        elif expr.INT_DIV() is not None:
+            return left // right
     elif expr.OPERATOR_COMPARE() is not None:
-        left = expr.expr(0).evaluate()
-        right = expr.expr(1).evaluate()
+        left = evaluate_expr(expr.expr(0), variables)
+        right = evaluate_expr(expr.expr(1), variables)
         if str(expr.OPERATOR_COMPARE()) == "==":
             return left == right
         elif str(expr.OPERATOR_COMPARE()) == "!=":
@@ -58,8 +53,8 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         elif str(expr.OPERATOR_COMPARE()) == "<=":
             return left <= right
     elif expr.OPERATOR_LOGIC() is not None:
-        left = expr.expr(0).evaluate()
-        right = expr.expr(1).evaluate()
+        left = evaluate_expr(expr.expr(0), variables)
+        right = evaluate_expr(expr.expr(1), variables)
         if str(expr.OPERATOR_LOGIC()) == "&&":
             return left and right
         elif str(expr.OPERATOR_LOGIC()) == "||":
@@ -93,16 +88,7 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
 
 def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict[str, VariableInfo]):
     function_name = str(ctx.NAME())
-    argument = ctx.expr().evaluate()  # only 1-arg functions allowed for now
+    argument = evaluate_expr(ctx.expr(), variables)  # only 1-arg functions allowed for now
     if function_name not in variables:
         raise ValueError(f"function not defined {function_name}")
     return variables[function_name](argument)
-
-ignoreParser.ExprContext.evaluate = lambda expr: evaluate_expr(expr, Listener.variables)
-ignoreParser.LiteralContext.evaluate = evaluate_literal
-ignoreParser.FunctionCallContext.evaluate = lambda call: evaluate_functioncall(call, Listener.variables)
-# zacomentowalem mozna by przepisac cale evaluate_expr
-# ale to kopiowanie kodu bezsensu
-# wystarczy zamiast wrapped_expr.evaluate() pisac wrapped_expression.expression().evaluate()
-# ignoreParser.Wrapped_exprContext.evaluate = evaluate_wrapped_expr
-Parser = ignoreParser

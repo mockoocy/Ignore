@@ -15,10 +15,6 @@
 </function>
 
 <program>
-    <io>
-        {print(factorial(5))}
-    </io>
-    <io>
-        {print(factorial(15))}
-    </io>
+    {print(factorial(5))}
+    {print(factorial(15))}
 </program>

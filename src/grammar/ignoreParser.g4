@@ -37,7 +37,7 @@ function: functionStart block* FUNCTION_TAG_END;
 varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
 var: varDecl wrapped_expr VAR_DECL_END; 
 
-condition: expr OPERATOR_LOGIC expr | expr | LITERAL_BOOL;
+condition: expr | LITERAL_BOOL;
 if:
 	IF_TAG CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY END_TAG;
 
@@ -53,7 +53,7 @@ expr:
 	OPEN_PAREN expr CLOSE_PAREN
 	| literal
 	| functionCall
-	| expr (MUL | DIV) expr
+	| expr (MUL | DIV | MOD | INT_DIV) expr
 	| expr (ADD | SUB) expr
 	| expr (OPERATOR_COMPARE) expr
 	| expr (OPERATOR_LOGIC) expr
