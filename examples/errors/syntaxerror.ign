@@ -1,5 +1,6 @@
 <program>
-  <function nasme=safsdfa>
+  {print(safsda())}
+  <function name=safsdfa>
     {print(2++2)}
   </function>
 </program>

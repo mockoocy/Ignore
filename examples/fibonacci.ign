@@ -20,7 +20,7 @@ komen
 tarz
 */
 <program>
-    <var name=wynikFibonaciego>
+    <var name=wynikFibonaciego type=int>
         {(fibonacci(2+2 * 3))}
     </var>
 </program>
