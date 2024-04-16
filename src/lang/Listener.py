@@ -1,4 +1,5 @@
 from utils.VariableInfo import VariableInfo
+from utils.VariableInfo import Valid_Types
 from stdlib import builtins
 from typing import Any, Dict, override
 from generated.ignoreParserListener import ignoreParserListener
@@ -41,13 +42,23 @@ class Listener(ignoreParserListener):
     @override
     def enterVarDecl(self, ctx: ignoreParser.VarDeclContext):
         var_name = str(ctx.FUNCTION_NAME())[5:]
-        expression = evaluate_expr(ctx.parentCtx.wrapped_expr().expr(), self.variables)
+        var_expression = ctx.parentCtx.wrapped_expr().expr()
 
-
+        #dodanie typu
+        if ctx.VAR_DECL_TYPE() != None: 
+            var_type = str(ctx.VAR_DECL_TYPE())[5:]
+            if var_type not in Valid_Types.keys():   #sprawdzenie czy typ jest wspierany przez język
+                raise TypeError(f"type {var_name} is not supported!")
+        else:  #jesli typ nie był podany to narazie None (w wizytorze automatycznie bedzie przypisany)
+            var_type = None
+ 
+        #sprawdzenie czy istnieje taka zmienna
         if var_name not in self.variables:
-            self.variables[var_name] = VariableInfo(expression, scope=self.current_scope)
-            print(f"assigned {var_name} with value {self.variables[var_name]}")
+            #dodanie zmiennych do slownika wraz z typem bez wartosci
+            self.variables[var_name] = VariableInfo(value=None, expression=var_expression, var_decl=ctx, type=var_type, scope=self.current_scope)#
+            print(f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {self.variables[var_name].was_evaluated} ")
         else:
+            #wyrzucenie błędu gdy próbujemy redeklarować zmienną
             raise ReferenceError(f"variable {var_name} is already defined!")
         # jesli expression to name to byla proba przypisania wartosci jednej zmiennej do drugiej
         # ... wspieramy przypisania?
@@ -57,3 +68,5 @@ class Listener(ignoreParserListener):
         #     self.variables[var_name] = self.variables[str(expression)]
         # else:
         #     self.variables[var_name] = expression
+
+

@@ -1,13 +1,16 @@
 <program>
+    
 {print(hello_world_variable)}
-
+    <var name=hello_world_variable>
+        {hello_variable + world_variable}
+    </var>  
     <var name=hello_variable type=string>
         {"Hello"}
     </var>  
-    <var name=world_variable type=string>
+    <var name=world_variable>
         {" World"}
     </var>  
-    <var name=hello_world_variable type=SiemaZTejStronyTwojUlubionyYoutuber>
-        {hello_variable + world_variable}
-    </var>  
+   
+
+    
 </program>

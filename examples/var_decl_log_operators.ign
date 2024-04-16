@@ -1,10 +1,10 @@
 <program>
-    <var name=true_var>
-        {True}
+    <var name=true_var type=bool>
+        {True} 
     </var> 
 
-    <var name=false_var>
-        {False}
+    <var name=false_var type=bool>
+        {0}
     </var>  
 
     <var name=add>
@@ -13,10 +13,10 @@
     <var name=div>
         {10/2}
     </var>  
-    <var name=bigger>
+    <var name=bigger type=int>
         {9.089}
     </var>  
-    <var name=smaller>
+    <var name=smaller type=float>
         {6.71}
     </var>  
 {print(true_var && false_var)}

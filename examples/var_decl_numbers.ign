@@ -1,9 +1,9 @@
 <program>
-    <var name=num1>
+    <var name=num1 type=int>
         {2 + 3*4}
     </var>  
-    <var name=num2>
-        {10/3}
+    <var name=num2 type=bool>
+        {1}
     </var>  
     <var name=diff>
         {num1 - num2}

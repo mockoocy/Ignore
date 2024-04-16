@@ -1,15 +1,19 @@
 from typing import Dict
 from generated.ignoreParser import ignoreParser
 from utils.VariableInfo import VariableInfo
-
-
+from utils.VariableInfo import Valid_Types, Valid_Types_Reversed
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
     if expr.literal() is not None:
         return evaluate_literal(expr.literal())
     elif expr.NAME() is not None:
         if str(expr.NAME()) not in variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
-        return variables[str(expr.NAME())].value
+        elif str(expr.NAME()) in variables.keys() and variables[str(expr.NAME())].was_evaluated == False:
+                var_info = variables[str(expr.NAME())]
+                evaluate_var_decl(var_info.var_decl, variables)
+                return variables[str(expr.NAME())].value
+        else:
+            return variables[str(expr.NAME())].value
 
     elif expr.functionCall() is not None:
         # print(evaluate_functioncall(expr.functionCall(), variables))
@@ -20,8 +24,9 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         or expr.MUL() is not None
         or expr.DIV() is not None
         or expr.MOD() is not None
-        or expr.INT_DIV() is not None # cant just omit this and go to ifs directly?
+        or expr.INT_DIV() is not None # cant just omit this and go to ifs directly? 
     ):
+
         left = evaluate_expr(expr.expr(0), variables)
         right = evaluate_expr(expr.expr(1), variables)
 
@@ -60,6 +65,7 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         elif str(expr.OPERATOR_LOGIC()) == "||":
             return left or right
     else:
+
         raise NotImplementedError("Unsupported expression syntax")
 
 
@@ -92,3 +98,29 @@ def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict
     if function_name not in variables:
         raise ValueError(f"function not defined {function_name}")
     return variables[function_name](argument)
+
+
+def evaluate_var_decl(ctx: ignoreParser.VarDeclContext, variables: Dict[str, VariableInfo] ):
+    var_name = str(ctx.FUNCTION_NAME())[5:]
+    variable_info = variables.get(var_name)
+    if variable_info.was_evaluated == True:
+        return
+    #sprawdzenie czy istnieje taka zmienna
+    if variable_info is not None:
+        expr_val = evaluate_expr(variable_info.expression, variables) #obliczenie warotsci exprresion
+
+        if variable_info.type != None: #jesli typ był podany w deklaracji
+            var_type = Valid_Types[variable_info.type]
+            try:  #jesli nie castowalne na dany typ to zwroc type error
+                variable_info.value = var_type(expr_val) #castowanie na var_type 
+            except ValueError:
+                raise TypeError(f"could not cast value of {var_name} to type : {var_type}")
+
+        else:  #jesli nie podano typu to jest przypisywany domyslny dla zmiennej
+            expr_val = evaluate_expr(variable_info.expression, variables)
+            variable_info.type = Valid_Types_Reversed.get(type(expr_val))
+            variable_info.value = expr_val
+        variable_info.was_evaluated = True
+        print(f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}")
+    else:
+        raise NameError(f"variable {var_name} was not declared")

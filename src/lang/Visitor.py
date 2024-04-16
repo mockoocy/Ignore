@@ -3,7 +3,8 @@ from typing import Any, Dict, override
 from generated.ignoreParserVisitor import ignoreParserVisitor
 from generated.ignoreParser import ignoreParser
 from typing import Dict, Any
-from utils.evaluate import evaluate_functioncall, evaluate_literal, evaluate_expr
+from utils.evaluate import evaluate_functioncall, evaluate_literal, evaluate_expr, evaluate_var_decl
+
 
 class Visitor(ignoreParserVisitor):
 
@@ -23,8 +24,10 @@ class Visitor(ignoreParserVisitor):
         return evaluate_functioncall(ctx, self.variables)
     
     @override 
-    def visitExpr(self, ctx: ignoreParser.ExprContext):
+    def visitExpr(self, ctx: ignoreParser.ExprContext):   
         return evaluate_expr(ctx, self.variables)
+       
+    
 
     @override
     def visitCondition(self, ctx: ignoreParser.ConditionContext):
@@ -40,3 +43,8 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitElse_statement(self, ctx: ignoreParser.Else_statementContext):
         return self.visitStatement(ctx.statement())
+    
+    @override
+    def visitVarDecl(self, ctx:ignoreParser.VarDeclContext):
+        evaluate_var_decl(ctx, self.variables)
+       # return self.visitChildren(ctx)  ## wydaje się niepotrzebne 
