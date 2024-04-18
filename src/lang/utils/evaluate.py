@@ -1,20 +1,24 @@
 from typing import Dict
-from generated.ignoreParser import ignoreParser
-from utils.VariableInfo import VariableInfo
-from utils.VariableInfo import Valid_Types, Valid_Types_Reversed
+
+from ..generated.ignoreParser import ignoreParser
+from .VariableInfo import Valid_Types, Valid_Types_Reversed, VariableInfo
+
+
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
     if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
-        print(f"{expr.getText()}")
         return evaluate_expr(expr.expr(0), variables)
     if expr.literal() is not None:
         return evaluate_literal(expr.literal())
     elif expr.NAME() is not None:
         if str(expr.NAME()) not in variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
-        elif str(expr.NAME()) in variables.keys() and variables[str(expr.NAME())].was_evaluated == False:
-                var_info = variables[str(expr.NAME())]
-                evaluate_var_decl(var_info.var_decl, variables)
-                return variables[str(expr.NAME())].value
+        elif (
+            str(expr.NAME()) in variables.keys()
+            and variables[str(expr.NAME())].was_evaluated == False
+        ):
+            var_info = variables[str(expr.NAME())]
+            evaluate_var_decl(var_info.var_decl, variables)
+            return variables[str(expr.NAME())].value
         else:
             return variables[str(expr.NAME())].value
 
@@ -27,7 +31,7 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         or expr.MUL() is not None
         or expr.DIV() is not None
         or expr.MOD() is not None
-        or expr.INT_DIV() is not None # cant just omit this and go to ifs directly? 
+        or expr.INT_DIV() is not None  # cant just omit this and go to ifs directly?
     ):
 
         left = evaluate_expr(expr.expr(0), variables)
@@ -95,35 +99,47 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
         raise NotImplementedError("Unsupported literal type")
 
 
-def evaluate_functioncall(ctx: ignoreParser.FunctionCallContext, variables: Dict[str, VariableInfo]):
+def evaluate_functioncall(
+    ctx: ignoreParser.FunctionCallContext, variables: Dict[str, VariableInfo]
+):
     function_name = str(ctx.NAME())
-    argument = evaluate_expr(ctx.expr(), variables)  # only 1-arg functions allowed for now
+    argument = evaluate_expr(
+        ctx.expr(), variables
+    )  # only 1-arg functions allowed for now
     if function_name not in variables:
         raise ValueError(f"function not defined {function_name}")
     return variables[function_name](argument)
 
 
-def evaluate_var_decl(ctx: ignoreParser.VarDeclContext, variables: Dict[str, VariableInfo] ):
+def evaluate_var_decl(
+    ctx: ignoreParser.VarDeclContext, variables: Dict[str, VariableInfo]
+):
     var_name = str(ctx.FUNCTION_NAME())[5:]
     variable_info = variables.get(var_name)
     if variable_info.was_evaluated == True:
         return
-    #sprawdzenie czy istnieje taka zmienna
+    # sprawdzenie czy istnieje taka zmienna
     if variable_info is not None:
-        expr_val = evaluate_expr(variable_info.expression, variables) #obliczenie warotsci exprresion
+        expr_val = evaluate_expr(
+            variable_info.expression, variables
+        )  # obliczenie warotsci exprresion
 
-        if variable_info.type != None: #jesli typ był podany w deklaracji
+        if variable_info.type != None:  # jesli typ był podany w deklaracji
             var_type = Valid_Types[variable_info.type]
-            try:  #jesli nie castowalne na dany typ to zwroc type error
-                variable_info.value = var_type(expr_val) #castowanie na var_type 
+            try:  # jesli nie castowalne na dany typ to zwroc type error
+                variable_info.value = var_type(expr_val)  # castowanie na var_type
             except ValueError:
-                raise TypeError(f"could not cast value of {var_name} to type : {var_type}")
+                raise TypeError(
+                    f"could not cast value of {var_name} to type : {var_type}"
+                )
 
-        else:  #jesli nie podano typu to jest przypisywany domyslny dla zmiennej
+        else:  # jesli nie podano typu to jest przypisywany domyslny dla zmiennej
             expr_val = evaluate_expr(variable_info.expression, variables)
             variable_info.type = Valid_Types_Reversed.get(type(expr_val))
             variable_info.value = expr_val
         variable_info.was_evaluated = True
-        print(f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}")
+        print(
+            f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
+        )
     else:
         raise NameError(f"variable {var_name} was not declared")

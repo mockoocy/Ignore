@@ -35,5 +35,13 @@ generate #Powershell
 To odpalić the program type the following thing:
 
 ```bash
-python src/lang/Driver.py <filename>
+python run.py <filename>
+```
+
+### Testing
+
+To run tests run
+
+```bash
+python pytest src/tests/*
 ```

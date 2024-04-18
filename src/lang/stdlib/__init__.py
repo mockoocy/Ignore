@@ -1,8 +1,9 @@
-from inspect import getmembers
 import contextlib
 import io
+from inspect import getmembers
 from typing import Any
-from utils.VariableInfo import VariableInfo
+
+from ..utils.VariableInfo import VariableInfo
 
 modules = ["builtins", "collections"]
 
@@ -18,4 +19,9 @@ def get_all_members(modulename: str):
 with contextlib.redirect_stdout(io.StringIO()):
     builtins = {}
     for module in modules:
-        builtins.update({var_name: VariableInfo(variable_value) for (var_name, variable_value)  in get_all_members(module).items()})
+        builtins.update(
+            {
+                var_name: VariableInfo(variable_value)
+                for (var_name, variable_value) in get_all_members(module).items()
+            }
+        )

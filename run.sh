@@ -1,1 +1,1 @@
-python src/lang/Driver.py $1
+python run.py $1
