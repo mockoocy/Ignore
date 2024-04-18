@@ -3,6 +3,9 @@ from generated.ignoreParser import ignoreParser
 from utils.VariableInfo import VariableInfo
 from utils.VariableInfo import Valid_Types, Valid_Types_Reversed
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
+    if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
+        print(f"{expr.getText()}")
+        return evaluate_expr(expr.expr(0), variables)
     if expr.literal() is not None:
         return evaluate_literal(expr.literal())
     elif expr.NAME() is not None:

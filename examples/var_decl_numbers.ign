@@ -1,6 +1,6 @@
 <program>
     <var name=num1 type=int>
-        {2 + 3*4}
+        {(2 + 3)*4 + 2}
     </var>  
     <var name=num2 type=bool>
         {1}
