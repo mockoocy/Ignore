@@ -38,17 +38,34 @@ class Visitor(ignoreParserVisitor):
         )  # an expression. If not castable to bool - then ok.
 
     @override
-    def visitIf_statement(self, ctx: ignoreParser.If_statementContext):
-        if self.visitCondition(ctx.if_().condition()):
+    def visitIf_statement(self, ctx: ignoreParser.If_statementContext) -> bool:
+        # returns wether the condition was evaluated 
+        condition_result = self.visitCondition(ctx.if_().condition())
+        if condition_result:
+            self.visitStatement(ctx.statement())
+        return condition_result
+
+    @override
+    def visitElif_statement(self, ctx: ignoreParser.Elif_statementContext):
+        condition_result = self.visitCondition(ctx.elif_().condition())
+        if condition_result:
             return self.visitStatement(ctx.statement())
-        return
+        return condition_result
 
     @override
     def visitElse_statement(self, ctx: ignoreParser.Else_statementContext):
-        return self.visitStatement(ctx.statement())
+        self.visitStatement(ctx.statement())
+
+    @override
+    def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
+        evaluated = self.visitIf_statement(ctx.if_statement())
+        for elif_ctx in ctx.elif_statement():
+            evaluated = self.visitElif_statement(elif_ctx)
+            if not evaluated: break
+        if ctx.else_statement() and not evaluated: 
+            self.visitElse_statement(ctx.else_statement())
+
 
     @override
     def visitVarDecl(self, ctx: ignoreParser.VarDeclContext):
         evaluate_var_decl(ctx, self.variables)
-
-    # return self.visitChildren(ctx)  ## wydaje się niepotrzebne

@@ -23,7 +23,6 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
             return variables[str(expr.NAME())].value
 
     elif expr.functionCall() is not None:
-        # print(evaluate_functioncall(expr.functionCall(), variables))
         return evaluate_functioncall(expr.functionCall(), variables)
     elif (
         expr.ADD() is not None

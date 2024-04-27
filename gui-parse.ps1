@@ -1,10 +1,6 @@
 param(
-    [Parameter(Mandatory = $false)]
+    [Parameter(Mandatory = $true)]
     [string]$path
 )
 
-$cmd = Get-Content .\gui-parse.sh
-
-$finalCommand = "$cmd $path"
-
-& $finalCommand
+antlr4-parse src/grammar/ignoreParser.g4 src/grammar/ignoreLexer.g4 program -tokens -gui -encoding utf-8 $path
