@@ -107,6 +107,7 @@ def evaluate_functioncall(
     argument = evaluate_expr(
         ctx.expr(), variables
     )  # only 1-arg functions allowed for now
+    print(f"evaling {function_name} w {argument}")
     if function_name not in variables:
         raise ValueError(f"function not defined {function_name}")
     return variables[function_name](argument)

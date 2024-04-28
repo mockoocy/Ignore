@@ -1,5 +1,5 @@
+from copy import deepcopy
 from typing import Any, Dict, override
-
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserListener import ignoreParserListener
 from .stdlib import builtins
@@ -7,14 +7,16 @@ from .utils.VariableInfo import Valid_Types, VariableInfo
 
 
 class Listener(ignoreParserListener):
-    
-    variables: Dict[str, Any] = builtins
-    """
-        stores our var decls. For now format: name -> value.
-        May move to format name -> variableSpecification 
-        (whatever it would be) if convenient.
-        By default stores many python functions.
-    """
+
+    def __init__(self):
+        self.variables: Dict[str, Any] = deepcopy(builtins)
+
+        """
+            stores our var decls. For now format: name -> value.
+            May move to format name -> variableSpecification 
+            (whatever it would be) if convenient.
+            By default stores many python functions.
+        """
 
     @override
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
