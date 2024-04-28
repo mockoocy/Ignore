@@ -17,7 +17,6 @@ Valid_Types_Reversed = {val: key for key,val in Valid_Types.items()}
 class VariableInfo[T]:
     value: T
     type: str = "Any"
-    scope: int = 0  # deeper we get, bigger it gets
     expression: ignoreParser.ExprContext | None = None
     var_decl: ignoreParser.VarDeclContext | None = None
     was_evaluated: bool = False

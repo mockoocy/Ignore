@@ -43,5 +43,5 @@ python run.py <filename>
 To run tests run
 
 ```bash
-python pytest tests/*
+pytest
 ```

@@ -14,9 +14,7 @@ class Listener(ignoreParserListener):
         May move to format name -> variableSpecification 
         (whatever it would be) if convenient.
         By default stores many python functions.
-        TODO: index it by pair (str, name).
     """
-    current_scope = 0
 
     @override
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
@@ -54,7 +52,6 @@ class Listener(ignoreParserListener):
                 expression=var_expression,
                 var_decl=ctx,
                 type=var_type,
-                scope=self.current_scope,
             )  #
             print(
                 f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {self.variables[var_name].was_evaluated} "
