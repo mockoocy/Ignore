@@ -53,6 +53,7 @@ expr:
 	OPEN_PAREN expr CLOSE_PAREN
 	| literal
 	| functionCall
+	| NOT expr
 	| expr (MUL | DIV | MOD | INT_DIV) expr
 	| expr (ADD | SUB) expr
 	| expr (OPERATOR_COMPARE) expr

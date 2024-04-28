@@ -1,0 +1,10 @@
+<program>
+  {print(!True)}
+  {print(!False)}
+  {print((!False && True && !!(!True || !False) ) == True )}
+  {print((!False && True && !!(!True || !False) ) != True )}
+  {print((!False && True && !!(!True || !False) ) == False )}
+  {print((!False && True && !!(!True || !False) ) != False )}
+  {print(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!True)}
+  {print(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!True)} // 1 more '!` than above
+</program>

@@ -66,6 +66,7 @@ ADD: '+';
 SUB: '-';
 MOD: '%';
 INT_DIV: '//';
+NOT: '!';
 
 OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
 OPERATOR_LOGIC: ('&&' | '||');

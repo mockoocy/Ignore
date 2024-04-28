@@ -9,7 +9,7 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         return evaluate_expr(expr.expr(0), variables)
     if expr.literal() is not None:
         return evaluate_literal(expr.literal())
-    elif expr.NAME() is not None:
+    if expr.NAME() is not None:
         if str(expr.NAME()) not in variables.keys():
             raise ValueError(f"No such variable declared {str(expr.NAME())}")
         elif (
@@ -22,9 +22,11 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         else:
             return variables[str(expr.NAME())].value
 
-    elif expr.functionCall() is not None:
+    if expr.functionCall() is not None:
         return evaluate_functioncall(expr.functionCall(), variables)
-    elif (
+    if expr.NOT():
+        return not evaluate_expr(expr.expr(0), variables)
+    if (
         expr.ADD() is not None
         or expr.SUB() is not None
         or expr.MUL() is not None
