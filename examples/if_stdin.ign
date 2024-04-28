@@ -1,6 +1,6 @@
 <program>
   <var name=n type=int>
-    {int(input("val of n"))} // does not add newline for some reason. Also being called twice currently xd
+    {int("val of n")} // does not add newline for some reason. Also being called twice currently xd
   </var>
     <if condition={n % 2 == 0}>
       {print("even")}

@@ -116,29 +116,21 @@ def evaluate_var_decl(
     var_name = str(ctx.FUNCTION_NAME())[5:]
     variable_info = variables.get(var_name)
     if variable_info.was_evaluated == True:
-        return
-    # sprawdzenie czy istnieje taka zmienna
-    if variable_info is not None:
-        expr_val = evaluate_expr(
-            variable_info.expression, variables
-        )  # obliczenie warotsci exprresion
+        return variable_info
+    expr_val = evaluate_expr(variable_info.expression, variables)
 
-        if variable_info.type != None:  # jesli typ był podany w deklaracji
-            var_type = Valid_Types[variable_info.type]
-            try:  # jesli nie castowalne na dany typ to zwroc type error
-                variable_info.value = var_type(expr_val)  # castowanie na var_type
-            except ValueError:
-                raise TypeError(
-                    f"could not cast value of {var_name} to type : {var_type}"
-                )
+    if variable_info.type != None:  # jesli typ był podany w deklaracji
+        var_type = Valid_Types[variable_info.type]
+        try:  # jesli nie castowalne na dany typ to zwroc type error
+            variable_info.value = var_type(expr_val)  # castowanie na var_type
+        except ValueError:
+            raise TypeError(f"could not cast value of {var_name} to type : {var_type}")
 
-        else:  # jesli nie podano typu to jest przypisywany domyslny dla zmiennej
-            expr_val = evaluate_expr(variable_info.expression, variables)
-            variable_info.type = Valid_Types_Reversed.get(type(expr_val))
-            variable_info.value = expr_val
-        variable_info.was_evaluated = True
-        print(
-            f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
-        )
-    else:
-        raise NameError(f"variable {var_name} was not declared")
+    else:  # jesli nie podano typu to jest przypisywany domyslny dla zmiennej
+        variable_info.type = Valid_Types_Reversed.get(type(expr_val))
+        variable_info.value = expr_val
+    variable_info.was_evaluated = True
+    print(
+        f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
+    )
+    return variable_info

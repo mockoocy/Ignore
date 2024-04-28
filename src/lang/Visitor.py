@@ -69,3 +69,9 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitVarDecl(self, ctx: ignoreParser.VarDeclContext):
         evaluate_var_decl(ctx, self.variables)
+
+    @override 
+    def visitVar(self, ctx: ignoreParser.VarContext):
+        # Normally it would evaluate expression that gives value to a new variable
+        # It is already done in the `self.visitVarDecl` function. Can safely omit.
+        pass

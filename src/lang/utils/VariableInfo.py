@@ -10,14 +10,7 @@ Valid_Types = {  # lewo reprezentuje nasz język, prawo odpowiadajacy typ python
     "bool": bool,
 }
 
-Valid_Types_Reversed = (
-    {  # lewo reprezentuje python, prawo odpowiadajacy typ w naszym jezyku
-        int: "int",
-        float: "float",
-        str: "string",
-        bool: "bool",
-    }
-)
+Valid_Types_Reversed = {val: key for key,val in Valid_Types.items()} 
 
 
 @dataclass
