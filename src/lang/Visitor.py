@@ -73,5 +73,5 @@ class Visitor(ignoreParserVisitor):
     @override 
     def visitVar(self, ctx: ignoreParser.VarContext):
         # Normally it would evaluate expression that gives value to a new variable
-        # It is already done in the `self.visitVarDecl` function. Can safely omit.
-        pass
+        # It is already done in the `self.visitVarDecl` function. Can safely om
+        return self.visitVarDecl(ctx.varDecl())

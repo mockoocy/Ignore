@@ -6,7 +6,7 @@ from .VariableInfo import Valid_Types, Valid_Types_Reversed, VariableInfo
 
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
     if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
-        return evaluate_expr(expr.expr(0), variables)
+        return evaluate_expr(expr.expr(0), variables) 
     if expr.literal() is not None:
         return evaluate_literal(expr.literal())
     if expr.NAME() is not None:
@@ -81,7 +81,7 @@ def evaluate_literal(literal: ignoreParser.LiteralContext):
 
     if literal.LITERAL_STRING() is not None:
         raw_string = str(literal.LITERAL_STRING())
-        return raw_string[1:-1]
+        return raw_string[1:-1] # removes quotes
 
     elif literal.LITERAL_INT() is not None:
         return int(str(literal.LITERAL_INT()))

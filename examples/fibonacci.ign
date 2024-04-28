@@ -1,8 +1,9 @@
 <function name=fibonacci 🍌:int returnType=int >
     <if condition={ 🍌 < 0 }>
-        <throw exceptionType=InvalidArgumentExeption >
+       /* <throw exceptionType=InvalidArgumentExeption >
                 {"😿😿😿There are no fib number below 0"}
-        </throw>
+        </throw> 
+        */
     </if>
     <if condition={🍌 == 1 || 🍌 == 0}> 
         <return>
@@ -13,6 +14,7 @@
         {fibonacci(🍌 - 1) + fibonacci(🍌 - 2)}
     </return>
 </function>
+
 /*
 Wielo
 liniowy
