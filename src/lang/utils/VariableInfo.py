@@ -20,6 +20,7 @@ class VariableInfo[T]:
     expression: ignoreParser.ExprContext | None = None
     var_decl: ignoreParser.VarDeclContext | None = None
     was_evaluated: bool = False
+    recursion_check: int = 0
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         if self.type in ("Any", "Function"):

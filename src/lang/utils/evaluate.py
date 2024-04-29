@@ -107,7 +107,6 @@ def evaluate_functioncall(
     argument = evaluate_expr(
         ctx.expr(), variables
     )  # only 1-arg functions allowed for now
-    print(f"evaling {function_name} w {argument}")
     if function_name not in variables:
         raise ValueError(f"function not defined {function_name}")
     return variables[function_name](argument)
@@ -120,6 +119,10 @@ def evaluate_var_decl(
     variable_info = variables.get(var_name)
     if variable_info.was_evaluated == True:
         return variable_info
+    
+    variable_info.recursion_check += 1 
+    if variable_info.recursion_check > 1:
+        raise RecursionError(f"Circular dependency detected for variable {var_name}")
     expr_val = evaluate_expr(variable_info.expression, variables)
 
     if variable_info.type != None:  # jesli typ był podany w deklaracji
