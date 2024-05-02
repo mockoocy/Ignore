@@ -61,11 +61,4 @@ class Listener(ignoreParserListener):
         else:
             # wyrzucenie błędu gdy próbujemy redeklarować zmienną
             raise ReferenceError(f"variable {var_name} is already defined!")
-        # jesli expression to name to byla proba przypisania wartosci jednej zmiennej do drugiej
-        # ... wspieramy przypisania?
-        # if ctx.parentCtx.wrapped_expr().expr().NAME() is not None:
-        #     if str(expression) not in self.variables.keys():
-        #         raise ValueError(f"No such variable declared {str(expression)}")
-        #     self.variables[var_name] = self.variables[str(expression)]
-        # else:
-        #     self.variables[var_name] = expression
+

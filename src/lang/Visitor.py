@@ -137,9 +137,10 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
         evaluated = self.visitIf_statement(ctx.if_statement())
+        if evaluated: return
         for elif_ctx in ctx.elif_statement():
             evaluated = self.visitElif_statement(elif_ctx)
-            if not evaluated: break
+            if evaluated: break
         if ctx.else_statement() and not evaluated: 
             self.visitElse_statement(ctx.else_statement())
 
