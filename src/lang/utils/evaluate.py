@@ -3,6 +3,7 @@ from typing import Dict
 from ..generated.ignoreParser import ignoreParser
 from .VariableInfo import Valid_Types, Valid_Types_Reversed, VariableInfo
 
+VariableDict = Dict[str, VariableInfo]
 
 def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableInfo]):
     if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
@@ -26,54 +27,41 @@ def evaluate_expr(expr: ignoreParser.ExprContext, variables: Dict[str, VariableI
         return evaluate_functioncall(expr.functionCall(), variables)
     if expr.NOT():
         return not evaluate_expr(expr.expr(0), variables)
-    if (
-        expr.ADD() is not None
-        or expr.SUB() is not None
-        or expr.MUL() is not None
-        or expr.DIV() is not None
-        or expr.MOD() is not None
-        or expr.INT_DIV() is not None  # cant just omit this and go to ifs directly?
-    ):
+    # Now we surely deal with a binary operation
+    left = evaluate_expr(expr.expr(0), variables)
+    right = evaluate_expr(expr.expr(1), variables)
 
-        left = evaluate_expr(expr.expr(0), variables)
-        right = evaluate_expr(expr.expr(1), variables)
-
-        if expr.ADD() is not None:
-            return left + right
-        elif expr.SUB() is not None:
-            return left - right
-        elif expr.MUL() is not None:
-            return left * right
-        elif expr.DIV() is not None:
-            return left / right  # division by zero?!
-        elif expr.MOD() is not None:
-            return left % right
-        elif expr.INT_DIV() is not None:
-            return left // right
-    elif expr.OPERATOR_COMPARE() is not None:
-        left = evaluate_expr(expr.expr(0), variables)
-        right = evaluate_expr(expr.expr(1), variables)
-        if str(expr.OPERATOR_COMPARE()) == "==":
-            return left == right
-        elif str(expr.OPERATOR_COMPARE()) == "!=":
-            return left != right
-        elif str(expr.OPERATOR_COMPARE()) == ">":
-            return left > right
-        elif str(expr.OPERATOR_COMPARE()) == "<":
-            return left < right
-        elif str(expr.OPERATOR_COMPARE()) == ">=":
-            return left >= right
-        elif str(expr.OPERATOR_COMPARE()) == "<=":
-            return left <= right
+    if expr.ADD() is not None:
+        return left + right
+    elif expr.SUB() is not None:
+        return left - right
+    elif expr.MUL() is not None:
+        return left * right
+    elif expr.DIV() is not None:
+        return left / right  # division by zero?!
+    elif expr.MOD() is not None:
+        return left % right
+    elif expr.INT_DIV() is not None:
+        return left // right
+    # case of comparision, maybe should switch these to be EQ, NEQ, LT, etc. instead of this check
+    elif str(expr.OPERATOR_COMPARE()) == "==":
+        return left == right
+    elif str(expr.OPERATOR_COMPARE()) == "!=":
+        return left != right
+    elif str(expr.OPERATOR_COMPARE()) == ">":
+        return left > right
+    elif str(expr.OPERATOR_COMPARE()) == "<":
+        return left < right
+    elif str(expr.OPERATOR_COMPARE()) == ">=":
+        return left >= right
+    elif str(expr.OPERATOR_COMPARE()) == "<=":
+        return left <= right
     elif expr.OPERATOR_LOGIC() is not None:
-        left = evaluate_expr(expr.expr(0), variables)
-        right = evaluate_expr(expr.expr(1), variables)
         if str(expr.OPERATOR_LOGIC()) == "&&":
             return left and right
         elif str(expr.OPERATOR_LOGIC()) == "||":
             return left or right
     else:
-
         raise NotImplementedError("Unsupported expression syntax")
 
 
@@ -116,7 +104,7 @@ def evaluate_var_decl(
     ctx: ignoreParser.VarDeclContext, variables: Dict[str, VariableInfo]
 ):
     var_name = str(ctx.FUNCTION_NAME())[5:]
-    variable_info = variables.get(var_name)
+    variable_info = variables.get(var_name, VariableInfo(var_name))
     if variable_info.was_evaluated == True:
         return variable_info
     
