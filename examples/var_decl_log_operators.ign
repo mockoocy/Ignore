@@ -26,4 +26,5 @@
 {print(div != add)}
 {print(bigger >  smaller)}
 {print(bigger <= smaller)}
+{print((true_var || false_var) && false_var)}
 </program>
