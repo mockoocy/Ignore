@@ -156,7 +156,8 @@ class Visitor(ignoreParserVisitor):
         variable_info.recursion_check += 1 
         if variable_info.recursion_check > 1:
             raise RecursionError(f"Circular dependency detected for variable {var_name}")
-        expr_val = self.visitExpr(variable_info.expression)
+        var_expression = ctx.parentCtx.wrapped_expr().expr()
+        expr_val = self.visitExpr(var_expression)
 
         if variable_info.type != None:  # jesli typ był podany w deklaracji
             var_type = Valid_Types[variable_info.type]

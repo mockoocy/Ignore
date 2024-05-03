@@ -18,6 +18,31 @@ class Listener(ignoreParserListener):
             By default stores many python functions.
         """
 
+    def _get_var_type(self, ctx: ignoreParser.VarDeclContext):
+        if ctx.VAR_DECL_TYPE() is None:# jesli typ nie był podany to narazie None (w wizytorze automatycznie bedzie przypisany)
+            return None
+        var_type = str(ctx.VAR_DECL_TYPE())[5:]
+        if (
+            var_type not in Valid_Types.keys()
+        ):  # sprawdzenie czy typ jest wspierany przez język
+            raise TypeError(f"type {var_name} is not supported!")
+        return var_type
+
+    def _add_new_var(self, var_name: str, var_type: str, ctx: ignoreParser.VarDeclContext):
+        # sprawdzenie czy istnieje taka zmienna
+        if var_name in self.variables:
+            raise ReferenceError(f"variable {var_name} is already defined!")
+            # dodanie zmiennych do slownika wraz z typem bez wartosci
+        new_var =  VariableInfo(
+            value=None,
+            var_decl=ctx,
+            type=var_type,
+        )  #
+        print(
+            f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {new_var.was_evaluated} "
+        )
+        self.variables[var_name] = new_var
+
     @override
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
         print(
@@ -37,28 +62,7 @@ class Listener(ignoreParserListener):
         var_expression = ctx.parentCtx.wrapped_expr().expr()
 
         # dodanie typu
-        if ctx.VAR_DECL_TYPE() != None:
-            var_type = str(ctx.VAR_DECL_TYPE())[5:]
-            if (
-                var_type not in Valid_Types.keys()
-            ):  # sprawdzenie czy typ jest wspierany przez język
-                raise TypeError(f"type {var_name} is not supported!")
-        else:  # jesli typ nie był podany to narazie None (w wizytorze automatycznie bedzie przypisany)
-            var_type = None
+        var_type = self._get_var_type(ctx)
+        self._add_new_var(var_name, var_type, ctx)
 
-        # sprawdzenie czy istnieje taka zmienna
-        if var_name not in self.variables:
-            # dodanie zmiennych do slownika wraz z typem bez wartosci
-            self.variables[var_name] = VariableInfo(
-                value=None,
-                expression=var_expression,
-                var_decl=ctx,
-                type=var_type,
-            )  #
-            print(
-                f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {self.variables[var_name].was_evaluated} "
-            )
-        else:
-            # wyrzucenie błędu gdy próbujemy redeklarować zmienną
-            raise ReferenceError(f"variable {var_name} is already defined!")
 
