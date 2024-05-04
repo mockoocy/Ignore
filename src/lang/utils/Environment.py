@@ -1,19 +1,19 @@
-
-
 from dataclasses import dataclass
 from typing import Self
-from src.lang.utils.VariableInfo import VariableInfo
+
 from src.lang.utils.types import VariableDict
+from src.lang.utils.VariableInfo import VariableInfo
+
 
 @dataclass
 class Environment:
     """
-    Environment is a wrapper around dictionary that maps variable names 
-    to the corresponding VariableInfo objects. 
+    Environment is a wrapper around dictionary that maps variable names
+    to the corresponding VariableInfo objects.
     """
+
     enclosing: Self | None
     variables: VariableDict
-    
 
     def merge(self, other: "Environment") -> "Environment":
         new_vars = {
@@ -22,10 +22,9 @@ class Environment:
         }
         return Environment(enclosing=other.enclosing, variables=new_vars)
 
-
     def create_snapshot(self) -> VariableDict:
         """Creates "snapshot" of all the variables that a newly declared function can access.
-        Will be used for closures most probably. 
+        Will be used for closures most probably.
         """
         if self.enclosing == None:
             return self.variables
@@ -37,10 +36,9 @@ class Environment:
     #     for _ in range(distance):
     #         env = env.enclosing
     #     return env
-    
+
     # def get_at(self, distance: int, name: str) -> VariableInfo:
     #     return self.ancestor(distance).variables[name]
-    
 
     def lookup_variable(self, var_name: str) -> VariableInfo | None:
         environment = self

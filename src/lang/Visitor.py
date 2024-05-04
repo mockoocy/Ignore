@@ -1,12 +1,14 @@
-from typing import override
 from copy import deepcopy
+from typing import override
+
 from src.lang.utils.Environment import Environment
 from src.lang.utils.VariableInfo import Valid_Types, Valid_Types_Reversed
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserVisitor import ignoreParserVisitor
-from .utils.types import VarDeclDict
 from .stdlib import global_env
+from .utils.types import VarDeclDict
+
 
 class Visitor(ignoreParserVisitor):
 
@@ -21,7 +23,7 @@ class Visitor(ignoreParserVisitor):
         literal = ctx
         if literal.LITERAL_STRING() is not None:
             raw_string = str(literal.LITERAL_STRING())
-            return raw_string[1:-1] # removes quotes
+            return raw_string[1:-1]  # removes quotes
 
         elif literal.LITERAL_INT() is not None:
             return int(str(literal.LITERAL_INT()))
@@ -50,7 +52,7 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
         function_name = ctx.NAME().getText()
-        
+
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
         function = self.current_env.lookup_variable(function_name)
         if not function:
@@ -62,7 +64,7 @@ class Visitor(ignoreParserVisitor):
         expr = ctx
         current_env = self.current_env
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
-            return self.visitExpr(expr.expr(0)) 
+            return self.visitExpr(expr.expr(0))
         if expr.literal() is not None:
             return self.visitLiteral(expr.literal())
         if expr.NAME() is not None:
@@ -70,7 +72,7 @@ class Visitor(ignoreParserVisitor):
             var_info = current_env.lookup_variable(var_name)
             if not var_info:
                 raise ValueError(f"No such variable declared {var_name}")
-            if (var_info.was_evaluated):
+            if var_info.was_evaluated:
                 return var_info.value
             return self.visitVarDecl(var_info.var_decl).value
 
@@ -125,7 +127,7 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitIf_statement(self, ctx: ignoreParser.If_statementContext) -> bool:
-        # returns wether the condition was evaluated 
+        # returns wether the condition was evaluated
         condition_result = self.visitCondition(ctx.if_().condition())
         if condition_result:
             self.visitBlock(ctx.block())
@@ -143,17 +145,17 @@ class Visitor(ignoreParserVisitor):
     def visitElse_statement(self, ctx: ignoreParser.Else_statementContext):
         self.visitBlock(ctx.block())
 
-
     @override
     def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
         evaluated = self.visitIf_statement(ctx.if_statement())
-        if evaluated: return
+        if evaluated:
+            return
         for elif_ctx in ctx.elif_statement():
             evaluated = self.visitElif_statement(elif_ctx)
-            if evaluated: break
-        if ctx.else_statement() and not evaluated: 
+            if evaluated:
+                break
+        if ctx.else_statement() and not evaluated:
             self.visitElse_statement(ctx.else_statement())
-
 
     @override
     def visitVarDecl(self, ctx: ignoreParser.VarDeclContext):
@@ -162,10 +164,12 @@ class Visitor(ignoreParserVisitor):
         self.current_env.variables[var_name] = variable_info
         if variable_info.was_evaluated == True:
             return variable_info
-        
-        variable_info.recursion_check += 1 
+
+        variable_info.recursion_check += 1
         if variable_info.recursion_check > 1:
-            raise RecursionError(f"Circular dependency detected for variable {var_name}")
+            raise RecursionError(
+                f"Circular dependency detected for variable {var_name}"
+            )
         var_expression = ctx.parentCtx.wrapped_expr().expr()
         expr_val = self.visitExpr(var_expression)
 
@@ -174,7 +178,9 @@ class Visitor(ignoreParserVisitor):
             try:  # jesli nie castowalne na dany typ to zwroc type error
                 variable_info.value = var_type(expr_val)  # castowanie na var_type
             except ValueError:
-                raise TypeError(f"could not cast value of {var_name} to type : {var_type}")
+                raise TypeError(
+                    f"could not cast value of {var_name} to type : {var_type}"
+                )
 
         else:  # jesli nie podano typu to jest przypisywany domyslny dla zmiennej
             variable_info.type = Valid_Types_Reversed.get(type(expr_val))
@@ -185,7 +191,7 @@ class Visitor(ignoreParserVisitor):
         )
         return variable_info
 
-    @override 
+    @override
     def visitVar(self, ctx: ignoreParser.VarContext):
         # Normally it would evaluate expression that gives value to a new variable
         # It is already done in the `self.visitVarDecl` function. Can safely om

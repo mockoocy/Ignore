@@ -3,6 +3,7 @@ import io
 from types import ModuleType
 
 from src.lang.utils.Environment import Environment
+
 from ..utils.VariableInfo import VariableInfo
 
 modules = ["builtins", "collections"]
@@ -14,6 +15,7 @@ modules = ["builtins", "collections"]
 
 def get_all_members(modulename: str):
     return __import__(modulename).__dict__
+
 
 with contextlib.redirect_stdout(io.StringIO()):
     builtins = {}

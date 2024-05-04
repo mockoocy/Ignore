@@ -10,7 +10,7 @@ Valid_Types = {  # lewo reprezentuje nasz język, prawo odpowiadajacy typ python
     "bool": bool,
 }
 
-Valid_Types_Reversed = {val: key for key,val in Valid_Types.items()} 
+Valid_Types_Reversed = {val: key for key, val in Valid_Types.items()}
 
 
 @dataclass
@@ -25,13 +25,12 @@ class VariableInfo[T]:
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         if self.type in ("Any", "Function") or self.type is None:
             return self.value(*args, **kwargs)
-        
 
     def __str__(self):
-        return (
-f"""VariableInfo
+        return f"""VariableInfo
     value: {self.value}
     type: {self.type}
     evaluated: {self.was_evaluated}
-""")
+"""
+
     __repr__ = __str__

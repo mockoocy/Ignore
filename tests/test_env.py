@@ -1,5 +1,5 @@
-from src.lang.utils.VariableInfo import VariableInfo
 from src.lang.utils.Environment import Environment
+from src.lang.utils.VariableInfo import VariableInfo
 
 abcd = {
     "a": VariableInfo("a1"),
@@ -41,6 +41,7 @@ def test_env_snapshot():
         "h": VariableInfo("h3"),
     }
     assert Environment(None, expected_vars).variables == efgh_env.create_snapshot()
+
 
 def test_env_lookup():
     names = ["a", "b", "c", "d", "e", "f"]
