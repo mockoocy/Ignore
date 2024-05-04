@@ -10,82 +10,83 @@ else:
 
 def serializedATN():
     return [
-        4,1,49,222,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,49,224,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
-        7,20,2,21,7,21,1,0,1,0,1,1,1,1,1,2,5,2,50,8,2,10,2,12,2,53,9,2,1,
-        2,1,2,1,2,5,2,58,8,2,10,2,12,2,61,9,2,1,2,1,2,5,2,65,8,2,10,2,12,
-        2,68,9,2,1,2,1,2,1,3,1,3,3,3,74,8,3,1,4,1,4,1,4,3,4,79,8,4,1,5,1,
-        5,1,5,1,6,1,6,1,6,1,6,4,6,88,8,6,11,6,12,6,89,1,6,1,6,3,6,94,8,6,
-        1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,103,8,7,1,8,1,8,1,8,1,8,3,8,109,
-        8,8,1,8,1,8,1,8,1,8,1,8,3,8,116,8,8,1,9,1,9,1,9,5,9,121,8,9,10,9,
-        12,9,124,9,9,1,9,1,9,1,9,1,10,1,10,5,10,131,8,10,10,10,12,10,134,
-        9,10,1,10,1,10,1,11,1,11,1,11,3,11,141,8,11,1,11,1,11,1,12,1,12,
-        1,12,1,12,1,13,1,13,3,13,151,8,13,1,14,1,14,1,14,1,14,1,14,1,14,
-        1,14,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,17,
-        1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,19,1,19,5,19,181,8,19,10,19,
-        12,19,184,9,19,1,19,3,19,187,8,19,1,20,1,20,1,20,1,20,1,20,1,20,
-        1,20,1,20,1,20,1,20,3,20,199,8,20,1,20,1,20,1,20,1,20,1,20,1,20,
-        1,20,1,20,1,20,1,20,1,20,1,20,5,20,213,8,20,10,20,12,20,216,9,20,
-        1,21,1,21,1,21,1,21,1,21,0,1,40,22,0,2,4,6,8,10,12,14,16,18,20,22,
-        24,26,28,30,32,34,36,38,40,42,0,4,1,0,35,36,3,0,29,29,31,31,35,36,
-        2,0,38,39,42,43,1,0,40,41,226,0,44,1,0,0,0,2,46,1,0,0,0,4,51,1,0,
-        0,0,6,73,1,0,0,0,8,75,1,0,0,0,10,80,1,0,0,0,12,93,1,0,0,0,14,102,
-        1,0,0,0,16,115,1,0,0,0,18,117,1,0,0,0,20,128,1,0,0,0,22,137,1,0,
-        0,0,24,144,1,0,0,0,26,150,1,0,0,0,28,152,1,0,0,0,30,159,1,0,0,0,
-        32,163,1,0,0,0,34,170,1,0,0,0,36,174,1,0,0,0,38,178,1,0,0,0,40,198,
-        1,0,0,0,42,217,1,0,0,0,44,45,7,0,0,0,45,1,1,0,0,0,46,47,7,1,0,0,
-        47,3,1,0,0,0,48,50,3,20,10,0,49,48,1,0,0,0,50,53,1,0,0,0,51,49,1,
-        0,0,0,51,52,1,0,0,0,52,54,1,0,0,0,53,51,1,0,0,0,54,59,5,16,0,0,55,
-        58,3,14,7,0,56,58,3,24,12,0,57,55,1,0,0,0,57,56,1,0,0,0,58,61,1,
-        0,0,0,59,57,1,0,0,0,59,60,1,0,0,0,60,62,1,0,0,0,61,59,1,0,0,0,62,
-        66,5,17,0,0,63,65,3,20,10,0,64,63,1,0,0,0,65,68,1,0,0,0,66,64,1,
-        0,0,0,66,67,1,0,0,0,67,69,1,0,0,0,68,66,1,0,0,0,69,70,5,0,0,1,70,
-        5,1,0,0,0,71,74,3,14,7,0,72,74,3,42,21,0,73,71,1,0,0,0,73,72,1,0,
-        0,0,74,7,1,0,0,0,75,78,5,26,0,0,76,79,3,42,21,0,77,79,5,20,0,0,78,
-        76,1,0,0,0,78,77,1,0,0,0,79,9,1,0,0,0,80,81,5,18,0,0,81,82,5,25,
-        0,0,82,11,1,0,0,0,83,84,5,19,0,0,84,94,5,25,0,0,85,87,5,19,0,0,86,
-        88,3,8,4,0,87,86,1,0,0,0,88,89,1,0,0,0,89,87,1,0,0,0,89,90,1,0,0,
-        0,90,91,1,0,0,0,91,92,5,25,0,0,92,94,1,0,0,0,93,83,1,0,0,0,93,85,
-        1,0,0,0,94,13,1,0,0,0,95,96,3,12,6,0,96,97,3,42,21,0,97,98,3,10,
-        5,0,98,103,1,0,0,0,99,103,3,42,21,0,100,103,3,20,10,0,101,103,3,
-        38,19,0,102,95,1,0,0,0,102,99,1,0,0,0,102,100,1,0,0,0,102,101,1,
-        0,0,0,103,15,1,0,0,0,104,105,5,30,0,0,105,108,5,33,0,0,106,109,3,
-        40,20,0,107,109,3,2,1,0,108,106,1,0,0,0,108,107,1,0,0,0,109,110,
-        1,0,0,0,110,111,5,34,0,0,111,116,1,0,0,0,112,113,5,30,0,0,113,114,
-        5,33,0,0,114,116,5,34,0,0,115,104,1,0,0,0,115,112,1,0,0,0,116,17,
-        1,0,0,0,117,118,5,1,0,0,118,122,5,21,0,0,119,121,5,23,0,0,120,119,
-        1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,
-        1,0,0,0,124,122,1,0,0,0,125,126,5,22,0,0,126,127,5,25,0,0,127,19,
-        1,0,0,0,128,132,3,18,9,0,129,131,3,14,7,0,130,129,1,0,0,0,131,134,
-        1,0,0,0,132,130,1,0,0,0,132,133,1,0,0,0,133,135,1,0,0,0,134,132,
-        1,0,0,0,135,136,5,2,0,0,136,21,1,0,0,0,137,138,5,12,0,0,138,140,
-        5,21,0,0,139,141,5,11,0,0,140,139,1,0,0,0,140,141,1,0,0,0,141,142,
-        1,0,0,0,142,143,5,25,0,0,143,23,1,0,0,0,144,145,3,22,11,0,145,146,
-        3,42,21,0,146,147,5,10,0,0,147,25,1,0,0,0,148,151,3,40,20,0,149,
-        151,5,29,0,0,150,148,1,0,0,0,150,149,1,0,0,0,151,27,1,0,0,0,152,
-        153,5,3,0,0,153,154,5,24,0,0,154,155,5,27,0,0,155,156,3,26,13,0,
-        156,157,5,48,0,0,157,158,5,25,0,0,158,29,1,0,0,0,159,160,3,28,14,
-        0,160,161,3,6,3,0,161,162,5,4,0,0,162,31,1,0,0,0,163,164,5,6,0,0,
-        164,165,5,24,0,0,165,166,5,27,0,0,166,167,3,26,13,0,167,168,5,48,
-        0,0,168,169,5,25,0,0,169,33,1,0,0,0,170,171,3,32,16,0,171,172,3,
-        6,3,0,172,173,5,5,0,0,173,35,1,0,0,0,174,175,5,7,0,0,175,176,3,6,
-        3,0,176,177,5,8,0,0,177,37,1,0,0,0,178,182,3,30,15,0,179,181,3,34,
-        17,0,180,179,1,0,0,0,181,184,1,0,0,0,182,180,1,0,0,0,182,183,1,0,
-        0,0,183,186,1,0,0,0,184,182,1,0,0,0,185,187,3,36,18,0,186,185,1,
-        0,0,0,186,187,1,0,0,0,187,39,1,0,0,0,188,189,6,20,-1,0,189,190,5,
-        33,0,0,190,191,3,40,20,0,191,192,5,34,0,0,192,199,1,0,0,0,193,199,
-        3,2,1,0,194,199,3,16,8,0,195,196,5,44,0,0,196,199,3,40,20,6,197,
-        199,5,30,0,0,198,188,1,0,0,0,198,193,1,0,0,0,198,194,1,0,0,0,198,
-        195,1,0,0,0,198,197,1,0,0,0,199,214,1,0,0,0,200,201,10,5,0,0,201,
-        202,7,2,0,0,202,213,3,40,20,6,203,204,10,4,0,0,204,205,7,3,0,0,205,
-        213,3,40,20,5,206,207,10,3,0,0,207,208,5,45,0,0,208,213,3,40,20,
-        4,209,210,10,2,0,0,210,211,5,46,0,0,211,213,3,40,20,3,212,200,1,
-        0,0,0,212,203,1,0,0,0,212,206,1,0,0,0,212,209,1,0,0,0,213,216,1,
-        0,0,0,214,212,1,0,0,0,214,215,1,0,0,0,215,41,1,0,0,0,216,214,1,0,
-        0,0,217,218,5,27,0,0,218,219,3,40,20,0,219,220,5,48,0,0,220,43,1,
-        0,0,0,20,51,57,59,66,73,78,89,93,102,108,115,122,132,140,150,182,
-        186,198,212,214
+        7,20,2,21,7,21,1,0,1,0,1,1,1,1,1,2,1,2,1,2,1,2,3,2,53,8,2,1,2,1,
+        2,1,2,1,2,1,2,3,2,60,8,2,1,3,1,3,1,3,5,3,65,8,3,10,3,12,3,68,9,3,
+        1,3,1,3,1,3,1,4,1,4,5,4,75,8,4,10,4,12,4,78,9,4,1,4,1,4,1,5,1,5,
+        1,5,3,5,85,8,5,1,5,1,5,1,6,1,6,1,6,1,6,1,7,1,7,3,7,95,8,7,1,8,1,
+        8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,
+        10,1,10,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,13,1,13,5,13,125,
+        8,13,10,13,12,13,128,9,13,1,13,3,13,131,8,13,1,14,5,14,134,8,14,
+        10,14,12,14,137,9,14,1,14,1,14,1,14,5,14,142,8,14,10,14,12,14,145,
+        9,14,1,14,1,14,5,14,149,8,14,10,14,12,14,152,9,14,1,14,1,14,1,15,
+        1,15,1,15,3,15,159,8,15,1,16,1,16,1,16,1,17,1,17,1,17,1,17,4,17,
+        168,8,17,11,17,12,17,169,1,17,1,17,3,17,174,8,17,1,18,1,18,1,18,
+        1,18,1,18,1,18,1,18,1,18,3,18,184,8,18,1,19,4,19,187,8,19,11,19,
+        12,19,188,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,3,20,
+        201,8,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,
+        1,20,5,20,215,8,20,10,20,12,20,218,9,20,1,21,1,21,1,21,1,21,1,21,
+        0,1,40,22,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
+        40,42,0,4,1,0,35,36,3,0,29,29,31,31,35,36,2,0,38,39,42,43,1,0,40,
+        41,229,0,44,1,0,0,0,2,46,1,0,0,0,4,59,1,0,0,0,6,61,1,0,0,0,8,72,
+        1,0,0,0,10,81,1,0,0,0,12,88,1,0,0,0,14,94,1,0,0,0,16,96,1,0,0,0,
+        18,103,1,0,0,0,20,107,1,0,0,0,22,114,1,0,0,0,24,118,1,0,0,0,26,122,
+        1,0,0,0,28,135,1,0,0,0,30,155,1,0,0,0,32,160,1,0,0,0,34,173,1,0,
+        0,0,36,183,1,0,0,0,38,186,1,0,0,0,40,200,1,0,0,0,42,219,1,0,0,0,
+        44,45,7,0,0,0,45,1,1,0,0,0,46,47,7,1,0,0,47,3,1,0,0,0,48,49,5,30,
+        0,0,49,52,5,33,0,0,50,53,3,40,20,0,51,53,3,2,1,0,52,50,1,0,0,0,52,
+        51,1,0,0,0,53,54,1,0,0,0,54,55,5,34,0,0,55,60,1,0,0,0,56,57,5,30,
+        0,0,57,58,5,33,0,0,58,60,5,34,0,0,59,48,1,0,0,0,59,56,1,0,0,0,60,
+        5,1,0,0,0,61,62,5,1,0,0,62,66,5,21,0,0,63,65,5,23,0,0,64,63,1,0,
+        0,0,65,68,1,0,0,0,66,64,1,0,0,0,66,67,1,0,0,0,67,69,1,0,0,0,68,66,
+        1,0,0,0,69,70,5,22,0,0,70,71,5,25,0,0,71,7,1,0,0,0,72,76,3,6,3,0,
+        73,75,3,38,19,0,74,73,1,0,0,0,75,78,1,0,0,0,76,74,1,0,0,0,76,77,
+        1,0,0,0,77,79,1,0,0,0,78,76,1,0,0,0,79,80,5,2,0,0,80,9,1,0,0,0,81,
+        82,5,12,0,0,82,84,5,21,0,0,83,85,5,11,0,0,84,83,1,0,0,0,84,85,1,
+        0,0,0,85,86,1,0,0,0,86,87,5,25,0,0,87,11,1,0,0,0,88,89,3,10,5,0,
+        89,90,3,42,21,0,90,91,5,10,0,0,91,13,1,0,0,0,92,95,3,40,20,0,93,
+        95,5,29,0,0,94,92,1,0,0,0,94,93,1,0,0,0,95,15,1,0,0,0,96,97,5,3,
+        0,0,97,98,5,24,0,0,98,99,5,27,0,0,99,100,3,14,7,0,100,101,5,48,0,
+        0,101,102,5,25,0,0,102,17,1,0,0,0,103,104,3,16,8,0,104,105,3,38,
+        19,0,105,106,5,4,0,0,106,19,1,0,0,0,107,108,5,6,0,0,108,109,5,24,
+        0,0,109,110,5,27,0,0,110,111,3,14,7,0,111,112,5,48,0,0,112,113,5,
+        25,0,0,113,21,1,0,0,0,114,115,3,20,10,0,115,116,3,38,19,0,116,117,
+        5,5,0,0,117,23,1,0,0,0,118,119,5,7,0,0,119,120,3,38,19,0,120,121,
+        5,8,0,0,121,25,1,0,0,0,122,126,3,18,9,0,123,125,3,22,11,0,124,123,
+        1,0,0,0,125,128,1,0,0,0,126,124,1,0,0,0,126,127,1,0,0,0,127,130,
+        1,0,0,0,128,126,1,0,0,0,129,131,3,24,12,0,130,129,1,0,0,0,130,131,
+        1,0,0,0,131,27,1,0,0,0,132,134,3,8,4,0,133,132,1,0,0,0,134,137,1,
+        0,0,0,135,133,1,0,0,0,135,136,1,0,0,0,136,138,1,0,0,0,137,135,1,
+        0,0,0,138,143,5,16,0,0,139,142,3,38,19,0,140,142,3,12,6,0,141,139,
+        1,0,0,0,141,140,1,0,0,0,142,145,1,0,0,0,143,141,1,0,0,0,143,144,
+        1,0,0,0,144,146,1,0,0,0,145,143,1,0,0,0,146,150,5,17,0,0,147,149,
+        3,8,4,0,148,147,1,0,0,0,149,152,1,0,0,0,150,148,1,0,0,0,150,151,
+        1,0,0,0,151,153,1,0,0,0,152,150,1,0,0,0,153,154,5,0,0,1,154,29,1,
+        0,0,0,155,158,5,26,0,0,156,159,3,42,21,0,157,159,5,20,0,0,158,156,
+        1,0,0,0,158,157,1,0,0,0,159,31,1,0,0,0,160,161,5,18,0,0,161,162,
+        5,25,0,0,162,33,1,0,0,0,163,164,5,19,0,0,164,174,5,25,0,0,165,167,
+        5,19,0,0,166,168,3,30,15,0,167,166,1,0,0,0,168,169,1,0,0,0,169,167,
+        1,0,0,0,169,170,1,0,0,0,170,171,1,0,0,0,171,172,5,25,0,0,172,174,
+        1,0,0,0,173,163,1,0,0,0,173,165,1,0,0,0,174,35,1,0,0,0,175,176,3,
+        34,17,0,176,177,3,42,21,0,177,178,3,32,16,0,178,184,1,0,0,0,179,
+        184,3,42,21,0,180,184,3,8,4,0,181,184,3,26,13,0,182,184,3,12,6,0,
+        183,175,1,0,0,0,183,179,1,0,0,0,183,180,1,0,0,0,183,181,1,0,0,0,
+        183,182,1,0,0,0,184,37,1,0,0,0,185,187,3,36,18,0,186,185,1,0,0,0,
+        187,188,1,0,0,0,188,186,1,0,0,0,188,189,1,0,0,0,189,39,1,0,0,0,190,
+        191,6,20,-1,0,191,192,5,33,0,0,192,193,3,40,20,0,193,194,5,34,0,
+        0,194,201,1,0,0,0,195,201,3,2,1,0,196,201,3,4,2,0,197,198,5,44,0,
+        0,198,201,3,40,20,6,199,201,5,30,0,0,200,190,1,0,0,0,200,195,1,0,
+        0,0,200,196,1,0,0,0,200,197,1,0,0,0,200,199,1,0,0,0,201,216,1,0,
+        0,0,202,203,10,5,0,0,203,204,7,2,0,0,204,215,3,40,20,6,205,206,10,
+        4,0,0,206,207,7,3,0,0,207,215,3,40,20,5,208,209,10,3,0,0,209,210,
+        5,45,0,0,210,215,3,40,20,4,211,212,10,2,0,0,212,213,5,46,0,0,213,
+        215,3,40,20,3,214,202,1,0,0,0,214,205,1,0,0,0,214,208,1,0,0,0,214,
+        211,1,0,0,0,215,218,1,0,0,0,216,214,1,0,0,0,216,217,1,0,0,0,217,
+        41,1,0,0,0,218,216,1,0,0,0,219,220,5,27,0,0,220,221,3,40,20,0,221,
+        222,5,48,0,0,222,43,1,0,0,0,20,52,59,66,76,84,94,126,130,135,141,
+        143,150,158,169,173,183,188,200,214,216
     ]
 
 class ignoreParser ( Parser ):
@@ -124,32 +125,32 @@ class ignoreParser ( Parser ):
 
     RULE_literalNumeric = 0
     RULE_literal = 1
-    RULE_program = 2
-    RULE_statement = 3
-    RULE_property = 4
-    RULE_endTag = 5
-    RULE_startTag = 6
-    RULE_block = 7
-    RULE_functionCall = 8
-    RULE_functionStart = 9
-    RULE_function = 10
-    RULE_varDecl = 11
-    RULE_var = 12
-    RULE_condition = 13
-    RULE_if = 14
-    RULE_if_statement = 15
-    RULE_elif = 16
-    RULE_elif_statement = 17
-    RULE_else_statement = 18
-    RULE_control_statement = 19
+    RULE_functionCall = 2
+    RULE_functionStart = 3
+    RULE_function = 4
+    RULE_varDecl = 5
+    RULE_var = 6
+    RULE_condition = 7
+    RULE_if = 8
+    RULE_if_statement = 9
+    RULE_elif = 10
+    RULE_elif_statement = 11
+    RULE_else_statement = 12
+    RULE_control_statement = 13
+    RULE_program = 14
+    RULE_property = 15
+    RULE_endTag = 16
+    RULE_startTag = 17
+    RULE_statement = 18
+    RULE_block = 19
     RULE_expr = 20
     RULE_wrapped_expr = 21
 
-    ruleNames =  [ "literalNumeric", "literal", "program", "statement", 
-                   "property", "endTag", "startTag", "block", "functionCall", 
-                   "functionStart", "function", "varDecl", "var", "condition", 
-                   "if", "if_statement", "elif", "elif_statement", "else_statement", 
-                   "control_statement", "expr", "wrapped_expr" ]
+    ruleNames =  [ "literalNumeric", "literal", "functionCall", "functionStart", 
+                   "function", "varDecl", "var", "condition", "if", "if_statement", 
+                   "elif", "elif_statement", "else_statement", "control_statement", 
+                   "program", "property", "endTag", "startTag", "statement", 
+                   "block", "expr", "wrapped_expr" ]
 
     EOF = Token.EOF
     FUNCTION_TAG_OPEN=1
@@ -329,490 +330,6 @@ class ignoreParser ( Parser ):
         return localctx
 
 
-    class ProgramContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def OPEN_PROGRAM(self):
-            return self.getToken(ignoreParser.OPEN_PROGRAM, 0)
-
-        def CLOSE_PROGRAM(self):
-            return self.getToken(ignoreParser.CLOSE_PROGRAM, 0)
-
-        def EOF(self):
-            return self.getToken(ignoreParser.EOF, 0)
-
-        def function(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ignoreParser.FunctionContext)
-            else:
-                return self.getTypedRuleContext(ignoreParser.FunctionContext,i)
-
-
-        def block(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ignoreParser.BlockContext)
-            else:
-                return self.getTypedRuleContext(ignoreParser.BlockContext,i)
-
-
-        def var(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ignoreParser.VarContext)
-            else:
-                return self.getTypedRuleContext(ignoreParser.VarContext,i)
-
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_program
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProgram" ):
-                listener.enterProgram(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProgram" ):
-                listener.exitProgram(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitProgram" ):
-                return visitor.visitProgram(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def program(self):
-
-        localctx = ignoreParser.ProgramContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_program)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 51
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==1:
-                self.state = 48
-                self.function()
-                self.state = 53
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 54
-            self.match(ignoreParser.OPEN_PROGRAM)
-            self.state = 59
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134746122) != 0):
-                self.state = 57
-                self._errHandler.sync(self)
-                token = self._input.LA(1)
-                if token in [1, 3, 19, 27]:
-                    self.state = 55
-                    self.block()
-                    pass
-                elif token in [12]:
-                    self.state = 56
-                    self.var()
-                    pass
-                else:
-                    raise NoViableAltException(self)
-
-                self.state = 61
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 62
-            self.match(ignoreParser.CLOSE_PROGRAM)
-            self.state = 66
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while _la==1:
-                self.state = 63
-                self.function()
-                self.state = 68
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-
-            self.state = 69
-            self.match(ignoreParser.EOF)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class StatementContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def block(self):
-            return self.getTypedRuleContext(ignoreParser.BlockContext,0)
-
-
-        def wrapped_expr(self):
-            return self.getTypedRuleContext(ignoreParser.Wrapped_exprContext,0)
-
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_statement
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatement" ):
-                listener.enterStatement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatement" ):
-                listener.exitStatement(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def statement(self):
-
-        localctx = ignoreParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_statement)
-        try:
-            self.state = 73
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
-            if la_ == 1:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 71
-                self.block()
-                pass
-
-            elif la_ == 2:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 72
-                self.wrapped_expr()
-                pass
-
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class PropertyContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def PROPERTY_NAME(self):
-            return self.getToken(ignoreParser.PROPERTY_NAME, 0)
-
-        def wrapped_expr(self):
-            return self.getTypedRuleContext(ignoreParser.Wrapped_exprContext,0)
-
-
-        def TAG_REFERENCE(self):
-            return self.getToken(ignoreParser.TAG_REFERENCE, 0)
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_property
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProperty" ):
-                listener.enterProperty(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProperty" ):
-                listener.exitProperty(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitProperty" ):
-                return visitor.visitProperty(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def property_(self):
-
-        localctx = ignoreParser.PropertyContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_property)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 75
-            self.match(ignoreParser.PROPERTY_NAME)
-            self.state = 78
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [27]:
-                self.state = 76
-                self.wrapped_expr()
-                pass
-            elif token in [20]:
-                self.state = 77
-                self.match(ignoreParser.TAG_REFERENCE)
-                pass
-            else:
-                raise NoViableAltException(self)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class EndTagContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def CLOSE_TAG(self):
-            return self.getToken(ignoreParser.CLOSE_TAG, 0)
-
-        def END_TAG(self):
-            return self.getToken(ignoreParser.END_TAG, 0)
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_endTag
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEndTag" ):
-                listener.enterEndTag(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEndTag" ):
-                listener.exitEndTag(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEndTag" ):
-                return visitor.visitEndTag(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def endTag(self):
-
-        localctx = ignoreParser.EndTagContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_endTag)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 80
-            self.match(ignoreParser.CLOSE_TAG)
-            self.state = 81
-            self.match(ignoreParser.END_TAG)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class StartTagContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def OPEN_TAG(self):
-            return self.getToken(ignoreParser.OPEN_TAG, 0)
-
-        def END_TAG(self):
-            return self.getToken(ignoreParser.END_TAG, 0)
-
-        def property_(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ignoreParser.PropertyContext)
-            else:
-                return self.getTypedRuleContext(ignoreParser.PropertyContext,i)
-
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_startTag
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStartTag" ):
-                listener.enterStartTag(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStartTag" ):
-                listener.exitStartTag(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStartTag" ):
-                return visitor.visitStartTag(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def startTag(self):
-
-        localctx = ignoreParser.StartTagContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_startTag)
-        self._la = 0 # Token type
-        try:
-            self.state = 93
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
-            if la_ == 1:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 83
-                self.match(ignoreParser.OPEN_TAG)
-                self.state = 84
-                self.match(ignoreParser.END_TAG)
-                pass
-
-            elif la_ == 2:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 85
-                self.match(ignoreParser.OPEN_TAG)
-                self.state = 87 
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                while True:
-                    self.state = 86
-                    self.property_()
-                    self.state = 89 
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-                    if not (_la==26):
-                        break
-
-                self.state = 91
-                self.match(ignoreParser.END_TAG)
-                pass
-
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class BlockContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def startTag(self):
-            return self.getTypedRuleContext(ignoreParser.StartTagContext,0)
-
-
-        def wrapped_expr(self):
-            return self.getTypedRuleContext(ignoreParser.Wrapped_exprContext,0)
-
-
-        def endTag(self):
-            return self.getTypedRuleContext(ignoreParser.EndTagContext,0)
-
-
-        def function(self):
-            return self.getTypedRuleContext(ignoreParser.FunctionContext,0)
-
-
-        def control_statement(self):
-            return self.getTypedRuleContext(ignoreParser.Control_statementContext,0)
-
-
-        def getRuleIndex(self):
-            return ignoreParser.RULE_block
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBlock" ):
-                listener.enterBlock(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBlock" ):
-                listener.exitBlock(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBlock" ):
-                return visitor.visitBlock(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def block(self):
-
-        localctx = ignoreParser.BlockContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_block)
-        try:
-            self.state = 102
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [19]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 95
-                self.startTag()
-                self.state = 96
-                self.wrapped_expr()
-                self.state = 97
-                self.endTag()
-                pass
-            elif token in [27]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 99
-                self.wrapped_expr()
-                pass
-            elif token in [1]:
-                self.enterOuterAlt(localctx, 3)
-                self.state = 100
-                self.function()
-                pass
-            elif token in [3]:
-                self.enterOuterAlt(localctx, 4)
-                self.state = 101
-                self.control_statement()
-                pass
-            else:
-                raise NoViableAltException(self)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
     class FunctionCallContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -860,42 +377,42 @@ class ignoreParser ( Parser ):
     def functionCall(self):
 
         localctx = ignoreParser.FunctionCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_functionCall)
+        self.enterRule(localctx, 4, self.RULE_functionCall)
         try:
-            self.state = 115
+            self.state = 59
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 104
+                self.state = 48
                 self.match(ignoreParser.NAME)
-                self.state = 105
+                self.state = 49
                 self.match(ignoreParser.OPEN_PAREN)
-                self.state = 108
+                self.state = 52
                 self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
+                la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
                 if la_ == 1:
-                    self.state = 106
+                    self.state = 50
                     self.expr(0)
                     pass
 
                 elif la_ == 2:
-                    self.state = 107
+                    self.state = 51
                     self.literal()
                     pass
 
 
-                self.state = 110
+                self.state = 54
                 self.match(ignoreParser.CLOSE_PAREN)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 112
+                self.state = 56
                 self.match(ignoreParser.NAME)
-                self.state = 113
+                self.state = 57
                 self.match(ignoreParser.OPEN_PAREN)
-                self.state = 114
+                self.state = 58
                 self.match(ignoreParser.CLOSE_PAREN)
                 pass
 
@@ -957,27 +474,27 @@ class ignoreParser ( Parser ):
     def functionStart(self):
 
         localctx = ignoreParser.FunctionStartContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_functionStart)
+        self.enterRule(localctx, 6, self.RULE_functionStart)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 117
+            self.state = 61
             self.match(ignoreParser.FUNCTION_TAG_OPEN)
-            self.state = 118
+            self.state = 62
             self.match(ignoreParser.FUNCTION_NAME)
-            self.state = 122
+            self.state = 66
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==23:
-                self.state = 119
+                self.state = 63
                 self.match(ignoreParser.FUNCTION_PARAM)
-                self.state = 124
+                self.state = 68
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 125
+            self.state = 69
             self.match(ignoreParser.FUNCTION_RET_TYPE)
-            self.state = 126
+            self.state = 70
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1032,23 +549,23 @@ class ignoreParser ( Parser ):
     def function(self):
 
         localctx = ignoreParser.FunctionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_function)
+        self.enterRule(localctx, 8, self.RULE_function)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 128
+            self.state = 72
             self.functionStart()
-            self.state = 132
+            self.state = 76
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134742026) != 0):
-                self.state = 129
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134746122) != 0):
+                self.state = 73
                 self.block()
-                self.state = 134
+                self.state = 78
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 135
+            self.state = 79
             self.match(ignoreParser.FUNCTION_TAG_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1101,23 +618,23 @@ class ignoreParser ( Parser ):
     def varDecl(self):
 
         localctx = ignoreParser.VarDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_varDecl)
+        self.enterRule(localctx, 10, self.RULE_varDecl)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 137
+            self.state = 81
             self.match(ignoreParser.VAR_DECL)
-            self.state = 138
+            self.state = 82
             self.match(ignoreParser.FUNCTION_NAME)
-            self.state = 140
+            self.state = 84
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==11:
-                self.state = 139
+                self.state = 83
                 self.match(ignoreParser.VAR_DECL_TYPE)
 
 
-            self.state = 142
+            self.state = 86
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1169,14 +686,14 @@ class ignoreParser ( Parser ):
     def var(self):
 
         localctx = ignoreParser.VarContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_var)
+        self.enterRule(localctx, 12, self.RULE_var)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 144
+            self.state = 88
             self.varDecl()
-            self.state = 145
+            self.state = 89
             self.wrapped_expr()
-            self.state = 146
+            self.state = 90
             self.match(ignoreParser.VAR_DECL_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1224,20 +741,20 @@ class ignoreParser ( Parser ):
     def condition(self):
 
         localctx = ignoreParser.ConditionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_condition)
+        self.enterRule(localctx, 14, self.RULE_condition)
         try:
-            self.state = 150
+            self.state = 94
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 148
+                self.state = 92
                 self.expr(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 149
+                self.state = 93
                 self.match(ignoreParser.LITERAL_BOOL)
                 pass
 
@@ -1300,21 +817,21 @@ class ignoreParser ( Parser ):
     def if_(self):
 
         localctx = ignoreParser.IfContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_if)
+        self.enterRule(localctx, 16, self.RULE_if)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 152
+            self.state = 96
             self.match(ignoreParser.IF_TAG)
-            self.state = 153
+            self.state = 97
             self.match(ignoreParser.CONDITION_EQ)
-            self.state = 154
+            self.state = 98
             self.match(ignoreParser.OPEN_CURLY)
 
-            self.state = 155
+            self.state = 99
             self.condition()
-            self.state = 156
+            self.state = 100
             self.match(ignoreParser.CLOSE_CURLY)
-            self.state = 157
+            self.state = 101
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1336,8 +853,8 @@ class ignoreParser ( Parser ):
             return self.getTypedRuleContext(ignoreParser.IfContext,0)
 
 
-        def statement(self):
-            return self.getTypedRuleContext(ignoreParser.StatementContext,0)
+        def block(self):
+            return self.getTypedRuleContext(ignoreParser.BlockContext,0)
 
 
         def IF_END(self):
@@ -1366,14 +883,14 @@ class ignoreParser ( Parser ):
     def if_statement(self):
 
         localctx = ignoreParser.If_statementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_if_statement)
+        self.enterRule(localctx, 18, self.RULE_if_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 159
+            self.state = 103
             self.if_()
-            self.state = 160
-            self.statement()
-            self.state = 161
+            self.state = 104
+            self.block()
+            self.state = 105
             self.match(ignoreParser.IF_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1433,21 +950,21 @@ class ignoreParser ( Parser ):
     def elif_(self):
 
         localctx = ignoreParser.ElifContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_elif)
+        self.enterRule(localctx, 20, self.RULE_elif)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 163
+            self.state = 107
             self.match(ignoreParser.ELIF_TAG)
-            self.state = 164
+            self.state = 108
             self.match(ignoreParser.CONDITION_EQ)
-            self.state = 165
+            self.state = 109
             self.match(ignoreParser.OPEN_CURLY)
 
-            self.state = 166
+            self.state = 110
             self.condition()
-            self.state = 167
+            self.state = 111
             self.match(ignoreParser.CLOSE_CURLY)
-            self.state = 168
+            self.state = 112
             self.match(ignoreParser.END_TAG)
         except RecognitionException as re:
             localctx.exception = re
@@ -1469,8 +986,8 @@ class ignoreParser ( Parser ):
             return self.getTypedRuleContext(ignoreParser.ElifContext,0)
 
 
-        def statement(self):
-            return self.getTypedRuleContext(ignoreParser.StatementContext,0)
+        def block(self):
+            return self.getTypedRuleContext(ignoreParser.BlockContext,0)
 
 
         def ELIF_END(self):
@@ -1499,14 +1016,14 @@ class ignoreParser ( Parser ):
     def elif_statement(self):
 
         localctx = ignoreParser.Elif_statementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_elif_statement)
+        self.enterRule(localctx, 22, self.RULE_elif_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 170
+            self.state = 114
             self.elif_()
-            self.state = 171
-            self.statement()
-            self.state = 172
+            self.state = 115
+            self.block()
+            self.state = 116
             self.match(ignoreParser.ELIF_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1527,8 +1044,8 @@ class ignoreParser ( Parser ):
         def ELSE(self):
             return self.getToken(ignoreParser.ELSE, 0)
 
-        def statement(self):
-            return self.getTypedRuleContext(ignoreParser.StatementContext,0)
+        def block(self):
+            return self.getTypedRuleContext(ignoreParser.BlockContext,0)
 
 
         def ELSE_END(self):
@@ -1557,14 +1074,14 @@ class ignoreParser ( Parser ):
     def else_statement(self):
 
         localctx = ignoreParser.Else_statementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_else_statement)
+        self.enterRule(localctx, 24, self.RULE_else_statement)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 174
+            self.state = 118
             self.match(ignoreParser.ELSE)
-            self.state = 175
-            self.statement()
-            self.state = 176
+            self.state = 119
+            self.block()
+            self.state = 120
             self.match(ignoreParser.ELSE_END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1620,29 +1137,520 @@ class ignoreParser ( Parser ):
     def control_statement(self):
 
         localctx = ignoreParser.Control_statementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_control_statement)
+        self.enterRule(localctx, 26, self.RULE_control_statement)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 178
+            self.state = 122
             self.if_statement()
-            self.state = 182
+            self.state = 126
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==6:
-                self.state = 179
+                self.state = 123
                 self.elif_statement()
-                self.state = 184
+                self.state = 128
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 186
+            self.state = 130
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==7:
-                self.state = 185
+                self.state = 129
                 self.else_statement()
 
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ProgramContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def OPEN_PROGRAM(self):
+            return self.getToken(ignoreParser.OPEN_PROGRAM, 0)
+
+        def CLOSE_PROGRAM(self):
+            return self.getToken(ignoreParser.CLOSE_PROGRAM, 0)
+
+        def EOF(self):
+            return self.getToken(ignoreParser.EOF, 0)
+
+        def function(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ignoreParser.FunctionContext)
+            else:
+                return self.getTypedRuleContext(ignoreParser.FunctionContext,i)
+
+
+        def block(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ignoreParser.BlockContext)
+            else:
+                return self.getTypedRuleContext(ignoreParser.BlockContext,i)
+
+
+        def var(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ignoreParser.VarContext)
+            else:
+                return self.getTypedRuleContext(ignoreParser.VarContext,i)
+
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_program
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProgram" ):
+                listener.enterProgram(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProgram" ):
+                listener.exitProgram(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProgram" ):
+                return visitor.visitProgram(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def program(self):
+
+        localctx = ignoreParser.ProgramContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 28, self.RULE_program)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 135
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==1:
+                self.state = 132
+                self.function()
+                self.state = 137
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 138
+            self.match(ignoreParser.OPEN_PROGRAM)
+            self.state = 143
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 134746122) != 0):
+                self.state = 141
+                self._errHandler.sync(self)
+                la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
+                if la_ == 1:
+                    self.state = 139
+                    self.block()
+                    pass
+
+                elif la_ == 2:
+                    self.state = 140
+                    self.var()
+                    pass
+
+
+                self.state = 145
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 146
+            self.match(ignoreParser.CLOSE_PROGRAM)
+            self.state = 150
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==1:
+                self.state = 147
+                self.function()
+                self.state = 152
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 153
+            self.match(ignoreParser.EOF)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PropertyContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def PROPERTY_NAME(self):
+            return self.getToken(ignoreParser.PROPERTY_NAME, 0)
+
+        def wrapped_expr(self):
+            return self.getTypedRuleContext(ignoreParser.Wrapped_exprContext,0)
+
+
+        def TAG_REFERENCE(self):
+            return self.getToken(ignoreParser.TAG_REFERENCE, 0)
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_property
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProperty" ):
+                listener.enterProperty(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProperty" ):
+                listener.exitProperty(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProperty" ):
+                return visitor.visitProperty(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def property_(self):
+
+        localctx = ignoreParser.PropertyContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 30, self.RULE_property)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 155
+            self.match(ignoreParser.PROPERTY_NAME)
+            self.state = 158
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [27]:
+                self.state = 156
+                self.wrapped_expr()
+                pass
+            elif token in [20]:
+                self.state = 157
+                self.match(ignoreParser.TAG_REFERENCE)
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class EndTagContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def CLOSE_TAG(self):
+            return self.getToken(ignoreParser.CLOSE_TAG, 0)
+
+        def END_TAG(self):
+            return self.getToken(ignoreParser.END_TAG, 0)
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_endTag
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEndTag" ):
+                listener.enterEndTag(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEndTag" ):
+                listener.exitEndTag(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitEndTag" ):
+                return visitor.visitEndTag(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def endTag(self):
+
+        localctx = ignoreParser.EndTagContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 32, self.RULE_endTag)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 160
+            self.match(ignoreParser.CLOSE_TAG)
+            self.state = 161
+            self.match(ignoreParser.END_TAG)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class StartTagContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def OPEN_TAG(self):
+            return self.getToken(ignoreParser.OPEN_TAG, 0)
+
+        def END_TAG(self):
+            return self.getToken(ignoreParser.END_TAG, 0)
+
+        def property_(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ignoreParser.PropertyContext)
+            else:
+                return self.getTypedRuleContext(ignoreParser.PropertyContext,i)
+
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_startTag
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStartTag" ):
+                listener.enterStartTag(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStartTag" ):
+                listener.exitStartTag(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStartTag" ):
+                return visitor.visitStartTag(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def startTag(self):
+
+        localctx = ignoreParser.StartTagContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_startTag)
+        self._la = 0 # Token type
+        try:
+            self.state = 173
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 163
+                self.match(ignoreParser.OPEN_TAG)
+                self.state = 164
+                self.match(ignoreParser.END_TAG)
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 165
+                self.match(ignoreParser.OPEN_TAG)
+                self.state = 167 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while True:
+                    self.state = 166
+                    self.property_()
+                    self.state = 169 
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    if not (_la==26):
+                        break
+
+                self.state = 171
+                self.match(ignoreParser.END_TAG)
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class StatementContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def startTag(self):
+            return self.getTypedRuleContext(ignoreParser.StartTagContext,0)
+
+
+        def wrapped_expr(self):
+            return self.getTypedRuleContext(ignoreParser.Wrapped_exprContext,0)
+
+
+        def endTag(self):
+            return self.getTypedRuleContext(ignoreParser.EndTagContext,0)
+
+
+        def function(self):
+            return self.getTypedRuleContext(ignoreParser.FunctionContext,0)
+
+
+        def control_statement(self):
+            return self.getTypedRuleContext(ignoreParser.Control_statementContext,0)
+
+
+        def var(self):
+            return self.getTypedRuleContext(ignoreParser.VarContext,0)
+
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_statement
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStatement" ):
+                listener.enterStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStatement" ):
+                listener.exitStatement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStatement" ):
+                return visitor.visitStatement(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def statement(self):
+
+        localctx = ignoreParser.StatementContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 36, self.RULE_statement)
+        try:
+            self.state = 183
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [19]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 175
+                self.startTag()
+                self.state = 176
+                self.wrapped_expr()
+                self.state = 177
+                self.endTag()
+                pass
+            elif token in [27]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 179
+                self.wrapped_expr()
+                pass
+            elif token in [1]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 180
+                self.function()
+                pass
+            elif token in [3]:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 181
+                self.control_statement()
+                pass
+            elif token in [12]:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 182
+                self.var()
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BlockContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def statement(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(ignoreParser.StatementContext)
+            else:
+                return self.getTypedRuleContext(ignoreParser.StatementContext,i)
+
+
+        def getRuleIndex(self):
+            return ignoreParser.RULE_block
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBlock" ):
+                listener.enterBlock(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBlock" ):
+                listener.exitBlock(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBlock" ):
+                return visitor.visitBlock(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def block(self):
+
+        localctx = ignoreParser.BlockContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 38, self.RULE_block)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 186 
+            self._errHandler.sync(self)
+            _alt = 1
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
+                    self.state = 185
+                    self.statement()
+
+                else:
+                    raise NoViableAltException(self)
+                self.state = 188 
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1740,43 +1748,43 @@ class ignoreParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 198
+            self.state = 200
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
             if la_ == 1:
-                self.state = 189
-                self.match(ignoreParser.OPEN_PAREN)
-                self.state = 190
-                self.expr(0)
                 self.state = 191
+                self.match(ignoreParser.OPEN_PAREN)
+                self.state = 192
+                self.expr(0)
+                self.state = 193
                 self.match(ignoreParser.CLOSE_PAREN)
                 pass
 
             elif la_ == 2:
-                self.state = 193
+                self.state = 195
                 self.literal()
                 pass
 
             elif la_ == 3:
-                self.state = 194
+                self.state = 196
                 self.functionCall()
                 pass
 
             elif la_ == 4:
-                self.state = 195
+                self.state = 197
                 self.match(ignoreParser.NOT)
-                self.state = 196
+                self.state = 198
                 self.expr(6)
                 pass
 
             elif la_ == 5:
-                self.state = 197
+                self.state = 199
                 self.match(ignoreParser.NAME)
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 214
+            self.state = 216
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1784,75 +1792,75 @@ class ignoreParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 212
+                    self.state = 214
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
                     if la_ == 1:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 200
+                        self.state = 202
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 201
+                        self.state = 203
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 14018773254144) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 202
+                        self.state = 204
                         self.expr(6)
                         pass
 
                     elif la_ == 2:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 203
+                        self.state = 205
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 204
+                        self.state = 206
                         _la = self._input.LA(1)
                         if not(_la==40 or _la==41):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 205
+                        self.state = 207
                         self.expr(5)
                         pass
 
                     elif la_ == 3:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 206
+                        self.state = 208
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
 
-                        self.state = 207
+                        self.state = 209
                         self.match(ignoreParser.OPERATOR_COMPARE)
-                        self.state = 208
+                        self.state = 210
                         self.expr(4)
                         pass
 
                     elif la_ == 4:
                         localctx = ignoreParser.ExprContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 209
+                        self.state = 211
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
 
-                        self.state = 210
+                        self.state = 212
                         self.match(ignoreParser.OPERATOR_LOGIC)
-                        self.state = 211
+                        self.state = 213
                         self.expr(3)
                         pass
 
              
-                self.state = 216
+                self.state = 218
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
@@ -1908,11 +1916,11 @@ class ignoreParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_wrapped_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 217
-            self.match(ignoreParser.OPEN_CURLY)
-            self.state = 218
-            self.expr(0)
             self.state = 219
+            self.match(ignoreParser.OPEN_CURLY)
+            self.state = 220
+            self.expr(0)
+            self.state = 221
             self.match(ignoreParser.CLOSE_CURLY)
         except RecognitionException as re:
             localctx.exception = re

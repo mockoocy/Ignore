@@ -26,60 +26,6 @@ class ignoreParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ignoreParser#program.
-    def enterProgram(self, ctx:ignoreParser.ProgramContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#program.
-    def exitProgram(self, ctx:ignoreParser.ProgramContext):
-        pass
-
-
-    # Enter a parse tree produced by ignoreParser#statement.
-    def enterStatement(self, ctx:ignoreParser.StatementContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#statement.
-    def exitStatement(self, ctx:ignoreParser.StatementContext):
-        pass
-
-
-    # Enter a parse tree produced by ignoreParser#property.
-    def enterProperty(self, ctx:ignoreParser.PropertyContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#property.
-    def exitProperty(self, ctx:ignoreParser.PropertyContext):
-        pass
-
-
-    # Enter a parse tree produced by ignoreParser#endTag.
-    def enterEndTag(self, ctx:ignoreParser.EndTagContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#endTag.
-    def exitEndTag(self, ctx:ignoreParser.EndTagContext):
-        pass
-
-
-    # Enter a parse tree produced by ignoreParser#startTag.
-    def enterStartTag(self, ctx:ignoreParser.StartTagContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#startTag.
-    def exitStartTag(self, ctx:ignoreParser.StartTagContext):
-        pass
-
-
-    # Enter a parse tree produced by ignoreParser#block.
-    def enterBlock(self, ctx:ignoreParser.BlockContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#block.
-    def exitBlock(self, ctx:ignoreParser.BlockContext):
-        pass
-
-
     # Enter a parse tree produced by ignoreParser#functionCall.
     def enterFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
         pass
@@ -185,6 +131,60 @@ class ignoreParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by ignoreParser#control_statement.
     def exitControl_statement(self, ctx:ignoreParser.Control_statementContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#program.
+    def enterProgram(self, ctx:ignoreParser.ProgramContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#program.
+    def exitProgram(self, ctx:ignoreParser.ProgramContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#property.
+    def enterProperty(self, ctx:ignoreParser.PropertyContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#property.
+    def exitProperty(self, ctx:ignoreParser.PropertyContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#endTag.
+    def enterEndTag(self, ctx:ignoreParser.EndTagContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#endTag.
+    def exitEndTag(self, ctx:ignoreParser.EndTagContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#startTag.
+    def enterStartTag(self, ctx:ignoreParser.StartTagContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#startTag.
+    def exitStartTag(self, ctx:ignoreParser.StartTagContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#statement.
+    def enterStatement(self, ctx:ignoreParser.StatementContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#statement.
+    def exitStatement(self, ctx:ignoreParser.StatementContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#block.
+    def enterBlock(self, ctx:ignoreParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#block.
+    def exitBlock(self, ctx:ignoreParser.BlockContext):
         pass
 
 

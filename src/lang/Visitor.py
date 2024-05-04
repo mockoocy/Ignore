@@ -1,16 +1,19 @@
-from typing import Any, Dict, override
-
-from src.lang.utils.VariableInfo import Valid_Types, Valid_Types_Reversed, VariableInfo
+from typing import override
+from copy import deepcopy
+from src.lang.utils.Environment import Environment
+from src.lang.utils.VariableInfo import Valid_Types, Valid_Types_Reversed
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserVisitor import ignoreParserVisitor
-
+from .utils.types import VarDeclDict
+from .stdlib import global_env
 
 class Visitor(ignoreParserVisitor):
 
-    def __init__(self, variables: Dict[str, Any]):
+    def __init__(self, variables: VarDeclDict):
         # By quick glance at parent classes, super class does define __init__, so no need to call super() there
         self.variables = variables
+        self.current_env = deepcopy(global_env)
         super().__init__()  # Call parent class constructor
 
     @override
@@ -37,34 +40,39 @@ class Visitor(ignoreParserVisitor):
             raise NotImplementedError("Unsupported literal type")
 
     @override
+    def visitBlock(self, ctx: ignoreParser.BlockContext):
+        # entering new env
+        prev_env = self.current_env
+        self.current_env = Environment(enclosing=prev_env, variables={})
+        super().visitBlock(ctx)
+        self.current_env = prev_env
+
+    @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
-        function_name = str(ctx.NAME())
+        function_name = ctx.NAME().getText()
         
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
-        if function_name not in self.variables:
+        function = self.current_env.lookup_variable(function_name)
+        if not function:
             raise ValueError(f"function not defined {function_name}")
-        return self.variables[function_name](argument)
+        return function(argument)
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):
         expr = ctx
-        variables = self.variables
+        current_env = self.current_env
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
             return self.visitExpr(expr.expr(0)) 
         if expr.literal() is not None:
             return self.visitLiteral(expr.literal())
         if expr.NAME() is not None:
-            if str(expr.NAME()) not in variables.keys():
-                raise ValueError(f"No such variable declared {str(expr.NAME())}")
-            elif (
-                str(expr.NAME()) in variables.keys()
-                and variables[str(expr.NAME())].was_evaluated == False
-            ):
-                var_info = variables[str(expr.NAME())]
-                self.visitVarDecl(var_info.var_decl)
-                return variables[str(expr.NAME())].value
-            else:
-                return variables[str(expr.NAME())].value
+            var_name = expr.NAME().getText()
+            var_info = current_env.lookup_variable(var_name)
+            if not var_info:
+                raise ValueError(f"No such variable declared {var_name}")
+            if (var_info.was_evaluated):
+                return var_info.value
+            return self.visitVarDecl(var_info.var_decl).value
 
         if expr.functionCall() is not None:
             return self.visitFunctionCall(expr.functionCall())
@@ -120,19 +128,21 @@ class Visitor(ignoreParserVisitor):
         # returns wether the condition was evaluated 
         condition_result = self.visitCondition(ctx.if_().condition())
         if condition_result:
-            self.visitStatement(ctx.statement())
+            self.visitBlock(ctx.block())
         return condition_result
 
     @override
     def visitElif_statement(self, ctx: ignoreParser.Elif_statementContext):
         condition_result = self.visitCondition(ctx.elif_().condition())
         if condition_result:
-            return self.visitStatement(ctx.statement())
+            self.visitBlock(ctx.block())
+
         return condition_result
 
     @override
     def visitElse_statement(self, ctx: ignoreParser.Else_statementContext):
-        self.visitStatement(ctx.statement())
+        self.visitBlock(ctx.block())
+
 
     @override
     def visitControl_statement(self, ctx: ignoreParser.Control_statementContext):
@@ -147,9 +157,9 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitVarDecl(self, ctx: ignoreParser.VarDeclContext):
-        variables = self.variables
-        var_name = str(ctx.FUNCTION_NAME())[5:]
-        variable_info = variables.get(var_name, VariableInfo(var_name))
+        variable_info = self.variables[ctx]
+        var_name = ctx.FUNCTION_NAME().getText()[5:]
+        self.current_env.variables[var_name] = variable_info
         if variable_info.was_evaluated == True:
             return variable_info
         

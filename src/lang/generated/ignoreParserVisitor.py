@@ -19,36 +19,6 @@ class ignoreParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ignoreParser#program.
-    def visitProgram(self, ctx:ignoreParser.ProgramContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ignoreParser#statement.
-    def visitStatement(self, ctx:ignoreParser.StatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ignoreParser#property.
-    def visitProperty(self, ctx:ignoreParser.PropertyContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ignoreParser#endTag.
-    def visitEndTag(self, ctx:ignoreParser.EndTagContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ignoreParser#startTag.
-    def visitStartTag(self, ctx:ignoreParser.StartTagContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ignoreParser#block.
-    def visitBlock(self, ctx:ignoreParser.BlockContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by ignoreParser#functionCall.
     def visitFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
         return self.visitChildren(ctx)
@@ -106,6 +76,36 @@ class ignoreParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ignoreParser#control_statement.
     def visitControl_statement(self, ctx:ignoreParser.Control_statementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#program.
+    def visitProgram(self, ctx:ignoreParser.ProgramContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#property.
+    def visitProperty(self, ctx:ignoreParser.PropertyContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#endTag.
+    def visitEndTag(self, ctx:ignoreParser.EndTagContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#startTag.
+    def visitStartTag(self, ctx:ignoreParser.StartTagContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#statement.
+    def visitStatement(self, ctx:ignoreParser.StatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ignoreParser#block.
+    def visitBlock(self, ctx:ignoreParser.BlockContext):
         return self.visitChildren(ctx)
 
 

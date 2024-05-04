@@ -1,0 +1,16 @@
+<program>
+  <var name=num1>
+    {2}
+  </var>
+  <if condition={True}>
+    <var name=num2>
+      {3}
+    </var>
+    {print(num1 + num2)}
+    <var name=num1>
+      {4}
+    </var>
+    {print(num1 + num2)}
+  </if>
+  {print(num1)}
+</program>

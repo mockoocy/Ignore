@@ -11,18 +11,7 @@ literal:
 	| LITERAL_STRING
 	| LITERAL_BOOL;
 
-program: (function)* OPEN_PROGRAM (block| var)* CLOSE_PROGRAM (
-		function
-	)* EOF;
-statement: block | wrapped_expr;
-property: PROPERTY_NAME (wrapped_expr | TAG_REFERENCE);
-endTag: CLOSE_TAG END_TAG;
-startTag: OPEN_TAG END_TAG | OPEN_TAG (property)+ END_TAG;
-block:
-	startTag wrapped_expr endTag
-	| wrapped_expr
-	| function
-	| control_statement;
+
 
 functionCall:
 	NAME OPEN_PAREN (expr | literal) CLOSE_PAREN
@@ -41,14 +30,30 @@ condition: expr | LITERAL_BOOL;
 if:
 	IF_TAG CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY END_TAG;
 
-if_statement: if statement IF_END;
+if_statement: if block IF_END;
 elif:
 	ELIF_TAG CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY END_TAG;
-elif_statement: elif statement ELIF_END;
-else_statement: ELSE statement ELSE_END;
+elif_statement: elif block ELIF_END;
+else_statement: ELSE block ELSE_END;
 
 control_statement:
 	if_statement (elif_statement)* (else_statement)?;
+
+
+program: (function)* OPEN_PROGRAM (block| var)* CLOSE_PROGRAM (
+		function
+	)* EOF;
+property: PROPERTY_NAME (wrapped_expr | TAG_REFERENCE);
+endTag: CLOSE_TAG END_TAG;
+startTag: OPEN_TAG END_TAG | OPEN_TAG (property)+ END_TAG;
+statement:
+	startTag wrapped_expr endTag
+	| wrapped_expr
+	| function
+	| control_statement
+	| var;
+block: (statement)+;
+
 expr:
 	OPEN_PAREN expr CLOSE_PAREN
 	| literal

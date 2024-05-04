@@ -2,10 +2,8 @@
 
 from dataclasses import dataclass
 from typing import Self
-
-from src.lang.utils.VariableInfo import VariableDict
-
-
+from src.lang.utils.VariableInfo import VariableInfo
+from src.lang.utils.types import VariableDict
 
 @dataclass
 class Environment:
@@ -16,14 +14,11 @@ class Environment:
     enclosing: Self | None
     variables: VariableDict
     
+
     def merge(self, other: "Environment") -> "Environment":
         new_vars = {
-            **self.variables, 
-            **{key:val 
-                for (key,val) in 
-                other.variables.items() 
-                if key not in self.variables
-            }
+            **other.variables,
+            **self.variables,
         }
         return Environment(enclosing=other.enclosing, variables=new_vars)
 
@@ -35,3 +30,22 @@ class Environment:
         if self.enclosing == None:
             return self.variables
         return self.merge(self.enclosing).create_snapshot()
+
+    # methods to quickly extract variable, if we know depth at which it was declared.
+    # def ancestor(self, distance: int) -> "Environment":
+    #     env = self
+    #     for _ in range(distance):
+    #         env = env.enclosing
+    #     return env
+    
+    # def get_at(self, distance: int, name: str) -> VariableInfo:
+    #     return self.ancestor(distance).variables[name]
+    
+
+    def lookup_variable(self, var_name: str) -> VariableInfo | None:
+        environment = self
+        while environment != None:
+            if var_name in environment.variables:
+                return environment.variables[var_name]
+            environment = environment.enclosing
+        return None

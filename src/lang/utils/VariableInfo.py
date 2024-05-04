@@ -23,7 +23,7 @@ class VariableInfo[T]:
     recursion_check: int = 0
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
-        if self.type in ("Any", "Function"):
+        if self.type in ("Any", "Function") or self.type is None:
             return self.value(*args, **kwargs)
         
 
@@ -35,5 +35,3 @@ f"""VariableInfo
     evaluated: {self.was_evaluated}
 """)
     __repr__ = __str__
-
-VariableDict = Dict[str, VariableInfo]
