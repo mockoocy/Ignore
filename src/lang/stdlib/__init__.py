@@ -1,8 +1,8 @@
 import contextlib
 import io
-from inspect import getmembers
 from types import ModuleType
-from typing import Any
+
+from src.lang.utils.Environment import Environment
 
 from ..utils.VariableInfo import VariableInfo
 
@@ -16,6 +16,7 @@ modules = ["builtins", "collections"]
 def get_all_members(modulename: str):
     return __import__(modulename).__dict__
 
+
 with contextlib.redirect_stdout(io.StringIO()):
     builtins = {}
     for module in modules:
@@ -26,3 +27,5 @@ with contextlib.redirect_stdout(io.StringIO()):
                 if type(variable_value) != ModuleType
             }
         )
+    global global_env
+    global_env = Environment(None, builtins)
