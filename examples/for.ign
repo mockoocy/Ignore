@@ -1,0 +1,13 @@
+<program>
+    <var name=i type=int>{0}</var>  
+    i = {i + 1}
+
+    <for <var name=i type=int>{0}</var> condition={i < 5} i = {i + 1} >
+        {print(i)}
+        <var name=j type=int> {66} </var> 
+        <for <var name=i type=int>{0}</var> condition={i < 5} i = {i + 1} >
+            {print(i)}
+        </for> 
+    </for>
+  
+</program>

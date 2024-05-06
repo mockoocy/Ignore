@@ -25,6 +25,14 @@ function: functionStart block* FUNCTION_TAG_END;
 
 varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
 var: varDecl wrapped_expr VAR_DECL_END; 
+var_assign: PROPERTY_NAME wrapped_expr;
+while_loop: WHILE_TAG loop_condition END_TAG block WHILE_END;
+for_loop: FOR_TAG loop_init loop_condition (var_assign)? END_TAG block FOR_END;
+
+loop_condition: CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY;
+loop_init: (var | TAG_REFERENCE) ;
+
+
 
 condition: expr | LITERAL_BOOL;
 if:
@@ -51,7 +59,10 @@ statement:
 	| wrapped_expr
 	| function
 	| control_statement
-	| var;
+	| var
+	| var_assign
+	| for_loop
+	| while_loop;
 block: (statement)+;
 
 expr:

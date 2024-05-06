@@ -1,0 +1,17 @@
+<program>
+    <var name=i type=int>
+        {0}
+    </var>
+    i = {i + 1}  
+
+    <while condition={i < 5} >
+        {print(i)}
+        {print(i+1)}
+        <var name=j type=int>
+        {66}
+        </var> 
+        
+     
+    </while>
+  
+</program>

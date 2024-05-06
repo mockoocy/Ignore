@@ -17,6 +17,11 @@ VAR_DECL_START: '<var';
 VAR_DECL_END: '</var>';
 VAR_DECL_TYPE: 'type=' ID;
 VAR_DECL: VAR_DECL_START ID;
+WHILE_TAG: '<while';
+WHILE_END: '</while>';
+FOR_TAG: '<for';
+FOR_END: '</for>';
+
 
 COMMENT: '/*' .*? '*/' -> skip;
 
@@ -42,7 +47,8 @@ FUNCTION_RET_TYPE: 'returnType=' ID;
 FUNCTION_PARAM: ID ':' ID;
 CONDITION_EQ: 'condition=';
 END_TAG: '>';
-PROPERTY_NAME: ID '=';
+PROPERTY_NAME: ID ('='|' =');
+//PROPERTY_NAME: ID (' ')*'='; //eksperymentalne jak wszystko bedzie dzialac to mozna odkomentowac na stałe
 
 OPEN_CURLY: '{' -> pushMode(expr);
 mode expr;
@@ -59,6 +65,7 @@ CLOSE_PAREN: ')';
 LITERAL_INT: NEGATIVE_SIGN?DIGIT+;
 LITERAL_FLOAT: NEGATIVE_SIGN? DIGIT+ '.' DIGIT*;
 
+
 EQUALS: '=';
 MUL: '*';
 DIV: '/';
@@ -67,6 +74,7 @@ SUB: '-';
 MOD: '%';
 INT_DIV: '//';
 NOT: '!';
+
 
 OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
 OPERATOR_LOGIC: ('&&' | '||');
