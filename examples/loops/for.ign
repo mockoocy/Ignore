@@ -1,0 +1,33 @@
+<program>
+//1 sposób
+/*
+    <for <var name=j type=int>{0}</var> condition={j < 5} j = {j + 1} >
+       {print(j)}
+    </for>
+*/
+//2 sposób
+/*
+    <var name=i type=int>{0}</var>
+
+    <for condition={i < 5} i = {i + 1} >
+       {print(i)}
+    </for>
+*/
+//3 sposób
+/*
+    <for <var name=k type=int>{0}</var> condition={k < 5} >
+        k = {k + 1}
+        {print(k)}
+    </for>
+*/
+
+//4 sposób
+/*
+    <var name=z type=int>{0}</var>  
+
+    <for condition={z < 5} >  //jak while
+        z = {z + 1}
+        {print(z)}
+    </for>
+*/
+</program>

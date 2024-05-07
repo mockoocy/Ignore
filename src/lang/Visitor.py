@@ -206,13 +206,28 @@ class Visitor(ignoreParserVisitor):
             var_info.value = expr_val
         else:
               raise ValueError(f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier")
-        return self.visitChildren(ctx)
+        #return self.visitChildren(ctx)
 
     @override
     def visitWhile_loop(self, ctx:ignoreParser.While_loopContext):
         condition_result = self.visitCondition(ctx.loop_condition().condition())
         while condition_result == True:
             self.visitBlock(ctx.block())
+            condition_result = self.visitCondition(ctx.loop_condition().condition())
+
+
+
+    @override
+    def visitFor_loop(self, ctx:ignoreParser.For_loopContext):
+        if ctx.var() is not None:
+            self.visitVarDecl(ctx.var().varDecl())
+
+        condition_result = self.visitCondition(ctx.loop_condition().condition())
+        
+        while condition_result == True:
+            self.visitBlock(ctx.block())
+            if ctx.var_assign() is not None:
+                self.visitVar_assign(ctx.var_assign())
             condition_result = self.visitCondition(ctx.loop_condition().condition())
 
     @override

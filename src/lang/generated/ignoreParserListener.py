@@ -107,15 +107,6 @@ class ignoreParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ignoreParser#loop_init.
-    def enterLoop_init(self, ctx:ignoreParser.Loop_initContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#loop_init.
-    def exitLoop_init(self, ctx:ignoreParser.Loop_initContext):
-        pass
-
-
     # Enter a parse tree produced by ignoreParser#condition.
     def enterCondition(self, ctx:ignoreParser.ConditionContext):
         pass
