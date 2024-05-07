@@ -1,0 +1,14 @@
+<program>
+  <var name=num>
+    {15}
+  </var>
+  <if condition={True}>
+    <var name=num type=int>
+      {input("can you give sum for me?")}
+    </var>
+    {print(num)}  
+  </if>
+
+
+  {print(num)}
+</program>
