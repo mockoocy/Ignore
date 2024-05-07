@@ -35,21 +35,21 @@ class ignoreParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ignoreParser#functionStart.
-    def enterFunctionStart(self, ctx:ignoreParser.FunctionStartContext):
-        pass
-
-    # Exit a parse tree produced by ignoreParser#functionStart.
-    def exitFunctionStart(self, ctx:ignoreParser.FunctionStartContext):
-        pass
-
-
     # Enter a parse tree produced by ignoreParser#function.
     def enterFunction(self, ctx:ignoreParser.FunctionContext):
         pass
 
     # Exit a parse tree produced by ignoreParser#function.
     def exitFunction(self, ctx:ignoreParser.FunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by ignoreParser#returnStmt.
+    def enterReturnStmt(self, ctx:ignoreParser.ReturnStmtContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#returnStmt.
+    def exitReturnStmt(self, ctx:ignoreParser.ReturnStmtContext):
         pass
 
 
