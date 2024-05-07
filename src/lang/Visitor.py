@@ -59,13 +59,28 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
-        function_name = ctx.NAME().getText()
 
+        print("TERAZ VISITOR - FUNCTION CALL")
+        function_name = ctx.NAME().getText()
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
-        function = self.current_env.lookup_variable(function_name)
+        if function_name == 'print':
+            return function(argument) 
+        
+        print(f"Entering function {function_name} with argument {argument}")
+        print(f"Function {function_name} not found in the current environment.")
+        
+        print(f"Szukanie funkcji {function_name}")
+        function = self.current_env.lookup_variable(function_name)        
         if not function:
-            raise ValueError(f"function not defined {function_name}")
-        return function(argument)
+            raise ValueError(f"Function '{function_name}' not defined in the current environment")
+
+        new_env = Environment(enclosing=self.current_env)
+       
+        prev_env = self.current_env
+        self.current_env = new_env
+        result = self.visit(function.body)
+        self.current_env = prev_env
+        return result
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):

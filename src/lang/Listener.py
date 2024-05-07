@@ -55,6 +55,30 @@ class Listener(ignoreParserListener):
         current_env.variables[var_name] = new_var
         self.variables[ctx] = new_var
 
+    def _extract_function_params(self, ctx):
+        params = {}
+        # for param_ctx in ctx.FUNCTION_PARAM():
+        param_name, param_type = ctx.FUNCTION_PARAM().getText().split(':')
+        params[param_name] = param_type
+        return params
+
+    def _add_new_function(self, function_name, params, body, return_type, ctx: ignoreParser.FunctionContext):
+        current_env = self.env_stack[-1] 
+        if function_name in current_env.variables:
+            raise ValueError(f"Function '{function_name}' already defined")
+        new_function = VariableInfo(
+            # name=function_name,
+            is_function=True,
+            # parameters=params,
+            body=body,
+            return_type=return_type,
+            value = None
+        )
+        current_env.variables[function_name] = new_function
+        self.variables[ctx] = new_function
+        print(f"Defined function '{function_name}' with parameters {params} and return type '{return_type}'")
+
+
     @override
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
         print(
@@ -87,7 +111,12 @@ class Listener(ignoreParserListener):
         var_type = self._get_var_type(ctx)
         self._add_new_var(var_name, var_type, ctx)
 
-    @override
+    @override 
     def enterFunction(self, ctx: ignoreParser.FunctionContext):
-        return super().enterFunction(ctx)
+        print("ENTER FUNCTION!!! W LISTENERZE")
+        function_name = ctx.FUNCTION_NAME().getText()[5:]
+        params = self._extract_function_params(ctx)
+        body = ctx.block() 
+        return_type = ctx.FUNCTION_RET_TYPE().getText().split('=')[1] if ctx.FUNCTION_RET_TYPE() else None
+        self._add_new_function(function_name, params, body, return_type, ctx)
     

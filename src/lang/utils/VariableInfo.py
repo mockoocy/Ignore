@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any, Callable, Dict, Optional, Type
 
 from ..generated.ignoreParser import ignoreParser
 
@@ -17,6 +17,9 @@ Valid_Types_Reversed = {val: key for key, val in Valid_Types.items()}
 class VariableInfo[T]:
     value: T
     type: str | None = None
+    is_function: bool = False
+    body: Optional[Callable] = None
+    return_type: Optional[Type] = None
     depth: int = 0
     var_decl: ignoreParser.VarDeclContext | None = None
     was_evaluated: bool = False
