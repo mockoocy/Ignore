@@ -18,10 +18,12 @@ functionCall:
 	| NAME OPEN_PAREN CLOSE_PAREN;
 
 // paramName: type. Could change to NAME : NAME = literal for default values of params.
-functionStart:
-	FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* FUNCTION_RET_TYPE END_TAG;
-function: functionStart block* FUNCTION_TAG_END;
+function:
+    FUNCTION_TAG_OPEN FUNCTION_NAME FUNCTION_PARAM? (FUNCTION_RET_TYPE)? END_TAG block* FUNCTION_TAG_END;
+// dla testow funkcja chwilowo przyjmuje max 1 parametr
 
+returnStmt:
+	RETURN_TAG wrapped_expr RETURN_END;
 
 varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
 var: varDecl wrapped_expr VAR_DECL_END; 
@@ -63,7 +65,7 @@ statement:
 	| var_assign
 	| for_loop
 	| while_loop;
-block: (statement)+;
+block: (statement | returnStmt)+;
 
 expr:
 	OPEN_PAREN expr CLOSE_PAREN
