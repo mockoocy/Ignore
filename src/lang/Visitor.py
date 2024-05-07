@@ -42,12 +42,20 @@ class Visitor(ignoreParserVisitor):
             raise NotImplementedError("Unsupported literal type")
 
     @override
-    def visitBlock(self, ctx: ignoreParser.BlockContext):
-        # entering new env
+    def visitBlock(self, ctx: ignoreParser.BlockContext): 
         prev_env = self.current_env
         self.current_env = Environment(enclosing=prev_env, variables={})
-        super().visitBlock(ctx)
+        
+        result = None
+        for child in ctx.getChildren():
+            result = self.visit(child)
+            if isinstance(child, ignoreParser.ReturnStmtContext):
+                break
+        
         self.current_env = prev_env
+        if result is not None:
+            print(f"return w bloku zwrocil {result}")
+        return result
 
     @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
@@ -61,6 +69,9 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):
+        if ctx is None:
+            return None
+    
         expr = ctx
         current_env = self.current_env
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
@@ -220,3 +231,16 @@ class Visitor(ignoreParserVisitor):
         # Normally it would evaluate expression that gives value to a new variable
         # It is already done in the `self.visitVarDecl` function. Can safely om
         return self.visitVarDecl(ctx.varDecl())
+
+    @override
+    def visitFunction(self, ctx: ignoreParser.FunctionContext):
+        return super().visitFunction(ctx)
+
+    @override
+    def visitReturnStmt(self, ctx: ignoreParser.ReturnStmtContext): 
+        wrapped_expr_context = ctx.wrapped_expr()
+        if wrapped_expr_context is not None:
+            return self.visit(wrapped_expr_context.expr())
+        else:
+            return None
+    

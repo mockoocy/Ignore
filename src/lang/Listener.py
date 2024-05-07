@@ -86,3 +86,8 @@ class Listener(ignoreParserListener):
         # dodanie typu
         var_type = self._get_var_type(ctx)
         self._add_new_var(var_name, var_type, ctx)
+
+    @override
+    def enterFunction(self, ctx: ignoreParser.FunctionContext):
+        return super().enterFunction(ctx)
+    

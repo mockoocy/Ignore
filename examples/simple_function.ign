@@ -1,0 +1,12 @@
+<program>
+    <var name=a type=int> {44} </var>
+    <function name=fibonacci returnType=int>
+        <return>
+            {a}
+        </return>
+    </function>
+    
+    {fibonacci()}
+    {print(fibonacci())} */
+
+</program>
