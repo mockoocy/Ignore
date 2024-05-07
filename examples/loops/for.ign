@@ -16,8 +16,9 @@
 //3 sposób
 /*
     <for <var name=k type=int>{0}</var> condition={k < 5} >
-        k = {k + 1}
-        {print(k)}
+        {print(k)} 
+        k = {k + 1}  
+        
     </for>
 */
 
@@ -26,8 +27,8 @@
     <var name=z type=int>{0}</var>  
 
     <for condition={z < 5} >  //jak while
+        {print(z)} 
         z = {z + 1}
-        {print(z)}
     </for>
 */
 </program>

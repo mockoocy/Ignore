@@ -223,7 +223,7 @@ class Visitor(ignoreParserVisitor):
             self.visitVarDecl(ctx.var().varDecl())
 
         condition_result = self.visitCondition(ctx.loop_condition().condition())
-        
+
         while condition_result == True:
             self.visitBlock(ctx.block())
             if ctx.var_assign() is not None:
