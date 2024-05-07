@@ -190,6 +190,30 @@ class Visitor(ignoreParserVisitor):
             f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
         )
         return variable_info
+    
+
+    @override
+    def visitVar_assign(self, ctx:ignoreParser.Var_assignContext):
+        input_string = ctx.PROPERTY_NAME().getText()
+        parts = input_string.split()
+        var_name = parts[0]
+
+        current_env = self.current_env
+        var_info = current_env.lookup_variable(var_name)
+        if var_info != None:
+            var_expression = ctx.wrapped_expr().expr()
+            expr_val = self.visitExpr(var_expression)
+            var_info.value = expr_val
+        else:
+              raise ValueError(f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier")
+        return self.visitChildren(ctx)
+
+    @override
+    def visitWhile_loop(self, ctx:ignoreParser.While_loopContext):
+        condition_result = self.visitCondition(ctx.loop_condition().condition())
+        while condition_result == True:
+            self.visitBlock(ctx.block())
+            condition_result = self.visitCondition(ctx.loop_condition().condition())
 
     @override
     def visitVar(self, ctx: ignoreParser.VarContext):
