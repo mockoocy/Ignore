@@ -1,12 +1,20 @@
-<program>
-    <var name=a type=int> {44} </var>
+<program> 
+    <var name=a type=int> {3} </var>
     <function name=fibonacci  b:int returnType=int>
+        <if condition={a < 4}> 
+            <return> 
+                {5}
+            </return>
+        </if>
         <return>
-            {a}
+            {3*a}
         </return>
     </function>
-    
-    {fibonacci(3)}
-    /* {print(fibonacci())} */
+
+
+    {print(a)}
+    {print(fibonacci(3))}
+    {print(fibonacci(3))}
+    {print(fibonacci(3))} 
 
 </program>

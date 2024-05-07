@@ -14,7 +14,7 @@ class Listener(ignoreParserListener):
     def __init__(self):
         self.env_stack: List[Environment] = [deepcopy(global_env)]
         self.current_depth = 0
-        self.variables: Dict[ignoreParser.VarDeclContext, VariableInfo] = {}
+        self.variables: Dict[object(), VariableInfo] = {}
 
         """
             stores our var decls. For now format: name -> value.
@@ -49,9 +49,9 @@ class Listener(ignoreParserListener):
             var_decl=ctx,
             type=var_type,
         )
-        print(
-            f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {new_var.was_evaluated} "
-        )
+        #print(
+        #    f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {new_var.was_evaluated} "
+       #  )
         current_env.variables[var_name] = new_var
         self.variables[ctx] = new_var
 
@@ -65,18 +65,19 @@ class Listener(ignoreParserListener):
     def _add_new_function(self, function_name, params, body, return_type, ctx: ignoreParser.FunctionContext):
         current_env = self.env_stack[-1] 
         if function_name in current_env.variables:
-            raise ValueError(f"Function '{function_name}' already defined")
-        new_function = VariableInfo(
-            # name=function_name,
+            raise ReferenceError(f"Function '{function_name}' already defined")
+        new_function = VariableInfo( 
+            value = None,
+            type = 'Function',
             is_function=True,
-            # parameters=params,
             body=body,
+            depth = self.current_depth,
+            var_decl = ctx,
             return_type=return_type,
-            value = None
         )
         current_env.variables[function_name] = new_function
         self.variables[ctx] = new_function
-        print(f"Defined function '{function_name}' with parameters {params} and return type '{return_type}'")
+        # print(f"Defined function '{function_name}' with parameters {params} and return type '{return_type}'")
 
 
     @override
@@ -113,10 +114,10 @@ class Listener(ignoreParserListener):
 
     @override 
     def enterFunction(self, ctx: ignoreParser.FunctionContext):
-        print("ENTER FUNCTION!!! W LISTENERZE")
+        # print("ENTER FUNCTION!!! W LISTENERZE")
         function_name = ctx.FUNCTION_NAME().getText()[5:]
         params = self._extract_function_params(ctx)
-        body = ctx.block() 
+        body = ctx.block()[0] 
         return_type = ctx.FUNCTION_RET_TYPE().getText().split('=')[1] if ctx.FUNCTION_RET_TYPE() else None
         self._add_new_function(function_name, params, body, return_type, ctx)
     

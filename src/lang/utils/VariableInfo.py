@@ -15,15 +15,18 @@ Valid_Types_Reversed = {val: key for key, val in Valid_Types.items()}
 
 @dataclass
 class VariableInfo[T]:
-    value: T
-    type: str | None = None
-    is_function: bool = False
-    body: Optional[Callable] = None
-    return_type: Optional[Type] = None
-    depth: int = 0
-    var_decl: ignoreParser.VarDeclContext | None = None
-    was_evaluated: bool = False
-    recursion_check: int = 0
+    def __init__(self, type: str, value=None, depth=None, var_decl=None, is_function=False, params=None, return_type=None, body=None, was_evaluated= False, recursion_check = 0):
+        self.type = type
+        self.value = value
+        self.depth = depth
+        self.var_decl = var_decl
+        self.is_function = is_function
+        self.params = params
+        self.return_type = return_type
+        self.body = body
+        self.was_evaluated = was_evaluated
+        self.recursion_check = recursion_check 
+
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         if self.type in ("Any", "Function") or self.type is None:

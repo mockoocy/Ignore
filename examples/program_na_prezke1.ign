@@ -1,20 +1,13 @@
-<function name=factorial n:int returnType=int>
-    <if condition={n<0}>
-        <throw exceptionType=InvalidArgumentExeption>
-            { "Factorial is not defined for negative numbers"}
-        </throw>
-    </if>
-    <if condition={n == 0}>
-        <return>
-            {1}
-        </return>
-    </if>
-    <return>
-        {n * factorial(n - 1)}
-    </return>
-</function>
-
 <program>
-    {print(factorial(5))}
+    <var name=n type=int> {0} </var>
+    <function name=factorial n:int returnType=int>
+        <if condition={ n == 0 } >
+            <return>
+                {1}
+            </return>
+        </if>
+        <return> {65} </return>
+    </function> 
+    {print(factorial())}
     {print(factorial(15))}
 </program>
