@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Self
 
 from src.lang.utils.types import VariableDict
@@ -13,7 +13,8 @@ class Environment:
     """
 
     enclosing: Self | None
-    variables: VariableDict
+    # dataclass way to have a mutable default value
+    variables: VariableDict = field(default_factory=lambda: dict())
 
     def merge(self, other: "Environment") -> "Environment":
         new_vars = {

@@ -47,12 +47,12 @@ class Visitor(ignoreParserVisitor):
         self.current_env = Environment(enclosing=prev_env, variables={})
         
         result = None 
-
         for child in ctx.getChildren():
-            result = self.visit(child)
             if isinstance(child, ignoreParser.ReturnStmtContext):
-                break
-        
+                result = self.visitReturnStmt(child)
+            else:
+                self.visit(child)
+
         self.current_env = prev_env
        #  if result is not None:
           #  print(f"return w bloku zwrocil {result}")
@@ -63,25 +63,21 @@ class Visitor(ignoreParserVisitor):
         function_name = ctx.NAME().getText()
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
 
-        # print(f"TERAZ VISITOR - FUNCTION CALL {function_name} arg: {argument}")
-        
-        function = self.current_env.lookup_variable(function_name)
-        if function_name == 'print':
-            return print(argument) 
-        
-        # print(f"Entering function {function_name} with argument {argument}")
-         # print(f"Function {function_name} not found in the current environment.")
-        # print(f"Szukanie funkcji {function_name}")
 
         function = self.current_env.lookup_variable(function_name)        
         if not function:
             raise ValueError(f"Function '{function_name}' not defined in the current environment")
 
         # print(f"Znalazla sie!")
-        new_env = Environment(enclosing=self.current_env, variables=self.variables) 
+        new_env = Environment(enclosing=self.current_env) 
         prev_env = self.current_env
         self.current_env = new_env
-        result = self.visitBlock(function.body)
+        if function.body:
+            result = self.visitBlock(function.body)
+            print(f"{function_name=}")
+        else:
+            # python built in function
+            result = function(argument)
         self.current_env = prev_env
         # print(f"UWAGA WARTOSC FUNKCJI:    {result}")
         return result
