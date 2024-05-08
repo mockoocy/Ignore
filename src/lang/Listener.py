@@ -42,7 +42,8 @@ class Listener(ignoreParserListener):
         current_env = self.env_stack[-1]
         if var_name in current_env.variables:
             raise ReferenceError(f"variable {var_name} is already defined!")
-            # dodanie zmiennych do slownika wraz z typem bez wartosci
+            # dodanie zmiennych do slownika wraz z ty
+            # pem bez wartosci
         new_var = VariableInfo(
             value=None,
             depth=self.current_depth,
@@ -50,7 +51,6 @@ class Listener(ignoreParserListener):
             type=var_type,
         )
         current_env.variables[var_name] = new_var
-        print(f'added {var_name=}')
         self.variables[ctx] = new_var
 
     def _extract_function_params(self, ctx):
@@ -75,7 +75,6 @@ class Listener(ignoreParserListener):
         )
         current_env.variables[function_name] = new_function
         self.variables[ctx] = new_function
-        # print(f"Defined function '{function_name}' with parameters {params} and return type '{return_type}'")
 
 
     @override
@@ -99,7 +98,6 @@ class Listener(ignoreParserListener):
 
     @override
     def exitBlock(self, ctx: ignoreParser.BlockContext):
-        print("block parent")
         parent = ctx.parentCtx
         if parent in self.variables and self.variables[parent].type == "Function":
             self.variables[parent].function_env = self.env_stack[-1].create_snapshot()

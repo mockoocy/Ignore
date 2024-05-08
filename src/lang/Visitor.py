@@ -64,7 +64,6 @@ class Visitor(ignoreParserVisitor):
 
         function = self.current_env.lookup_variable(function_name)        
         prev_env = self.current_env
-        print(f"env for {function_name=}",function.function_env)
         self.current_env = Environment(enclosing=None, variables=function.function_env)
         if not function:
             raise ValueError(f"Function '{function_name}' not defined in the current environment")
@@ -91,7 +90,6 @@ class Visitor(ignoreParserVisitor):
         if expr.NAME() is not None:
             var_name = expr.NAME().getText()
             var_info = current_env.lookup_variable(var_name)
-            # print(current_env.variables)
             if not var_info:
                 raise ValueError(f"No such variable declared {var_name}")
             if var_info.was_evaluated:
