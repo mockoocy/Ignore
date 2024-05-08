@@ -23,7 +23,7 @@ def test_if_stdin():
     test_nums = [-7, 0, 420, 13]
     expected = ["odd", "even", "even", "odd"]
     for num in test_nums:
-        tree, variables = first_phase("examples/if_stdin.ign")
+        tree, variables = first_phase("examples/conditional/if_stdin.ign")
 
         global_env.variables["print"] = VariableInfo(lambda x: outputs.append(x))
         global_env.variables["input"] = VariableInfo(lambda _: num)

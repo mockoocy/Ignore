@@ -64,11 +64,6 @@ class ignoreParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ignoreParser#loop_init.
-    def visitLoop_init(self, ctx:ignoreParser.Loop_initContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by ignoreParser#condition.
     def visitCondition(self, ctx:ignoreParser.ConditionContext):
         return self.visitChildren(ctx)

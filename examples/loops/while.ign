@@ -8,11 +8,16 @@
     </var>
 
     <while condition={i < 5} >
-        {print(i)}
+         <var name=k type=int>
+        {10}
+        </var>
+        //{print(k)}
         i = {i + 1}
         <while condition={j > 0} >
-            {print(j)}
+            //{print(j)}
             j = {j - 1}
+            {print(k)}
+            k = {k - 1}
         </while>
     </while>
   
