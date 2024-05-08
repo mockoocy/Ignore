@@ -55,7 +55,6 @@ class Visitor(ignoreParserVisitor):
 
         self.current_env = prev_env
        #  if result is not None:
-          #  print(f"return w bloku zwrocil {result}")
         return result
 
     @override
@@ -63,23 +62,19 @@ class Visitor(ignoreParserVisitor):
         function_name = ctx.NAME().getText()
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
 
-
         function = self.current_env.lookup_variable(function_name)        
+        prev_env = self.current_env
+        print(f"env for {function_name=}",function.function_env)
+        self.current_env = Environment(enclosing=None, variables=function.function_env)
         if not function:
             raise ValueError(f"Function '{function_name}' not defined in the current environment")
-
-        # print(f"Znalazla sie!")
-        new_env = Environment(enclosing=self.current_env) 
-        prev_env = self.current_env
-        self.current_env = new_env
         if function.body:
             result = self.visitBlock(function.body)
-            print(f"{function_name=}")
         else:
             # python built in function
             result = function(argument)
         self.current_env = prev_env
-        # print(f"UWAGA WARTOSC FUNKCJI:    {result}")
+        
         return result
 
     @override
@@ -96,6 +91,7 @@ class Visitor(ignoreParserVisitor):
         if expr.NAME() is not None:
             var_name = expr.NAME().getText()
             var_info = current_env.lookup_variable(var_name)
+            # print(current_env.variables)
             if not var_info:
                 raise ValueError(f"No such variable declared {var_name}")
             if var_info.was_evaluated:

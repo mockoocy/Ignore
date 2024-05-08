@@ -25,6 +25,7 @@ class VariableInfo[T]:
     body: ignoreParser.BlockContext | None = None
     was_evaluated: bool = False
     recursion_check: int = 0 
+    function_env: Dict[str, "VariableInfo"] | None = None
 
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:

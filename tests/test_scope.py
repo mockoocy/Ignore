@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 from src.lang.Driver import traverse
 from src.lang.stdlib import global_env
 from src.lang.utils.VariableInfo import VariableInfo

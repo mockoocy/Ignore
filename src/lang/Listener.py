@@ -2,6 +2,7 @@ from copy import deepcopy
 from typing import Dict, List, override
 
 from src.lang.utils.Environment import Environment
+from src.lang.utils.types import VarDeclDict
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserListener import ignoreParserListener
@@ -14,8 +15,7 @@ class Listener(ignoreParserListener):
     def __init__(self):
         self.env_stack: List[Environment] = [deepcopy(global_env)]
         self.current_depth = 0
-        self.variables: Dict[object(), VariableInfo] = {}
-
+        self.variables: VarDeclDict = {}
         """
             stores our var decls. For now format: name -> value.
             May move to format name -> variableSpecification 
@@ -49,10 +49,8 @@ class Listener(ignoreParserListener):
             var_decl=ctx,
             type=var_type,
         )
-        #print(
-        #    f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {new_var.was_evaluated} "
-       #  )
         current_env.variables[var_name] = new_var
+        print(f'added {var_name=}')
         self.variables[ctx] = new_var
 
     def _extract_function_params(self, ctx):
@@ -67,12 +65,12 @@ class Listener(ignoreParserListener):
         if function_name in current_env.variables:
             raise ReferenceError(f"Function '{function_name}' already defined")
         new_function = VariableInfo( 
-            value = None,
-            type = 'Function',
+            value=None,
+            type='Function',
             is_function=True,
             body=body,
-            depth = self.current_depth,
-            var_decl = ctx,
+            depth=self.current_depth,
+            var_decl=ctx,
             return_type=return_type,
         )
         current_env.variables[function_name] = new_function
@@ -101,6 +99,10 @@ class Listener(ignoreParserListener):
 
     @override
     def exitBlock(self, ctx: ignoreParser.BlockContext):
+        print("block parent")
+        parent = ctx.parentCtx
+        if parent in self.variables and self.variables[parent].type == "Function":
+            self.variables[parent].function_env = self.env_stack[-1].create_snapshot()
         self.current_depth -= 1
         self.env_stack.pop()
         return super().exitBlock(ctx)
@@ -114,10 +116,12 @@ class Listener(ignoreParserListener):
 
     @override 
     def enterFunction(self, ctx: ignoreParser.FunctionContext):
-        # print("ENTER FUNCTION!!! W LISTENERZE")
         function_name = ctx.FUNCTION_NAME().getText()[5:]
         params = self._extract_function_params(ctx)
         body = ctx.block()[0] 
         return_type = ctx.FUNCTION_RET_TYPE().getText().split('=')[1] if ctx.FUNCTION_RET_TYPE() else None
         self._add_new_function(function_name, params, body, return_type, ctx)
     
+    @override
+    def exitFunction(self, ctx: ignoreParser.FunctionContext):
+        return super().exitFunction(ctx)
