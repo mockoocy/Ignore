@@ -1,0 +1,17 @@
+<program>
+  <var name=n>
+    {4}
+  </var>
+ 
+  {print("n before modification")}
+  {print(n)}
+
+  <function name=modify b:int> 
+    n = {1435} 
+  </function>
+
+  {modify()}
+  {print("n after modification")}
+  {print(n)}
+    
+</program>
