@@ -1,0 +1,16 @@
+<program> 
+  <function name=sum a:int, b:int, c:int returnType=int > 
+    <return>
+        {a+b+c}
+    </return>
+  </function>
+
+  <var name=res type=int>
+    {sum(3, 4, 5)}
+  </var>
+   
+   {print(res)}
+
+</program>
+
+/* expected output: 12 */

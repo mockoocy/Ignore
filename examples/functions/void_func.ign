@@ -1,0 +1,10 @@
+<program> 
+  <function name=print_tripled a:int > 
+    {print(3*a)}
+  </function>
+
+  {print_tripled(5)}
+
+</program>
+
+/* expected output: 15*/
