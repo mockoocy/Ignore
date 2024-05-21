@@ -1,0 +1,40 @@
+<program> 
+  <function name=sum a:int, b:int returnType=int > 
+    <return>
+        {2*7}
+    </return>
+  </function>
+
+  <function name=avg a:double, b:double returnType=double > 
+    <return>
+        {(a+b)/2}
+    </return>
+  </function>
+  
+  
+  <function name=double_string a:string returnType=string > 
+    <return>
+      {a+a}
+    </return>
+  </function>
+
+   <function name=xor a:bool, b:bool returnType=bool > 
+    <return>
+      {a^b}
+    </return>
+  </function>
+
+   {print(sum(1,2))}
+   {print(avg(1,2))}
+   {print(double_string("hello_world"))}
+   {print(xor(true, false))}
+  
+</program>
+
+
+/* expected output: 
+    3
+    1.5
+    hello_worldhello_world
+    true
+*/
