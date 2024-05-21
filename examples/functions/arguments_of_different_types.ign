@@ -1,0 +1,14 @@
+<program> 
+  <function name=multiply_string string_to_multiply:string, times:int returnType=string > 
+    <return>
+        {string_to_multiply * times}
+    </return>
+  </function>
+
+   {print(multiply_string("he", 4))}
+
+</program>
+
+/* expected output: 
+    "hehehehe"
+*/
