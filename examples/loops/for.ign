@@ -1,10 +1,11 @@
 <program>
 //1 sposób
-/*
     <for <var name=j type=int>{0}</var> condition={j < 5} j = {j + 1} >
-       {print(j)}
+        <for <var name=a type=int>{0}</var> condition={a < 5} a = {a + 1} >
+            {print(a)}
+        </for>
+
     </for>
-*/
 //2 sposób
 /*
     <var name=i type=int>{0}</var>
@@ -26,9 +27,9 @@
 /*
     <var name=z type=int>{0}</var>  
 
-    <for condition={z < 5} >  //jak while
+    <for condition={z < 15} >  //jak while
         {print(z)} 
-        z = {z + 1}
+        z = {z + 2}
     </for>
 */
 </program>

@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Dict, List, override
+from typing import List, override
 
 from src.lang.utils.Environment import Environment
 from src.lang.utils.types import VarDeclDict
@@ -55,9 +55,9 @@ class Listener(ignoreParserListener):
 
     def _extract_function_params(self, ctx):
         params = {}
-        # for param_ctx in ctx.FUNCTION_PARAM():
-        param_name, param_type = ctx.FUNCTION_PARAM().getText().split(':')
-        params[param_name] = param_type
+        if ctx.FUNCTION_PARAM():
+            param_name, param_type = ctx.FUNCTION_PARAM().getText().split(":")
+            params[param_name] = param_type
         return params
 
     def _add_new_function(self, function_name, params, body, return_type, ctx: ignoreParser.FunctionContext):

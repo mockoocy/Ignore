@@ -7,7 +7,6 @@ def test_function_stupid():
     # if you put any other number, it does not work XD
     test_nums = [12, 0, 420, -7]
     def new_print(x):
-        print(f"prints {x}")
         outputs.append(x)
     for num in test_nums:
         global_env.variables["input"] = VariableInfo(lambda _: num, is_function=True, type="Function")

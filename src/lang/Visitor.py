@@ -1,6 +1,7 @@
 from copy import deepcopy
 from typing import override
 
+from src.lang.utils.EarlyExit import EarlyExit
 from src.lang.utils.Environment import Environment
 from src.lang.utils.VariableInfo import Valid_Types, Valid_Types_Reversed
 
@@ -17,6 +18,14 @@ class Visitor(ignoreParserVisitor):
         self.variables = variables
         self.current_env = deepcopy(global_env)
         super().__init__()  # Call parent class constructor
+
+    def _catch_return(self, block: ignoreParser.BlockContext):
+        # return statements throw EarlyExit exception, which allows us to propagate return value through 
+        # the stack and ignore further instructions inside function block.
+        try:
+            self.visitBlock(block)
+        except EarlyExit as early_exit:
+            return early_exit.value
 
     @override
     def visitLiteral(self, ctx: ignoreParser.LiteralContext):
@@ -45,17 +54,9 @@ class Visitor(ignoreParserVisitor):
     def visitBlock(self, ctx: ignoreParser.BlockContext): 
         prev_env = self.current_env
         self.current_env = Environment(enclosing=prev_env, variables={})
-        
-        result = None 
         for child in ctx.getChildren():
-            if isinstance(child, ignoreParser.ReturnStmtContext):
-                result = self.visitReturnStmt(child)
-            else:
-                self.visit(child)
-
+            self.visit(child)
         self.current_env = prev_env
-       #  if result is not None:
-        return result
 
     @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
@@ -68,7 +69,7 @@ class Visitor(ignoreParserVisitor):
         if not function:
             raise ValueError(f"Function '{function_name}' not defined in the current environment")
         if function.body:
-            result = self.visitBlock(function.body)
+            result = self._catch_return(function.body)
         else:
             # python built in function
             result = function(argument)
@@ -270,8 +271,7 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitReturnStmt(self, ctx: ignoreParser.ReturnStmtContext): 
         wrapped_expr_context = ctx.wrapped_expr()
+        result = None
         if wrapped_expr_context is not None:
-            return self.visit(wrapped_expr_context.expr())
-        else:
-            return None
-    
+            result = self.visit(wrapped_expr_context.expr())
+        EarlyExit.return_with(result)    

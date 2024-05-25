@@ -1,0 +1,56 @@
+<program>
+  <var name=n type=int>
+    {input("give me n")}
+  </var>
+  <function name=isOdd returnType=string>
+    <if condition={n == 1}>
+      <return>
+        {"odd"}
+      </return>
+    </if>
+    <elif condition={n == 2}>
+      <return>
+        {"even"}
+      </return>
+    </elif>
+    <elif condition={n == 3}>
+      <return>
+        {"odd"}
+      </return>
+    </elif>
+    <elif condition={n == 4}>
+      <return>
+        {"even"}
+      </return>
+    </elif>
+    <elif condition={n == 5}>
+      <return>
+        {"odd"}
+      </return>
+    </elif>
+    <elif condition={n == 6}>
+      <return>
+        {"even"}
+      </return>
+    </elif>
+    <elif condition={n == 7}>
+      <return>
+        {"odd"}
+      </return>
+    </elif>
+    <elif condition={n == 8}>
+      <return>
+        {"even"}
+      </return>
+    </elif>
+    <elif condition={n == 9}>
+        {"odd"}
+    </elif>
+    <else>
+      <return>
+        {"I don't know :("}
+      </return>
+    </else>
+  </function>
+  {print(isOdd(n))}
+</program>
