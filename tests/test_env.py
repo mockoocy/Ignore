@@ -1,29 +1,29 @@
+from src.lang.utils.BuiltIn import BuiltIn
 from src.lang.utils.Environment import Environment
-from src.lang.utils.VariableInfo import VariableInfo
 
 abcd = {
-    "a": VariableInfo("a1"),
-    "b": VariableInfo("b1"),
-    "c": VariableInfo("c1"),
-    "d": VariableInfo("d1"),
+    "a": BuiltIn("a1"),
+    "b": BuiltIn("b1"),
+    "c": BuiltIn("c1"),
+    "d": BuiltIn("d1"),
 }
 abcd_env = Environment(None, abcd)
 
 cdef = {
-    "c": VariableInfo("c2"),
-    "d": VariableInfo("d2"),
-    "e": VariableInfo("e2"),
-    "f": VariableInfo("f2"),
+    "c": BuiltIn("c2"),
+    "d": BuiltIn("d2"),
+    "e": BuiltIn("e2"),
+    "f": BuiltIn("f2"),
 }
 
 cdef_env = Environment(abcd_env, cdef)
 
 
 efgh = {
-    "e": VariableInfo("e3"),
-    "f": VariableInfo("f3"),
-    "g": VariableInfo("g3"),
-    "h": VariableInfo("h3"),
+    "e": BuiltIn("e3"),
+    "f": BuiltIn("f3"),
+    "g": BuiltIn("g3"),
+    "h": BuiltIn("h3"),
 }
 
 efgh_env = Environment(cdef_env, efgh)
@@ -31,14 +31,14 @@ efgh_env = Environment(cdef_env, efgh)
 
 def test_env_snapshot():
     expected_vars = {
-        "a": VariableInfo("a1"),
-        "b": VariableInfo("b1"),
-        "c": VariableInfo("c2"),
-        "d": VariableInfo("d2"),
-        "e": VariableInfo("e3"),
-        "f": VariableInfo("f3"),
-        "g": VariableInfo("g3"),
-        "h": VariableInfo("h3"),
+        "a": BuiltIn("a1"),
+        "b": BuiltIn("b1"),
+        "c": BuiltIn("c2"),
+        "d": BuiltIn("d2"),
+        "e": BuiltIn("e3"),
+        "f": BuiltIn("f3"),
+        "g": BuiltIn("g3"),
+        "h": BuiltIn("h3"),
     }
     assert Environment(None, expected_vars).variables == efgh_env.create_snapshot()
 

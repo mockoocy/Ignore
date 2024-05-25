@@ -1,9 +1,14 @@
 from copy import deepcopy
-from typing import override
+from typing import Any, override
 
+from src.lang.stdlib import global_env
+from src.lang.utils.BuiltIn import BuiltIn
 from src.lang.utils.EarlyExit import EarlyExit
 from src.lang.utils.Environment import Environment
-from src.lang.utils.VariableInfo import Valid_Types, Valid_Types_Reversed
+from src.lang.utils.FunctionArgument import FunctionArgument
+from src.lang.utils.FunctionInfo import FunctionInfo
+from src.lang.utils.VariableInfo import (Valid_Types, Valid_Types_Reversed,
+                                         VariableInfo)
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserVisitor import ignoreParserVisitor
@@ -20,7 +25,7 @@ class Visitor(ignoreParserVisitor):
         super().__init__()  # Call parent class constructor
 
     def _catch_return(self, block: ignoreParser.BlockContext):
-        # return statements throw EarlyExit exception, which allows us to propagate return value through 
+        # return statements throw EarlyExit exception, which allows us to propagate return value through
         # the stack and ignore further instructions inside function block.
         try:
             self.visitBlock(block)
@@ -51,37 +56,52 @@ class Visitor(ignoreParserVisitor):
             raise NotImplementedError("Unsupported literal type")
 
     @override
-    def visitBlock(self, ctx: ignoreParser.BlockContext): 
+    def visitBlock(self, ctx: ignoreParser.BlockContext):
         prev_env = self.current_env
         self.current_env = Environment(enclosing=prev_env, variables={})
         for child in ctx.getChildren():
             self.visit(child)
         self.current_env = prev_env
 
+    def _evaluate_builtin_call(self, builtin: BuiltIn, argument: Any):
+        return builtin(argument)
+
+    def _evaluate_function_call(self, function: FunctionInfo, argument: Any):
+        # TODO add logic bounding function.params to argument(s).
+        prev_env = self.current_env
+        function_env = function.function_env
+        assert function_env is not None
+        params = {}
+        if raw_param := function.params:
+            # it is a dict for now, so only one parameter is supported
+            param_name, param_type = list(raw_param.items())[0]
+            params[param_name] = FunctionArgument(argument, param_type)
+        self.current_env = Environment(enclosing=None, variables=function_env | params)
+        result = self._catch_return(function.body)
+        self.current_env = prev_env
+        return result
+
     @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
         function_name = ctx.NAME().getText()
         argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
-
-        function = self.current_env.lookup_variable(function_name)        
-        prev_env = self.current_env
-        self.current_env = Environment(enclosing=None, variables=function.function_env)
+        function = self.current_env.lookup_variable(function_name)
         if not function:
-            raise ValueError(f"Function '{function_name}' not defined in the current environment")
-        if function.body:
-            result = self._catch_return(function.body)
+            raise ValueError(
+                f"Function '{function_name}' not defined in the current environment"
+            )
+        if isinstance(function, BuiltIn):
+            return self._evaluate_builtin_call(function, argument)
+        elif isinstance(function, FunctionInfo):
+            return self._evaluate_function_call(function, argument)
         else:
-            # python built in function
-            result = function(argument)
-        self.current_env = prev_env
-        
-        return result
+            raise ValueError(f"{function_name} is not a function!")
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):
         if ctx is None:
             return None
-    
+
         expr = ctx
         current_env = self.current_env
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
@@ -93,6 +113,9 @@ class Visitor(ignoreParserVisitor):
             var_info = current_env.lookup_variable(var_name)
             if not var_info:
                 raise ValueError(f"No such variable declared {var_name}")
+            if isinstance(var_info, FunctionArgument):
+                return var_info.value
+            assert isinstance(var_info, VariableInfo)
             if var_info.was_evaluated:
                 return var_info.value
             return self.visitVarDecl(var_info.var_decl).value
@@ -183,6 +206,7 @@ class Visitor(ignoreParserVisitor):
         variable_info = self.variables[ctx]
         var_name = ctx.FUNCTION_NAME().getText()[5:]
         self.current_env.variables[var_name] = variable_info
+        assert isinstance(variable_info, VariableInfo)
         if variable_info.was_evaluated == True:
             return variable_info
 
@@ -211,35 +235,35 @@ class Visitor(ignoreParserVisitor):
             f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
         )
         return variable_info
-    
 
     @override
-    def visitVar_assign(self, ctx:ignoreParser.Var_assignContext):
+    def visitVar_assign(self, ctx: ignoreParser.Var_assignContext):
         input_string = ctx.PROPERTY_NAME().getText()
         parts = input_string.split()
         var_name = parts[0]
 
         current_env = self.current_env
         var_info = current_env.lookup_variable(var_name)
+        assert isinstance(var_info, VariableInfo)
         if var_info != None:
             var_expression = ctx.wrapped_expr().expr()
             expr_val = self.visitExpr(var_expression)
             var_info.value = expr_val
         else:
-              raise ValueError(f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier")
-        #return self.visitChildren(ctx)
+            raise ValueError(
+                f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier"
+            )
+        # return self.visitChildren(ctx)
 
     @override
-    def visitWhile_loop(self, ctx:ignoreParser.While_loopContext):
+    def visitWhile_loop(self, ctx: ignoreParser.While_loopContext):
         condition_result = self.visitCondition(ctx.loop_condition().condition())
         while condition_result == True:
             self.visitBlock(ctx.block())
             condition_result = self.visitCondition(ctx.loop_condition().condition())
 
-
-
     @override
-    def visitFor_loop(self, ctx:ignoreParser.For_loopContext):
+    def visitFor_loop(self, ctx: ignoreParser.For_loopContext):
         if ctx.var() is not None:
             self.visitVarDecl(ctx.var().varDecl())
 
@@ -259,19 +283,16 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitFunction(self, ctx: ignoreParser.FunctionContext):
-        variable_info = self.variables[ctx]
+        function_info = self.variables[ctx]
         var_name = ctx.FUNCTION_NAME().getText()[5:]
-        self.current_env.variables[var_name] = variable_info
-        
-        print(
-            f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
-        )
-        return variable_info
+
+        self.current_env.variables[var_name] = function_info
+        return function_info
 
     @override
-    def visitReturnStmt(self, ctx: ignoreParser.ReturnStmtContext): 
+    def visitReturnStmt(self, ctx: ignoreParser.ReturnStmtContext):
         wrapped_expr_context = ctx.wrapped_expr()
         result = None
         if wrapped_expr_context is not None:
             result = self.visit(wrapped_expr_context.expr())
-        EarlyExit.return_with(result)    
+        EarlyExit.return_with(result)

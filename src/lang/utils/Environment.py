@@ -41,7 +41,7 @@ class Environment:
     # def get_at(self, distance: int, name: str) -> VariableInfo:
     #     return self.ancestor(distance).variables[name]
 
-    def lookup_variable(self, var_name: str) -> VariableInfo | None:
+    def lookup_variable(self, var_name: str):
         environment = self
         while environment != None:
             if var_name in environment.variables:

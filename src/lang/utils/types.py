@@ -1,11 +1,16 @@
 from typing import Dict
 
 from src.lang.generated.ignoreParser import ignoreParser
+from src.lang.utils.BuiltIn import BuiltIn
+from src.lang.utils.FunctionArgument import FunctionArgument
+from src.lang.utils.FunctionInfo import FunctionInfo
 from src.lang.utils.VariableInfo import VariableInfo
 
-VarDeclDict = Dict[
-    ignoreParser.VarDeclContext, VariableInfo
-]  # maps specific declarations to info.
+ValueWrapper = VariableInfo | FunctionInfo | BuiltIn | FunctionArgument
+
+ValueDecl = ignoreParser.VarDeclContext | ignoreParser.FunctionContext
+
+VarDeclDict = Dict[ValueDecl, ValueWrapper]  # maps specific declarations to info.
 VariableDict = Dict[
-    str, VariableInfo
+    str, ValueWrapper
 ]  # maps name in the current scope to specific info.

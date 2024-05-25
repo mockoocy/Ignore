@@ -1,6 +1,6 @@
 from src.lang.stdlib import global_env
 from src.lang.Driver import traverse
-from src.lang.utils.VariableInfo import VariableInfo
+from src.lang.utils.BuiltIn import BuiltIn
 
 def test_function_stupid():
     outputs = []
@@ -9,8 +9,8 @@ def test_function_stupid():
     def new_print(x):
         outputs.append(x)
     for num in test_nums:
-        global_env.variables["input"] = VariableInfo(lambda _: num, is_function=True, type="Function")
-        global_env.variables["print"] = VariableInfo(new_print, is_function=True, type="Function")
+        global_env.variables["input"] = BuiltIn(lambda _: num)
+        global_env.variables["print"] = BuiltIn(new_print)
 
         traverse("examples/functions/stupid.ign")
     expected_prints = []

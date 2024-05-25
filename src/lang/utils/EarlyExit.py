@@ -7,7 +7,7 @@ class EarlyExit[T](Exception):
     def __init__(self, value: T):
         super().__init__()
         self.value = value
-    
+
     def __str__(self):
         return f"Early Exit signalizer with {self.value=}"
 

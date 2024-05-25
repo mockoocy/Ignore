@@ -1,22 +1,17 @@
 <program>
 
-<var name=n type=int>
-    {4}
-</var>
-
 <function name=fibonacci 🚀:int returnType=int >
-    <if condition={ n <= 1 }>
+    <if condition={ 🚀 <= 1 }>
         <return>
-            {n}
+            {🚀}
         </return>
     </if>
     <return>
-        {5}
-        //{fibonacci(3 - 1) + fibonacci(2 - 2)} 
+        {fibonacci(🚀 - 1) + fibonacci(🚀 - 2)} 
     </return>
 </function>
-<var name=wynikFibonaciego type=int>
-    {fibonacci(n)}
-</var>
-    {print(fibonacci(n))}
+<var name=i type=int>{0}</var>
+<for condition={i < 10} i = {i + 1} >
+    {print("Fib(" + str(i) + ") is: " + str(fibonacci(i)))}
+</for>
 </program>

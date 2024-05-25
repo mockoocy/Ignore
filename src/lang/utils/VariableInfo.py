@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Dict
 
 from ..generated.ignoreParser import ignoreParser
 
@@ -16,21 +16,10 @@ Valid_Types_Reversed = {val: key for key, val in Valid_Types.items()}
 @dataclass
 class VariableInfo[T]:
     value: T
+    var_decl: ignoreParser.VarDeclContext
     type: str | None = None
-    depth: int = 0 
-    var_decl: ignoreParser.VarDeclContext | None = None
-    is_function: bool = False
-    params: Dict[str, str] | None = None
-    return_type: str | None = None
-    body: ignoreParser.BlockContext | None = None
     was_evaluated: bool = False
-    recursion_check: int = 0 
-    function_env: Dict[str, "VariableInfo"] | None = None
-
-
-    def __call__(self, *args: Any, **kwargs: Any) -> Any:
-        if self.type in ("Any", "Function") or self.type is None:
-            return self.value(*args, **kwargs)
+    recursion_check: int = 0
 
     def __str__(self):
         return f"""VariableInfo
