@@ -1,0 +1,30 @@
+<program>
+  <var name=n>
+    {4}
+  </var>
+  {print("n before modification:")}
+  {print(n)}
+
+  <function name=double_the_number a:int returnType=int >
+    <var name=n type=int>
+      {233}
+    </var>
+    <var name=result type=int>
+      {n * 2}
+    </var>
+    <return>
+      {result}
+    </return>
+  </function>
+
+  <var name=result type=int>
+    {double_the_number(3)}
+  </var>
+  {print(result)} 
+
+  {print("n after modification")}
+  {print(n)}
+    
+  {print(n)}
+  
+</program>

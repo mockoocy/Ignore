@@ -1,0 +1,21 @@
+<program>
+  <var name=n>
+    {4}
+  </var>
+  {print(n)}
+  <function name=add2 a:int returnType=int >
+    <var name=n type=int>
+      {input("val of n")}
+    </var>
+    <var name=result type=int>
+      {n + 2}
+    </var>
+    <return>
+      {result}
+    </return>
+  </function>
+  <var name=result type=int>
+    {add2(n)}
+  </var>
+  {print(result)}
+</program>

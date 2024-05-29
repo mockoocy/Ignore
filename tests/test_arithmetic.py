@@ -1,6 +1,6 @@
-from src.lang.Driver import first_phase, second_phase, traverse
+from src.lang.Driver import traverse
 from src.lang.stdlib import global_env
-from src.lang.utils.VariableInfo import VariableInfo
+from src.lang.utils.BuiltIn import BuiltIn
 
 
 def test_parens():
@@ -23,9 +23,8 @@ def test_if_stdin():
     test_nums = [-7, 0, 420, 13]
     expected = ["odd", "even", "even", "odd"]
     for num in test_nums:
-        tree, variables = first_phase("examples/conditional/if_stdin.ign")
+        global_env.variables["print"] = BuiltIn(lambda x: outputs.append(x))
+        global_env.variables["input"] = BuiltIn(lambda _: num)
+        traverse("examples/conditional/if_stdin.ign")
 
-        global_env.variables["print"] = VariableInfo(lambda x: outputs.append(x))
-        global_env.variables["input"] = VariableInfo(lambda _: num)
-        second_phase(tree, variables)
     assert outputs == expected

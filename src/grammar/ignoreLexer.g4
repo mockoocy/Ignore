@@ -3,10 +3,6 @@ lexer grammar ignoreLexer;
 fragment DIGIT: [0-9];
 fragment NEGATIVE_SIGN: '-';
 
-
-FUNCTION_TAG_OPEN: '<function';
-FUNCTION_TAG_END: '</function>';
-
 IF_TAG: '<if';
 IF_END: '</if>';
 ELIF_END: '</elif>';
@@ -20,9 +16,15 @@ VAR_DECL: VAR_DECL_START ID;
 WHILE_TAG: '<while';
 WHILE_END: '</while>';
 FOR_TAG: '<for';
-FOR_END: '</for>';
+FOR_END: '</for>'; 
 
-
+FUNCTION_TAG_OPEN: '<function';
+FUNCTION_TAG_END: '</function>';
+RETURN_TAG: '<return>';
+RETURN_END: '</return>';
+FUNCTION_NAME: 'name=' ID;
+FUNCTION_RET_TYPE: 'returnType=' ID;
+FUNCTION_PARAM: ID ':' ID;
 COMMENT: '/*' .*? '*/' -> skip;
 
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
@@ -42,9 +44,6 @@ CLOSE_PROGRAM: '</program>';
 CLOSE_TAG: '</' ID;
 OPEN_TAG: '<' ID;
 TAG_REFERENCE: ID;
-FUNCTION_NAME: 'name=' ID;
-FUNCTION_RET_TYPE: 'returnType=' ID;
-FUNCTION_PARAM: ID ':' ID;
 CONDITION_EQ: 'condition=';
 END_TAG: '>';
 PROPERTY_NAME: ID ('='|' =');

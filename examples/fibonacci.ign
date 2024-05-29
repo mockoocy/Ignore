@@ -1,28 +1,17 @@
-<function name=fibonacci 🍌:int returnType=int >
-    <if condition={ 🍌 < 0 }>
-       /* <throw exceptionType=InvalidArgumentExeption >
-                {"😿😿😿There are no fib number below 0"}
-        </throw> 
-        */
-    </if>
-    <if condition={🍌 == 1 || 🍌 == 0}> 
+<program>
+
+<function name=fibonacci 🚀:int returnType=int >
+    <if condition={ 🚀 <= 1 }>
         <return>
-            {🍌}
+            {🚀}
         </return>
     </if>
     <return>
-        {fibonacci(🍌 - 1) + fibonacci(🍌 - 2)}
+        {fibonacci(🚀 - 1) + fibonacci(🚀 - 2)} 
     </return>
 </function>
-
-/*
-Wielo
-liniowy
-komen
-tarz
-*/
-<program>
-    <var name=wynikFibonaciego type=int>
-        {(fibonacci(2+2 * 3))}
-    </var>
+<var name=i type=int>{0}</var>
+<for condition={i < 10} i = {i + 1} >
+    {print("Fib(" + str(i) + ") is: " + str(fibonacci(i)))}
+</for>
 </program>

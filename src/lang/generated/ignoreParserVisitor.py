@@ -19,18 +19,23 @@ class ignoreParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ignoreParser#argumentList.
+    def visitArgumentList(self, ctx:ignoreParser.ArgumentListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ignoreParser#functionCall.
     def visitFunctionCall(self, ctx:ignoreParser.FunctionCallContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ignoreParser#functionStart.
-    def visitFunctionStart(self, ctx:ignoreParser.FunctionStartContext):
+    # Visit a parse tree produced by ignoreParser#function.
+    def visitFunction(self, ctx:ignoreParser.FunctionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ignoreParser#function.
-    def visitFunction(self, ctx:ignoreParser.FunctionContext):
+    # Visit a parse tree produced by ignoreParser#returnStmt.
+    def visitReturnStmt(self, ctx:ignoreParser.ReturnStmtContext):
         return self.visitChildren(ctx)
 
 

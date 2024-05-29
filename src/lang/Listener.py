@@ -2,20 +2,20 @@ from copy import deepcopy
 from typing import Dict, List, override
 
 from src.lang.utils.Environment import Environment
+from src.lang.utils.FunctionInfo import FunctionInfo
+from src.lang.utils.types import TypedParam, VarDeclDict
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserListener import ignoreParserListener
 from .stdlib import global_env
 from .utils.VariableInfo import Valid_Types, VariableInfo
-
+from antlr4.tree.Tree import TerminalNodeImpl
 
 class Listener(ignoreParserListener):
 
     def __init__(self):
         self.env_stack: List[Environment] = [deepcopy(global_env)]
-        self.current_depth = 0
-        self.variables: Dict[ignoreParser.VarDeclContext, VariableInfo] = {}
-
+        self.variables: VarDeclDict = {}
         """
             stores our var decls. For now format: name -> value.
             May move to format name -> variableSpecification 
@@ -42,18 +42,43 @@ class Listener(ignoreParserListener):
         current_env = self.env_stack[-1]
         if var_name in current_env.variables:
             raise ReferenceError(f"variable {var_name} is already defined!")
-            # dodanie zmiennych do slownika wraz z typem bez wartosci
+            # dodanie zmiennych do slownika wraz z ty
+            # pem bez wartosci
         new_var = VariableInfo(
             value=None,
-            depth=self.current_depth,
             var_decl=ctx,
             type=var_type,
         )
-        print(
-            f"assigned {var_name} with value {None} and type={var_type}, is_evaluated = {new_var.was_evaluated} "
-        )
         current_env.variables[var_name] = new_var
         self.variables[ctx] = new_var
+
+
+    def _extract_function_param(self, param_node: TerminalNodeImpl) -> TypedParam:
+        param_name, param_type = param_node.getText().split(":", 2) 
+        return TypedParam(param_name, param_type)
+
+    def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
+
+        if not (params := map(lambda param_node: self._extract_function_param(param_node), ctx.FUNCTION_PARAM())):
+            return {}
+        return {param.name : param.type for param in params}
+
+    def _add_new_function(
+        self,
+        function_name,
+        params,
+        body,
+        return_type,
+        ctx: ignoreParser.FunctionContext,
+    ):
+        current_env = self.env_stack[-1]
+        if function_name in current_env.variables:
+            raise ReferenceError(f"Function '{function_name}' already defined")
+        new_function = FunctionInfo(
+            body=body, var_decl=ctx, return_type=return_type, params=params
+        )
+        current_env.variables[function_name] = new_function
+        self.variables[ctx] = new_function
 
     @override
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
@@ -69,14 +94,17 @@ class Listener(ignoreParserListener):
 
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
-        self.current_depth += 1
         current_stack = self.env_stack[-1] if len(self.env_stack) > 0 else None
         self.env_stack.append(Environment(enclosing=current_stack, variables={}))
         return super().enterBlock(ctx)
 
     @override
     def exitBlock(self, ctx: ignoreParser.BlockContext):
-        self.current_depth -= 1
+        parent = ctx.parentCtx
+        if parent in self.variables and isinstance(
+            function := self.variables[parent], FunctionInfo
+        ):
+            function.function_env = self.env_stack[-1].create_snapshot()
         self.env_stack.pop()
         return super().exitBlock(ctx)
 
@@ -86,3 +114,19 @@ class Listener(ignoreParserListener):
         # dodanie typu
         var_type = self._get_var_type(ctx)
         self._add_new_var(var_name, var_type, ctx)
+
+    @override
+    def enterFunction(self, ctx: ignoreParser.FunctionContext):
+        function_name = ctx.FUNCTION_NAME().getText()[5:]
+        params = self._extract_function_params(ctx)
+        body = ctx.block()[0]
+        return_type = (
+            ctx.FUNCTION_RET_TYPE().getText().split("=")[1]
+            if ctx.FUNCTION_RET_TYPE()
+            else None
+        )
+        self._add_new_function(function_name, params, body, return_type, ctx)
+
+    @override
+    def exitFunction(self, ctx: ignoreParser.FunctionContext):
+        return super().exitFunction(ctx)

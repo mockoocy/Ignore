@@ -1,8 +1,8 @@
 <program>
   <var name=n type=int>
-    {input("val of n")} // does not add newline for some reason. Also being called twice currently xd
+    {input("val of n")}
   </var>
-    <if condition={n < 0}>
+    <if condition={n < 0} >
       {print("negative")}
     </if>
     <elif condition={n == 0}>
@@ -11,4 +11,5 @@
     <else>
       {print("positive")}
     </else>
+
 </program>
