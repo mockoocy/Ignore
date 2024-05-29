@@ -1,5 +1,5 @@
 <program> 
-  <function name=sum a:int, b:int, c:int returnType=int > 
+  <function name=sum a:int b:int c:int returnType=int > 
     <return>
         {a+b+c}
     </return>

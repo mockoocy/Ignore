@@ -1,15 +1,15 @@
 from copy import deepcopy
-from typing import List, override
+from typing import Dict, List, override
 
 from src.lang.utils.Environment import Environment
 from src.lang.utils.FunctionInfo import FunctionInfo
-from src.lang.utils.types import VarDeclDict
+from src.lang.utils.types import TypedParam, VarDeclDict
 
 from .generated.ignoreParser import ignoreParser
 from .generated.ignoreParserListener import ignoreParserListener
 from .stdlib import global_env
 from .utils.VariableInfo import Valid_Types, VariableInfo
-
+from antlr4.tree.Tree import TerminalNodeImpl
 
 class Listener(ignoreParserListener):
 
@@ -52,12 +52,16 @@ class Listener(ignoreParserListener):
         current_env.variables[var_name] = new_var
         self.variables[ctx] = new_var
 
-    def _extract_function_params(self, ctx):
-        params = {}
-        if ctx.FUNCTION_PARAM():
-            param_name, param_type = ctx.FUNCTION_PARAM().getText().split(":")
-            params[param_name] = param_type
-        return params
+
+    def _extract_function_param(self, param_node: TerminalNodeImpl) -> TypedParam:
+        param_name, param_type = param_node.getText().split(":", 2) 
+        return TypedParam(param_name, param_type)
+
+    def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
+
+        if not (params := map(lambda param_node: self._extract_function_param(param_node), ctx.FUNCTION_PARAM())):
+            return {}
+        return {param.name : param.type for param in params}
 
     def _add_new_function(
         self,

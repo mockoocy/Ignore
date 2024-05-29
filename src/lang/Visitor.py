@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Any, override
+from typing import Any, Dict, List, override
 
 from src.lang.stdlib import global_env
 from src.lang.utils.BuiltIn import BuiltIn
@@ -63,37 +63,52 @@ class Visitor(ignoreParserVisitor):
             self.visit(child)
         self.current_env = prev_env
 
-    def _evaluate_builtin_call(self, builtin: BuiltIn, argument: Any):
-        return builtin(argument)
+    @staticmethod
+    def fill_arguments_with_values(parameters: Dict[str, str], values) -> Dict[str, FunctionArgument]:
+        if (len(parameters) != len(values)):
+            raise ValueError("Invalid number of arguments")
+        param_data = zip(parameters.keys(), parameters.values(), values)
+        return {
+            param_name: FunctionArgument(param_value, param_type) 
+            for (param_name, param_type, param_value) 
+            in param_data
+            }
 
-    def _evaluate_function_call(self, function: FunctionInfo, argument: Any):
+    def _evaluate_builtin_call(self, builtin: BuiltIn, arguments: List[Any]):
+        return builtin(*arguments)
+
+    def _evaluate_function_call(self, function: FunctionInfo, arguments: List[Any]):
         # TODO add logic bounding function.params to argument(s).
         prev_env = self.current_env
         function_env = function.function_env
         assert function_env is not None
-        params = {}
-        if raw_param := function.params:
-            # it is a dict for now, so only one parameter is supported
-            param_name, param_type = list(raw_param.items())[0]
-            params[param_name] = FunctionArgument(argument, param_type)
+        params = Visitor.fill_arguments_with_values(function.params, arguments) if function.params else {}
         self.current_env = Environment(enclosing=None, variables=function_env | params)
         result = self._catch_return(function.body)
         self.current_env = prev_env
         return result
 
     @override
+    def visitArgumentList(self, ctx: ignoreParser.ArgumentListContext) -> List[Any]:
+        arguments = ctx.getChildren()
+        return [self.visitExpr(argument) for argument in arguments]
+
+    @override
     def visitFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
         function_name = ctx.NAME().getText()
-        argument = self.visitExpr(ctx.expr())  # only 1-arg functions allowed for now
+        arguments = []
+        if argument_list := ctx.argumentList():
+            arguments = self.visitArgumentList(argument_list)  # only 1-arg functions allowed for now
+        
         function = self.current_env.lookup_variable(function_name)
         if not function:
             raise ValueError(
                 f"Function '{function_name}' not defined in the current environment"
             )
         if isinstance(function, BuiltIn):
-            return self._evaluate_builtin_call(function, argument)
+            return self._evaluate_builtin_call(function, arguments)
         elif isinstance(function, FunctionInfo):
-            return self._evaluate_function_call(function, argument)
+            return self._evaluate_function_call(function, arguments)
         else:
             raise ValueError(f"{function_name} is not a function!")
 

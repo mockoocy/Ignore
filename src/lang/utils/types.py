@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, NamedTuple
 
 from src.lang.generated.ignoreParser import ignoreParser
 from src.lang.utils.BuiltIn import BuiltIn
@@ -14,3 +14,7 @@ VarDeclDict = Dict[ValueDecl, ValueWrapper]  # maps specific declarations to inf
 VariableDict = Dict[
     str, ValueWrapper
 ]  # maps name in the current scope to specific info.
+
+class TypedParam(NamedTuple):
+    name: str
+    type: str

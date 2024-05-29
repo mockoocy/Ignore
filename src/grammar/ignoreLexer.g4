@@ -25,7 +25,6 @@ RETURN_END: '</return>';
 FUNCTION_NAME: 'name=' ID;
 FUNCTION_RET_TYPE: 'returnType=' ID;
 FUNCTION_PARAM: ID ':' ID;
-
 COMMENT: '/*' .*? '*/' -> skip;
 
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
