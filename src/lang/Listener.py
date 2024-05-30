@@ -1,6 +1,7 @@
 from copy import deepcopy
 from typing import Dict, List, override
 
+from src.lang.errors.utils import IgnoreException
 from src.lang.utils.Environment import Environment
 from src.lang.utils.FunctionInfo import FunctionInfo
 from src.lang.utils.types import TypedParam, VarDeclDict
@@ -13,7 +14,8 @@ from antlr4.tree.Tree import TerminalNodeImpl
 
 class Listener(ignoreParserListener):
 
-    def __init__(self):
+    def __init__(self, filename):
+        self.filename = filename
         self.env_stack: List[Environment] = [deepcopy(global_env)]
         self.variables: VarDeclDict = {}
         """
@@ -31,8 +33,14 @@ class Listener(ignoreParserListener):
         var_type = str(ctx.VAR_DECL_TYPE())[5:]
         if (
             var_type not in Valid_Types.keys()
-        ):  # sprawdzenie czy typ jest wspierany przez język
-            raise TypeError(f"type {var_type} is not supported!")
+        ):  # sprawdzenie czy typ jest wspierany przez 
+            type_token = ctx.VAR_DECL_TYPE.getSymbol()
+            raise IgnoreException(
+                TypeError,
+                f"type {var_type} is not supported!",
+                self.filename,
+                type_token
+            )
         return var_type
 
     def _add_new_var(
@@ -41,7 +49,14 @@ class Listener(ignoreParserListener):
         # sprawdzenie czy istnieje taka zmienna
         current_env = self.env_stack[-1]
         if var_name in current_env.variables:
-            raise ReferenceError(f"variable {var_name} is already defined!")
+            # raise ReferenceError(f"variable {var_name} is already defined!")
+            var_decl_token = ctx.VAR_DECL.getSymbol()
+            raise IgnoreException(
+                ReferenceError,
+                f"Variable '{var_name}' already defined",
+                self.filename,
+                var_decl_token
+            )
             # dodanie zmiennych do slownika wraz z ty
             # pem bez wartosci
         new_var = VariableInfo(
@@ -73,7 +88,13 @@ class Listener(ignoreParserListener):
     ):
         current_env = self.env_stack[-1]
         if function_name in current_env.variables:
-            raise ReferenceError(f"Function '{function_name}' already defined")
+            function_name_token = ctx.FUNCTION_NAME.getSymbol()
+            raise IgnoreException(
+                ReferenceError,
+                f"Function '{function_name}' already defined",
+                self.filename,
+                function_name_token
+            )
         new_function = FunctionInfo(
             body=body, var_decl=ctx, return_type=return_type, params=params
         )

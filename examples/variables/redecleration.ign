@@ -1,8 +1,0 @@
-<program>
-  <var name=test type=int>
-    {2}
-  </var>
-  <var name=test type=int>
-    {3}
-  </var>
-</program>

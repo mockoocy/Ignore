@@ -1,6 +1,7 @@
 from copy import deepcopy
 from typing import Any, Dict, List, override
-
+from antlr4.Token import CommonToken
+from src.lang.errors.utils import IgnoreException
 from src.lang.stdlib import global_env
 from src.lang.utils.BuiltIn import BuiltIn
 from src.lang.utils.EarlyExit import EarlyExit
@@ -15,12 +16,12 @@ from .generated.ignoreParserVisitor import ignoreParserVisitor
 from .stdlib import global_env
 from .utils.types import VarDeclDict
 
-
 class Visitor(ignoreParserVisitor):
 
-    def __init__(self, variables: VarDeclDict):
+    def __init__(self, variables: VarDeclDict, filename: str):
         # By quick glance at parent classes, super class does define __init__, so no need to call super() there
         self.variables = variables
+        self.filename = filename
         self.current_env = deepcopy(global_env)
         super().__init__()  # Call parent class constructor
 
@@ -63,10 +64,14 @@ class Visitor(ignoreParserVisitor):
             self.visit(child)
         self.current_env = prev_env
 
-    @staticmethod
-    def fill_arguments_with_values(parameters: Dict[str, str], values) -> Dict[str, FunctionArgument]:
+    def fill_arguments_with_values(self, parameters: Dict[str, str], values, function_name_token: CommonToken) -> Dict[str, FunctionArgument]:
         if (len(parameters) != len(values)):
-            raise ValueError("Invalid number of arguments")
+            raise IgnoreException(
+                ValueError,
+                "Invalid number of arguments",
+                self.filename,
+                function_name_token
+            )
         param_data = zip(parameters.keys(), parameters.values(), values)
         return {
             param_name: FunctionArgument(param_value, param_type) 
@@ -77,12 +82,12 @@ class Visitor(ignoreParserVisitor):
     def _evaluate_builtin_call(self, builtin: BuiltIn, arguments: List[Any]):
         return builtin(*arguments)
 
-    def _evaluate_function_call(self, function: FunctionInfo, arguments: List[Any]):
+    def _evaluate_function_call(self, function: FunctionInfo, arguments: List[Any], function_name_token: CommonToken):
         # TODO add logic bounding function.params to argument(s).
         prev_env = self.current_env
         function_env = function.function_env
         assert function_env is not None
-        params = Visitor.fill_arguments_with_values(function.params, arguments) if function.params else {}
+        params = self.fill_arguments_with_values(function.params, arguments, function_name_token) if function.params else {}
         self.current_env = Environment(enclosing=None, variables=function_env | params)
         result = self._catch_return(function.body)
         self.current_env = prev_env
@@ -101,16 +106,25 @@ class Visitor(ignoreParserVisitor):
             arguments = self.visitArgumentList(argument_list)  # only 1-arg functions allowed for now
         
         function = self.current_env.lookup_variable(function_name)
+        function_name_token = ctx.NAME().getSymbol()
         if not function:
-            raise ValueError(
-                f"Function '{function_name}' not defined in the current environment"
+            raise IgnoreException(
+                ValueError,
+                f"Function '{function_name}' not defined in the current environment",
+                self.filename,
+                function_name_token # for better error handling
             )
         if isinstance(function, BuiltIn):
             return self._evaluate_builtin_call(function, arguments)
         elif isinstance(function, FunctionInfo):
-            return self._evaluate_function_call(function, arguments)
+            return self._evaluate_function_call(function, arguments, function_name_token)
         else:
-            raise ValueError(f"{function_name} is not a function!")
+            raise IgnoreException(
+                ValueError,
+                f" {function_name} is not a function",
+                self.filename,
+                function_name_token
+            )
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):
@@ -123,16 +137,28 @@ class Visitor(ignoreParserVisitor):
             return self.visitExpr(expr.expr(0))
         if expr.literal() is not None:
             return self.visitLiteral(expr.literal())
-        if expr.NAME() is not None:
-            var_name = expr.NAME().getText()
+        if (name := expr.NAME()) is not None:
+            var_name = name.getText()
             var_info = current_env.lookup_variable(var_name)
+            name_token = name.getSymbol()
             if not var_info:
-                raise ValueError(f"No such variable declared {var_name}")
+                raise IgnoreException(
+                    ValueError, 
+                    f"No such variable declared {var_name}",
+                    self.filename,
+                    name_token
+                )
             if isinstance(var_info, FunctionArgument):
                 return var_info.value
             assert isinstance(var_info, VariableInfo)
             if not var_info.was_evaluated:
-                raise ReferenceError(f"Attempted to use undeclared variable {var_name}")
+
+                raise IgnoreException(
+                    ReferenceError,
+                    f"Attempted to use undeclared variable {var_name}",
+                    self.filename,
+                    name_token
+                )
             return var_info.value 
 
         if expr.functionCall() is not None:
@@ -168,13 +194,12 @@ class Visitor(ignoreParserVisitor):
             return left >= right
         elif str(expr.OPERATOR_COMPARE()) == "<=":
             return left <= right
-        elif expr.OPERATOR_LOGIC() is not None:
-            if str(expr.OPERATOR_LOGIC()) == "&&":
+        elif (op_logic :=expr.OPERATOR_LOGIC()) is not None:
+            if str(op_logic) == "&&":
                 return left and right
-            elif str(expr.OPERATOR_LOGIC()) == "||":
+            elif str(op_logic) == "||":
                 return left or right
-        else:
-            raise NotImplementedError("Unsupported expression syntax")
+
 
     @override
     def visitCondition(self, ctx: ignoreParser.ConditionContext):
@@ -233,8 +258,12 @@ class Visitor(ignoreParserVisitor):
             try:  # jesli nie castowalne na dany typ to zwroc type error
                 variable_info.value = var_type(expr_val)  # castowanie na var_type
             except ValueError:
-                raise TypeError(
-                    f"could not cast value of {var_name} to type : {var_type}"
+                var_name_token = ctx.VAR_DECL().getSymbol()
+                raise IgnoreException(
+                    TypeError,
+                    f"could not cast value of {var_name} to type : {var_type}",
+                    self.filename,
+                    var_name_token
                 )
 
         else:  # jesli nie podano typu to jest przypisywany domyslny dla zmiennej
@@ -260,10 +289,13 @@ class Visitor(ignoreParserVisitor):
             expr_val = self.visitExpr(var_expression)
             var_info.value = expr_val
         else:
-            raise ValueError(
-                f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier"
+            var_name_token = ctx.PROPERTY_NAME.getSymbol()
+            raise IgnoreException(
+                ValueError,
+                f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier",
+                self.filename,
+                var_name_token
             )
-        # return self.visitChildren(ctx)
 
     @override
     def visitWhile_loop(self, ctx: ignoreParser.While_loopContext):

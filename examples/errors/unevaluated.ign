@@ -1,0 +1,6 @@
+<program>
+  {print(aaa + 2)}  
+  <var name=aaa type=int>
+    {3}
+  </var>
+</program>
