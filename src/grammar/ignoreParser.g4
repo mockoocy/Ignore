@@ -22,7 +22,8 @@ function:
 returnStmt:
 	RETURN_TAG wrapped_expr RETURN_END;
 
-varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
+// it should not matter if we specify name or type first - hence the union.
+varDecl: VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG | VAR_DECL FUNCTION_NAME (VAR_DECL_TYPE)? END_TAG;
 var: varDecl wrapped_expr VAR_DECL_END; 
 var_assign: PROPERTY_NAME wrapped_expr;
 while_loop: WHILE_TAG loop_condition END_TAG block WHILE_END;

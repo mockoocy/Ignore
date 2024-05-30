@@ -9,14 +9,16 @@
 
     <while condition={i < 5} >
          <var name=k type=int>
-        {10}
+            {10}
         </var>
-        //{print(k)}
+        {print("k is", k)}
         i = {i + 1}
+        {print("i is", i)}
+
         <while condition={j > 0} >
             //{print(j)}
             j = {j - 1}
-            {print(j)}
+            {print("j is", j)}
             k = {k - 1}
         </while>
     </while>

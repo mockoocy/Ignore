@@ -1,0 +1,5 @@
+<program>
+  <var name=siema type=int>
+    {siema + 2}
+  </var>
+</program>

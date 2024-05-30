@@ -19,7 +19,6 @@ class VariableInfo[T]:
     var_decl: ignoreParser.VarDeclContext
     type: str | None = None
     was_evaluated: bool = False
-    recursion_check: int = 0
 
     def __str__(self):
         return f"""VariableInfo

@@ -131,9 +131,9 @@ class Visitor(ignoreParserVisitor):
             if isinstance(var_info, FunctionArgument):
                 return var_info.value
             assert isinstance(var_info, VariableInfo)
-            if var_info.was_evaluated:
-                return var_info.value
-            return self.visitVarDecl(var_info.var_decl).value
+            if not var_info.was_evaluated:
+                raise ReferenceError(f"Attempted to use undeclared variable {var_name}")
+            return var_info.value 
 
         if expr.functionCall() is not None:
             return self.visitFunctionCall(expr.functionCall())
@@ -225,11 +225,6 @@ class Visitor(ignoreParserVisitor):
         if variable_info.was_evaluated == True:
             return variable_info
 
-        variable_info.recursion_check += 1
-        if variable_info.recursion_check > 1:
-            raise RecursionError(
-                f"Circular dependency detected for variable {var_name}"
-            )
         var_expression = ctx.parentCtx.wrapped_expr().expr()
         expr_val = self.visitExpr(var_expression)
 
