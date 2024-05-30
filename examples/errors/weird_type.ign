@@ -1,0 +1,5 @@
+<program>
+  <var name=what type=doesNotExist>
+    {2}
+  </var>
+</program>

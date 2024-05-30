@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from ..generated.ignoreParser import ignoreParser
 
@@ -8,6 +7,7 @@ Valid_Types = {  # lewo reprezentuje nasz język, prawo odpowiadajacy typ python
     "float": float,
     "string": str,
     "bool": bool,
+    "Function": lambda x : x
 }
 
 Valid_Types_Reversed = {val: key for key, val in Valid_Types.items()}

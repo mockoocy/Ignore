@@ -118,6 +118,8 @@ class Visitor(ignoreParserVisitor):
             return self._evaluate_builtin_call(function, arguments)
         elif isinstance(function, FunctionInfo):
             return self._evaluate_function_call(function, arguments, function_name_token)
+        elif isinstance(function, VariableInfo):
+            return self._evaluate_function_call(function.value, arguments, function_name_token)
         else:
             raise IgnoreException(
                 ValueError,
@@ -150,6 +152,10 @@ class Visitor(ignoreParserVisitor):
                 )
             if isinstance(var_info, FunctionArgument):
                 return var_info.value
+
+            if isinstance(var_info, FunctionInfo):
+                return var_info  
+
             assert isinstance(var_info, VariableInfo)
             if not var_info.was_evaluated:
 
@@ -284,18 +290,24 @@ class Visitor(ignoreParserVisitor):
         current_env = self.current_env
         var_info = current_env.lookup_variable(var_name)
         assert isinstance(var_info, VariableInfo)
-        if var_info != None:
-            var_expression = ctx.wrapped_expr().expr()
-            expr_val = self.visitExpr(var_expression)
-            var_info.value = expr_val
-        else:
-            var_name_token = ctx.PROPERTY_NAME.getSymbol()
+        var_name_token = ctx.PROPERTY_NAME().getSymbol()
+        if var_info == None:
             raise IgnoreException(
                 ValueError,
                 f"You are trying to change value of variable = {var_name} but it was not declared in the code earlier",
                 self.filename,
                 var_name_token
             )
+        var_expression = ctx.wrapped_expr().expr()
+        expr_val = self.visitExpr(var_expression)
+        if ((expr_type := type(expr_val)) != type(var_info)):
+            raise IgnoreException(
+                TypeError,
+                f"Tried to assign value of type {expr_type} to variable {var_name} of type {var_info.type}",
+                self.filename,
+                var_name_token
+            )
+        var_info.value = expr_val
 
     @override
     def visitWhile_loop(self, ctx: ignoreParser.While_loopContext):
@@ -329,6 +341,7 @@ class Visitor(ignoreParserVisitor):
         var_name = ctx.FUNCTION_NAME().getText()[5:]
 
         self.current_env.variables[var_name] = function_info
+        function_info.function_env = self.current_env.create_snapshot()
         return function_info
 
     @override

@@ -5,7 +5,7 @@ from types import ModuleType
 from src.lang.utils.BuiltIn import BuiltIn
 from src.lang.utils.Environment import Environment
 
-modules = ["builtins", "collections"]
+modules = ["builtins", "math"]
 
 """
     definitions of built in variable declarations and function definitions

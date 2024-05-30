@@ -1,0 +1,16 @@
+<program>
+  <function name=exponentFactory exponent:int returnType=Function>
+    <function name=exponentator base:int returnType=int>
+      <return>
+        {pow(base, exponent)}
+      </return>
+    </function>
+    <return>
+      {exponentator}
+    </return>
+  </function>
+  <var name=a type=Function>
+    {exponentFactory(2)}
+  </var>
+  {print(a(3))}
+</program>

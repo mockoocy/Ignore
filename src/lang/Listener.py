@@ -3,6 +3,7 @@ from typing import Dict, List, override
 
 from src.lang.errors.utils import IgnoreException
 from src.lang.utils.Environment import Environment
+from src.lang.utils.FunctionArgument import FunctionArgument
 from src.lang.utils.FunctionInfo import FunctionInfo
 from src.lang.utils.types import TypedParam, VarDeclDict
 
@@ -34,7 +35,7 @@ class Listener(ignoreParserListener):
         if (
             var_type not in Valid_Types.keys()
         ):  # sprawdzenie czy typ jest wspierany przez 
-            type_token = ctx.VAR_DECL_TYPE.getSymbol()
+            type_token = ctx.VAR_DECL_TYPE().getSymbol()
             raise IgnoreException(
                 TypeError,
                 f"type {var_type} is not supported!",
@@ -50,7 +51,7 @@ class Listener(ignoreParserListener):
         current_env = self.env_stack[-1]
         if var_name in current_env.variables:
             # raise ReferenceError(f"variable {var_name} is already defined!")
-            var_decl_token = ctx.VAR_DECL.getSymbol()
+            var_decl_token = ctx.VAR_DECL().getSymbol()
             raise IgnoreException(
                 ReferenceError,
                 f"Variable '{var_name}' already defined",
@@ -88,7 +89,7 @@ class Listener(ignoreParserListener):
     ):
         current_env = self.env_stack[-1]
         if function_name in current_env.variables:
-            function_name_token = ctx.FUNCTION_NAME.getSymbol()
+            function_name_token = ctx.FUNCTION_NAME().getSymbol()
             raise IgnoreException(
                 ReferenceError,
                 f"Function '{function_name}' already defined",
@@ -116,7 +117,14 @@ class Listener(ignoreParserListener):
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
         current_stack = self.env_stack[-1] if len(self.env_stack) > 0 else None
-        self.env_stack.append(Environment(enclosing=current_stack, variables={}))
+        parent = ctx.parentCtx
+        params = {}
+        if parent in self.variables and isinstance(
+            function := self.variables[parent], FunctionInfo
+        ):
+            function_params = function.params or {}
+            params = {param_name: FunctionArgument(None, param_type) for (param_name, param_type) in function_params.items()}
+        self.env_stack.append(Environment(enclosing=current_stack, variables=params)) # type: ignore
         return super().enterBlock(ctx)
 
     @override
@@ -125,7 +133,7 @@ class Listener(ignoreParserListener):
         if parent in self.variables and isinstance(
             function := self.variables[parent], FunctionInfo
         ):
-            function.function_env = self.env_stack[-1].create_snapshot()
+            function.function_env = self.env_stack[-1].create_snapshot() 
         self.env_stack.pop()
         return super().exitBlock(ctx)
 

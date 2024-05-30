@@ -1,0 +1,7 @@
+<program>
+  <var name=hello>
+    {2}
+  </var>
+  hello = {str(2)}
+  {print(type(hello))}
+</program>
