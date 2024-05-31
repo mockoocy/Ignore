@@ -19,6 +19,7 @@ class Listener(ignoreParserListener):
         self.filename = filename
         self.env_stack: List[Environment] = [deepcopy(global_env)]
         self.variables: VarDeclDict = {}
+        self.loop_stack: List[bool] = [] # used to keep track if we are inside a loop to restrict break statement.
         """
             stores our var decls. For now format: name -> value.
             May move to format name -> variableSpecification 
@@ -124,6 +125,16 @@ class Listener(ignoreParserListener):
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
         current_stack = self.env_stack[-1] if len(self.env_stack) > 0 else None
+        if len(self.env_stack) > 0:
+            for child in ctx.getChildren():
+                if not isinstance(child, TerminalNodeImpl) or child.getSymbol().type != ignoreParser.BREAK:
+                    continue
+                raise IgnoreException(
+                    SyntaxError,
+                    "Break statement outside of loop",
+                    self.filename,
+                    child.getSymbol()
+                )
         parent = ctx.parentCtx
         params = {}
         if parent in self.variables and isinstance(
@@ -131,6 +142,7 @@ class Listener(ignoreParserListener):
         ):
             function_params = function.params or {}
             params = {param_name: FunctionArgument(None, param_type) for (param_name, param_type) in function_params.items()}
+
         self.env_stack.append(Environment(enclosing=current_stack, variables=params)) # type: ignore
         return super().enterBlock(ctx)
 
@@ -176,3 +188,23 @@ class Listener(ignoreParserListener):
     @override
     def exitFunction(self, ctx: ignoreParser.FunctionContext):
         return super().exitFunction(ctx)
+
+    @override
+    def enterWhile_loop(self, ctx: ignoreParser.While_loopContext):
+        self.loop_stack.append(True)
+        return super().enterWhile_loop(ctx)
+    
+    @override 
+    def exitWhile_loop(self, ctx: ignoreParser.While_loopContext):
+        self.loop_stack.pop()
+        return super().exitWhile_loop(ctx)
+    
+    @override 
+    def enterFor_loop(self, ctx: ignoreParser.For_loopContext):
+        self.loop_stack.append(True)
+        return super().enterFor_loop(ctx)
+    
+    @override
+    def exitFor_loop(self, ctx: ignoreParser.For_loopContext):
+        self.loop_stack.pop()
+        return super().exitFor_loop(ctx)

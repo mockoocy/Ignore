@@ -15,6 +15,9 @@ VAR_DECL_TYPE: 'type=' ID;
 VAR_DECL: VAR_DECL_START ID;
 WHILE_TAG: '<while';
 WHILE_END: '</while>';
+fragment BREAK_START: '<break';
+fragment BREAK_END: '/>';
+BREAK: BREAK_START BREAK_END;
 FOR_TAG: '<for';
 FOR_END: '</for>'; 
 

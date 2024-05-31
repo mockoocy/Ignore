@@ -1,0 +1,19 @@
+
+<program>
+  <var name=i type=int>
+    {0}
+  </var>
+  <while condition={True}>
+    <var name=nestedVar type=int >
+      {0}
+    </var>
+    i = {i + 1}
+    <while condition={nestedVar < 5}>
+      nestedVar = {nestedVar + 1}
+      {print(nestedVar)}
+    </while>
+    <if condition={i>=2}>
+      <break/>
+    </if> 
+  </while>
+</program>

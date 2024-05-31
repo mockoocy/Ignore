@@ -62,7 +62,8 @@ statement:
 	| var_assign
 	| for_loop
 	| while_loop;
-block: (statement | returnStmt)+;
+
+block: (statement | returnStmt | BREAK)+;
 
 expr:
 	OPEN_PAREN expr CLOSE_PAREN

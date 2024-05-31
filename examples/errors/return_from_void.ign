@@ -1,0 +1,7 @@
+<program>
+  <function name=aa>
+    <return>
+      {"should not work"}
+    </return>
+  </function>
+</program>

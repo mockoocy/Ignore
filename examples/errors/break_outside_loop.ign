@@ -1,0 +1,5 @@
+<program>
+  <if condition={2<5}>
+    <break/>
+  </if>
+</program>

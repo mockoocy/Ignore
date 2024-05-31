@@ -58,11 +58,15 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitBlock(self, ctx: ignoreParser.BlockContext):
-        prev_env = self.current_env
-        self.current_env = Environment(enclosing=prev_env, variables={})
-        for child in ctx.getChildren():
-            self.visit(child)
-        self.current_env = prev_env
+        try:
+            prev_env = self.current_env
+            self.current_env = Environment(enclosing=prev_env, variables={})
+            for child in ctx.getChildren():
+                self.visit(child)
+            if ctx.BREAK():
+                EarlyExit.break_from_loop()
+        finally:
+            self.current_env = prev_env
 
     def fill_arguments_with_values(self, parameters: Dict[str, str], values, function_name_token: CommonToken) -> Dict[str, FunctionArgument]:
         if (len(parameters) != len(values)):
@@ -317,9 +321,15 @@ class Visitor(ignoreParserVisitor):
     @override
     def visitWhile_loop(self, ctx: ignoreParser.While_loopContext):
         condition_result = self.visitCondition(ctx.loop_condition().condition())
-        while condition_result == True:
-            self.visitBlock(ctx.block())
-            condition_result = self.visitCondition(ctx.loop_condition().condition())
+        try:
+            while condition_result == True:
+                self.visitBlock(ctx.block())
+                condition_result = self.visitCondition(ctx.loop_condition().condition())
+        except EarlyExit as ee:
+            if ee.tag == "Break":
+                return
+            else:
+                raise ee # it means that we are in an early return, not a break
 
     @override
     def visitFor_loop(self, ctx: ignoreParser.For_loopContext):
@@ -327,12 +337,17 @@ class Visitor(ignoreParserVisitor):
             self.visitVarDecl(ctx.var().varDecl())
 
         condition_result = self.visitCondition(ctx.loop_condition().condition())
-
-        while condition_result == True:
-            self.visitBlock(ctx.block())
-            if ctx.var_assign() is not None:
-                self.visitVar_assign(ctx.var_assign())
-            condition_result = self.visitCondition(ctx.loop_condition().condition())
+        try:
+            while condition_result == True:
+                self.visitBlock(ctx.block())
+                if ctx.var_assign() is not None:
+                    self.visitVar_assign(ctx.var_assign())
+                condition_result = self.visitCondition(ctx.loop_condition().condition())
+        except EarlyExit as ee:
+            if ee.tag == "Break":
+                return
+            else:
+                raise ee # it means that we are in an early return, not a break
 
     @override
     def visitVar(self, ctx: ignoreParser.VarContext):

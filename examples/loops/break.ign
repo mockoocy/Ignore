@@ -1,0 +1,12 @@
+<program>
+  <var name=i type=int>
+    {0}
+  </var>
+  <while condition={True}>
+    i = {i + 1}
+    {print(i)}
+    <if condition={i>4}>
+      <break/>
+    </if>
+  </while>
+</program>

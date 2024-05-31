@@ -1,0 +1,11 @@
+<program>
+    <var name=z type=int>{0}</var>  
+
+    <for condition={z < 15} >  
+        {print(z)} 
+        <if condition={z>6}>
+          <break/>
+        </if>
+        z = {z + 2}
+    </for>
+</program>
