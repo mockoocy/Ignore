@@ -1,0 +1,7 @@
+<function name=hello a:int a:int>
+  {print('wow')}
+</function>
+
+<program>
+  {hello(1,2)}
+</program>

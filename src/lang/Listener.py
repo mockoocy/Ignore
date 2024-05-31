@@ -74,9 +74,16 @@ class Listener(ignoreParserListener):
         return TypedParam(param_name, param_type)
 
     def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
-
-        if not (params := map(lambda param_node: self._extract_function_param(param_node), ctx.FUNCTION_PARAM())):
+        function_param = ctx.FUNCTION_PARAM()
+        if not (params := map(lambda param_node: self._extract_function_param(param_node), function_param)):
             return {}
+        if (len(set(params)) != len(list(params))):
+            raise IgnoreException(
+                AttributeError,
+                f"the same argument has been declared twice",
+                self.filename,
+                ctx.FUNCTION_NAME().getSymbol()
+            )
         return {param.name : param.type for param in params}
 
     def _add_new_function(
