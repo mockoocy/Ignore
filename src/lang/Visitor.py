@@ -114,12 +114,13 @@ class Visitor(ignoreParserVisitor):
                 self.filename,
                 function_name_token # for better error handling
             )
+        result = None
         if isinstance(function, BuiltIn):
-            return self._evaluate_builtin_call(function, arguments)
+            result =  self._evaluate_builtin_call(function, arguments)
         elif isinstance(function, FunctionInfo):
-            return self._evaluate_function_call(function, arguments, function_name_token)
+            result =  self._evaluate_function_call(function, arguments, function_name_token)
         elif isinstance(function, VariableInfo):
-            return self._evaluate_function_call(function.value, arguments, function_name_token)
+            result =  self._evaluate_function_call(function.value, arguments, function_name_token)
         else:
             raise IgnoreException(
                 ValueError,
@@ -127,6 +128,12 @@ class Visitor(ignoreParserVisitor):
                 self.filename,
                 function_name_token
             )
+        type_caster = lambda x: x
+        if isinstance(function, FunctionInfo) and (return_type := function.return_type):
+            type_caster = Valid_Types[return_type]
+        if isinstance(function, VariableInfo) and isinstance(function.value, FunctionInfo):
+            type_caster = Valid_Types[function.value.return_type] # type: ignore
+        return type_caster(result)
 
     @override
     def visitExpr(self, ctx: ignoreParser.ExprContext):
@@ -253,8 +260,6 @@ class Visitor(ignoreParserVisitor):
         var_name = ctx.FUNCTION_NAME().getText()[5:]
         self.current_env.variables[var_name] = variable_info
         assert isinstance(variable_info, VariableInfo)
-        if variable_info.was_evaluated == True:
-            return variable_info
 
         var_expression = ctx.parentCtx.wrapped_expr().expr()
         expr_val = self.visitExpr(var_expression)
@@ -300,7 +305,7 @@ class Visitor(ignoreParserVisitor):
             )
         var_expression = ctx.wrapped_expr().expr()
         expr_val = self.visitExpr(var_expression)
-        if ((expr_type := type(expr_val)) != type(var_info)):
+        if ((expr_type := type(expr_val)) != type(var_info.value)):
             raise IgnoreException(
                 TypeError,
                 f"Tried to assign value of type {expr_type} to variable {var_name} of type {var_info.type}",
@@ -341,6 +346,7 @@ class Visitor(ignoreParserVisitor):
         var_name = ctx.FUNCTION_NAME().getText()[5:]
 
         self.current_env.variables[var_name] = function_info
+        assert isinstance(function_info, FunctionInfo)
         function_info.function_env = self.current_env.create_snapshot()
         return function_info
 

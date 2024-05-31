@@ -1,0 +1,25 @@
+<function name=add3 a:int returnType=Function>
+  <function name=add2 b:int returnType=Function>
+    <function name=add c:int returnType=Function>
+      <return>  
+        {a+b+c}
+      </return>
+    </function>
+    <return>
+      {add}
+    </return>
+  </function>
+  <return>
+    {add2}
+  </return>
+</function>
+
+<program>
+  <var name=adder1 type=Function>
+    {add3(1)}
+  </var>
+  <var name=adder2 type=Function>
+    {adder1(2)}
+  </var>
+  {print(adder2(3))}
+</program>

@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import Self
 
 from src.lang.utils.types import VariableDict
-from src.lang.utils.VariableInfo import VariableInfo
 
 
 @dataclass
@@ -31,15 +30,6 @@ class Environment:
             return self.variables
         return self.merge(self.enclosing).create_snapshot()
 
-    # methods to quickly extract variable, if we know depth at which it was declared.
-    # def ancestor(self, distance: int) -> "Environment":
-    #     env = self
-    #     for _ in range(distance):
-    #         env = env.enclosing
-    #     return env
-
-    # def get_at(self, distance: int, name: str) -> VariableInfo:
-    #     return self.ancestor(distance).variables[name]
 
     def lookup_variable(self, var_name: str):
         environment = self

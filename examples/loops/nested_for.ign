@@ -1,0 +1,9 @@
+<program>
+  <for <var name=outer type=int>{0}</var> condition={outer < 5} >
+    outer = {outer + 1}  
+    <for <var name=inner type=int>{0}</var> condition={inner < 5} >
+      inner = {inner + 1}  
+      {print(inner)}
+    </for>
+  </for>
+</program>
