@@ -312,7 +312,7 @@ class Visitor(ignoreParserVisitor):
         if ((expr_type := type(expr_val)) != type(var_info.value)):
             raise IgnoreException(
                 TypeError,
-                f"Tried to assign value of type {expr_type} to variable {var_name} of type {var_info.type}",
+                f"Tried to assign value of type {expr_type.__name__} to variable {var_name} of type {var_info.type}",
                 self.filename,
                 var_name_token
             )
