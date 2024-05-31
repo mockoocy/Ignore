@@ -75,9 +75,9 @@ class Listener(ignoreParserListener):
 
     def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
         function_param = ctx.FUNCTION_PARAM()
-        if not (params := map(lambda param_node: self._extract_function_param(param_node), function_param)):
+        if not (params := list(map(lambda param_node: self._extract_function_param(param_node), function_param))):
             return {}
-        if (len(set(params)) != len(list(params))):
+        if len(params) != len(set(params)):
             raise IgnoreException(
                 AttributeError,
                 f"the same argument has been declared twice",
@@ -155,12 +155,22 @@ class Listener(ignoreParserListener):
     def enterFunction(self, ctx: ignoreParser.FunctionContext):
         function_name = ctx.FUNCTION_NAME().getText()[5:]
         params = self._extract_function_params(ctx)
-        body = ctx.block()[0]
+        body = ctx.block()
+        print(type(body))
+        assert isinstance(body, ignoreParser.BlockContext) #python can't properly infer type of this, this is supposed to help it.
         return_type = (
-            ctx.FUNCTION_RET_TYPE().getText().split("=")[1]
+            ctx.FUNCTION_RET_TYPE().getText().split("=",2)[1]
             if ctx.FUNCTION_RET_TYPE()
             else None
         )
+        if return_type is None and any((isinstance(child, ignoreParser.ReturnStmtContext) for child in body.getChildren())):
+            raise IgnoreException(
+                ValueError,
+                f"Attempting to return from function that does not define return type",
+                self.filename,
+                body.returnStmt()[0].RETURN_TAG().getSymbol()
+            )
+        
         self._add_new_function(function_name, params, body, return_type, ctx)
 
     @override

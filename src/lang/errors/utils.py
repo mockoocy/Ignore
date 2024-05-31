@@ -7,6 +7,9 @@ class SpecialFormatters(StrEnum):
     START_UNDERLINE = '\033[4;31m'
     END_UNDERLINE = '\033[0m'
 
+def underline_word(word: str):
+    return SpecialFormatters.START_UNDERLINE + word + SpecialFormatters.END_UNDERLINE
+
 def underline(filepath: str, token: CommonToken):
     # Shows the line with syntax error, the exact character gets underlined.
     # line and col are 0-indexed
@@ -19,7 +22,18 @@ def underline(filepath: str, token: CommonToken):
     line_text = text[line]
 
     # Add spaces before and after the underlined character
-    return line_text[:col] + SpecialFormatters.START_UNDERLINE + line_text[col:col+length] + SpecialFormatters.END_UNDERLINE + line_text[col+length:]
+    prev_line = ""
+    next_line = ""
+    if line > 0:
+        prev_line = '\n' + text[line - 1] + '\n'
+    if line +1 < len(text):
+        next_line = '\n' + text[line + 1]
+    return (prev_line +
+        line_text[:col] + 
+        underline_word(line_text[col: col+length]) + 
+        line_text[col+length:] +
+        next_line
+    ) 
 
     # Print the line with the underlined character
 
@@ -35,7 +49,7 @@ class IgnoreException(Exception):
         line = self.token.line
         col = self.token.column
         return f"""
-{self.exception_type.__name__}: {self.message} 
+{underline_word(self.exception_type.__name__)}: {self.message} 
 in file {self.filename} at line: {line}, col: {col}
 {underline(self.filename, self.token)}
 """

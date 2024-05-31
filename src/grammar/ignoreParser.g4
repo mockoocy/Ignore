@@ -17,7 +17,7 @@ functionCall:
 	NAME OPEN_PAREN argumentList? CLOSE_PAREN;
 // paramName: type. Could change to NAME : NAME = literal for default values of params.
 function:
-    FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* (FUNCTION_RET_TYPE)? END_TAG block* FUNCTION_TAG_END;
+    FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* (FUNCTION_RET_TYPE)? END_TAG block FUNCTION_TAG_END;
 
 returnStmt:
 	RETURN_TAG wrapped_expr RETURN_END;

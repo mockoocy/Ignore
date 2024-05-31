@@ -4,9 +4,7 @@
         {string_to_multiply * times}
     </return>
   </function>
-
-   {print(multiply_string("he", 4))}
-
+  {print(multiply_string("he", 4))}
 </program>
 
 /* expected output: 
