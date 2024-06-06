@@ -18,7 +18,7 @@
   {input("Provide an exponent number")}
 </var>
 <var name=raiseToExponent type=Function>
-  {exponentFactory(base)}
+  {exponentFactory(exponent)}
 </var>
-{print(raiseToExponent(exponent))}
+{print(raiseToExponent(base))}
 </program>
