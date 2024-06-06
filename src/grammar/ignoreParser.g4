@@ -67,12 +67,13 @@ block: (statement | returnStmt | BREAK)+;
 
 expr:
 	OPEN_PAREN expr CLOSE_PAREN
-	| literal
-	| functionCall
-	| NOT expr
+	| SUB expr
 	| expr (MUL | DIV | MOD | INT_DIV) expr
 	| expr (ADD | SUB) expr
 	| expr (OPERATOR_COMPARE) expr
 	| expr (OPERATOR_LOGIC) expr
+	| literal
+	| functionCall
+	| NOT expr
 	| NAME;
 wrapped_expr: OPEN_CURLY expr CLOSE_CURLY;

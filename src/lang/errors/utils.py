@@ -48,8 +48,7 @@ class IgnoreException(Exception):
     def __str__(self) -> str:
         line = self.token.line
         col = self.token.column
-        return f"""
-{underline_word(self.exception_type.__name__)}: {self.message} 
+        return f"""{underline_word(self.exception_type.__name__)}: {self.message} 
 in file {self.filename} at line: {line}, col: {col}
 {underline(self.filename, self.token)}
 """

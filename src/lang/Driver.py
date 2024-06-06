@@ -16,6 +16,7 @@ def first_phase(filename: str) -> Tuple[ignoreParser.ProgramContext, VarDeclDict
     lexer = ignoreLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = ignoreParser(stream)
+    parser.removeErrorListeners()
     parser.addErrorListener(IgnoreErrorListener(filename))
     tree = parser.program()
     if parser.getNumberOfSyntaxErrors() > 0:

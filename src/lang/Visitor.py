@@ -183,6 +183,8 @@ class Visitor(ignoreParserVisitor):
             return self.visitFunctionCall(expr.functionCall())
         if expr.NOT():
             return not self.visitExpr(expr.expr(0))
+        if expr.SUB() and len(expr.expr()) == 1:
+            return -self.visitExpr(expr.expr(0))
         # Now we surely deal with a binary operation
         left = self.visitExpr(expr.expr(0))
         right = self.visitExpr(expr.expr(1))

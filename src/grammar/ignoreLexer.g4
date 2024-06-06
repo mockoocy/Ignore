@@ -1,8 +1,5 @@
 lexer grammar ignoreLexer;
 
-fragment DIGIT: [0-9];
-fragment NEGATIVE_SIGN: '-';
-
 IF_TAG: '<if';
 IF_END: '</if>';
 ELIF_END: '</elif>';
@@ -65,10 +62,6 @@ COLON: ':';
 OPEN_PAREN: '(';
 CLOSE_PAREN: ')';
 
-LITERAL_INT: NEGATIVE_SIGN?DIGIT+;
-LITERAL_FLOAT: NEGATIVE_SIGN? DIGIT+ '.' DIGIT*;
-
-
 EQUALS: '=';
 MUL: '*';
 DIV: '/';
@@ -78,6 +71,9 @@ MOD: '%';
 INT_DIV: '//';
 NOT: '!';
 
+fragment DIGIT: [0-9];
+LITERAL_INT: DIGIT+;
+LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
 
 OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
 OPERATOR_LOGIC: ('&&' | '||');

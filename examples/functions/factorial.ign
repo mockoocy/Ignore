@@ -1,0 +1,22 @@
+<program>
+  {print(factorial(4))}
+  <function name=factorial n:int returnType=int >
+    <function name=inna returnType=int>
+      <return>
+        {1}
+      </return>
+    </function>
+  <var name=a type=int>
+    {-10}
+  </var>
+    <if condition={n == 0 || n == 1!!!}>
+      <return>
+        {inna(inna())} // ilosc argumentow!!
+      </return>
+    </if>
+    <return>
+      {n * factorial(n - 1)} // spacje!
+    </return>
+  </function>
+  {2-1}
+</program>

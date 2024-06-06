@@ -19,12 +19,12 @@
     <var name=smaller type=float>
         {6.71}
     </var>  
-{print(true_var && false_var)}
-{print(true_var || false_var)}
-{print(add + div)}
-{print(add == div)}
-{print(div != add)}
-{print(bigger >  smaller)}
-{print(bigger <= smaller)}
-{print((true_var || false_var) && false_var)}
+    {print(true_var && false_var)}
+    {print(true_var || false_var)}
+    {print(add + div)}
+    {print(add == div)}
+    {print(div != add)}
+    {print(bigger >  smaller)}
+    {print(bigger <= smaller)}
+    {print((true_var || false_var) && false_var)}
 </program>

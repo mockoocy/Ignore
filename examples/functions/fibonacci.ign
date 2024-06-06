@@ -1,13 +1,13 @@
 <program>
 
     <function name=fibonacci 🚀:int returnType=int >
-        <if condition={ 🚀 <= 1 }>
-            <return>
-                {🚀}
-            </return>
+        <if condition={ 🚀 <= 2 }>
+        <return>
+            {🚀}
+        </return>
         </if>
         <return>
-            {fibonacci(🚀 - 1) + fibonacci(🚀 - 2)} 
+            {fibonacci(🚀 - 1) + fibonacci(🚀 - 2) + fibonacci(🚀 - 3)} 
         </return>
     </function>
 
