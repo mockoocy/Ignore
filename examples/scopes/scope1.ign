@@ -6,11 +6,11 @@
     <var name=num2>
       {3}
     </var>
-    {print(num1 + num2)}
+    {print(num1 + num2)} // 3
     <var name=num1>
       {4}
     </var>
-    {print(num1 + num2)}
+    {print(num1 + num2)} // 5
   </if>
-  {print(num1)}
+  {print(num1)} //7 
 </program>

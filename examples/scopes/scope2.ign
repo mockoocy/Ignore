@@ -4,11 +4,9 @@
   </var>
   <if condition={True}>
     <var name=num type=int>
-      {input("can you give sum for me?")}
+      {input("can you give something for me? ")}
     </var>
-    {print(num)}  
+    {print(num)}  // from input
   </if>
-
-
-  {print(num)}
+  {print(num)} // 15
 </program>
