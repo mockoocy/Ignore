@@ -285,9 +285,6 @@ class Visitor(ignoreParserVisitor):
             variable_info.type = Valid_Types_Reversed.get(type(expr_val))
             variable_info.value = expr_val
         variable_info.was_evaluated = True
-        print(
-            f"updated variables with variable {var_name}, of type {variable_info.type}, and value = {variable_info.value}"
-        )
         return variable_info
 
     @override

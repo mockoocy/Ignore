@@ -32,10 +32,17 @@ sh generate.sh #Bash
 generate #Powershell
 ```
 
-To odpalić the program type the following thing:
+To run the program type the following thing:
 
 ```bash
 python run.py <filename>
+```
+
+or use one of these ommands:
+
+```bash
+. ignore.sh <filename> // bash
+.\ignore.ps1 <filename> // powershell
 ```
 
 ### Testing

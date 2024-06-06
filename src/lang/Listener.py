@@ -114,13 +114,10 @@ class Listener(ignoreParserListener):
     def enterProgram(self, ctx: ignoreParser.ProgramContext):
         print(
             "\x1b[6;30;42m"
-            + "Thank you for using Ignore language! You are really awesome"
+            + "Thank you for using Ignore language! You are really awesome!"
             + "\x1b[0m"
         )
 
-    @override
-    def exitProgram(self, ctx: ignoreParser.ProgramContext):
-        print("\x1b[46;20;20m" + "Ended first phase of interpreting" + "\x1b[0m")
 
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
@@ -168,7 +165,6 @@ class Listener(ignoreParserListener):
         function_name = ctx.FUNCTION_NAME().getText()[5:]
         params = self._extract_function_params(ctx)
         body = ctx.block()
-        print(type(body))
         assert isinstance(body, ignoreParser.BlockContext) #python can't properly infer type of this, this is supposed to help it.
         return_type = (
             ctx.FUNCTION_RET_TYPE().getText().split("=",2)[1]

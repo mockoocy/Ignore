@@ -12,7 +12,6 @@ def test_parens():
         ctx.FUNCTION_NAME().getText()[5:]: val
         for (ctx, val) in variable_declarations.items()
     }
-    print(variables)
     assert variables["num1"].value == 22
     assert variables["num2"].value == 1
     assert variables["diff"].value == 21
