@@ -11,9 +11,9 @@
       {0}
     </var>
     i = {i + 1}
-    <while condition={nestedVar < i}>
-      {print(i, nestedVar)}
+    <while condition={nestedVar < 5}>
       nestedVar = {nestedVar + 1}
+      {print(nestedVar)}
     </while>
   </while>
 </program>

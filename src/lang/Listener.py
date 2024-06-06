@@ -2,6 +2,7 @@ from copy import deepcopy
 from typing import Dict, List, override
 
 from src.lang.errors.utils import IgnoreException
+from src.lang.utils.BuiltIn import BuiltIn
 from src.lang.utils.Environment import Environment
 from src.lang.utils.FunctionArgument import FunctionArgument
 from src.lang.utils.FunctionInfo import FunctionInfo
@@ -204,3 +205,36 @@ class Listener(ignoreParserListener):
     def exitFor_loop(self, ctx: ignoreParser.For_loopContext):
         self.loop_stack.pop()
         return super().exitFor_loop(ctx)
+    
+
+    @override
+    def enterFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
+        function_name = ctx.NAME().getText()
+        function_name_token = ctx.NAME().getSymbol()
+        function = self.env_stack[-1].create_snapshot()[function_name]
+        arguments = []
+        if arguments_list := ctx.argumentList():
+            arguments = arguments_list.getText().split(",")
+        params = {}
+        if isinstance(function, FunctionInfo):
+            params = function.params or {}
+        elif isinstance(function, VariableInfo) and isinstance(function.value, FunctionInfo):
+            params = function.value.params or {}
+        elif isinstance(function, VariableInfo) and function.type == "Function":
+            return super().enterFunctionCall(ctx)
+        elif isinstance(function, BuiltIn) :
+            return super().enterFunctionCall(ctx)
+        else:
+            raise IgnoreException(
+                SyntaxError,
+                f"{function_name_token.text} is not a function",
+                self.filename,
+                function_name_token
+            )
+        if len(params) != len(arguments):
+            raise IgnoreException(
+                ValueError,
+                "Invalid number of arguments (LISTENER)",
+                self.filename,
+                function_name_token
+            )
