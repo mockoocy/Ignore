@@ -87,11 +87,10 @@ class Visitor(ignoreParserVisitor):
         return builtin(*arguments)
 
     def _evaluate_function_call(self, function: FunctionInfo, arguments: List[Any], function_name_token: CommonToken):
-        # TODO add logic bounding function.params to argument(s).
         prev_env = self.current_env
         function_env = function.function_env
         assert function_env is not None
-        params = self.fill_arguments_with_values(function.params, arguments, function_name_token) if function.params else {}
+        params = self.fill_arguments_with_values(function.params, arguments, function_name_token) if function.params is not None else {}
         self.current_env = Environment(enclosing=None, variables=function_env | params)
         result = self._catch_return(function.body)
         self.current_env = prev_env
