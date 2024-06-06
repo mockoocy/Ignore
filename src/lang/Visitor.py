@@ -147,7 +147,6 @@ class Visitor(ignoreParserVisitor):
 
         expr = ctx
         current_env = self.current_env
-        print(expr.getText())
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
             return self.visitExpr(expr.expr(0))
         if expr.literal() is not None:
