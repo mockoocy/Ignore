@@ -99,7 +99,8 @@ class Visitor(ignoreParserVisitor):
 
     @override
     def visitArgumentList(self, ctx: ignoreParser.ArgumentListContext) -> List[Any]:
-        arguments = ctx.getChildren()
+        # argument list consists of expressions and commas.
+        arguments = [child for child in ctx.getChildren() if isinstance(child, ignoreParser.ExprContext) ]
         return [self.visitExpr(argument) for argument in arguments]
 
     @override
@@ -146,6 +147,7 @@ class Visitor(ignoreParserVisitor):
 
         expr = ctx
         current_env = self.current_env
+        print(expr.getText())
         if expr.OPEN_PAREN() and expr.CLOSE_PAREN():
             return self.visitExpr(expr.expr(0))
         if expr.literal() is not None:
