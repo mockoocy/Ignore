@@ -54,6 +54,7 @@ PROPERTY_NAME: ID ('='|' =');
 
 OPEN_CURLY: '{' -> pushMode(expr);
 mode expr;
+COMMA: ',';
 EXPR_WS: [ \t\n\r]+ -> skip;
 LITERAL_BOOL: 'False' | 'True';
 NAME: ID;

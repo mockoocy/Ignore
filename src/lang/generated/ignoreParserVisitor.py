@@ -9,6 +9,11 @@ else:
 
 class ignoreParserVisitor(ParseTreeVisitor):
 
+    # Visit a parse tree produced by ignoreParser#comma.
+    def visitComma(self, ctx:ignoreParser.CommaContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ignoreParser#literalNumeric.
     def visitLiteralNumeric(self, ctx:ignoreParser.LiteralNumericContext):
         return self.visitChildren(ctx)

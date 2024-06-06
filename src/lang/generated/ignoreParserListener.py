@@ -8,6 +8,15 @@ else:
 # This class defines a complete listener for a parse tree produced by ignoreParser.
 class ignoreParserListener(ParseTreeListener):
 
+    # Enter a parse tree produced by ignoreParser#comma.
+    def enterComma(self, ctx:ignoreParser.CommaContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#comma.
+    def exitComma(self, ctx:ignoreParser.CommaContext):
+        pass
+
+
     # Enter a parse tree produced by ignoreParser#literalNumeric.
     def enterLiteralNumeric(self, ctx:ignoreParser.LiteralNumericContext):
         pass

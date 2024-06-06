@@ -1,24 +1,24 @@
-    <function name=exponentFactory exponent:int returnType=Function>
-      <function name=exponentator base:int returnType=int>
-        <return>
-          {pow(base, exponent)}
-        </return>
-      </function>
-      <return>
-        {exponentator}
-      </return>
-    </function>
+<function name=exponentFactory exponent:int returnType=Function>
+  <function name=exponentator base:int returnType=int>
+    <return>
+      {pow(base, exponent)}
+    </return>
+  </function>
+  <return>
+    {exponentator}
+  </return>
+</function>
 
-  <program>
-    <var name=base type=int>
-      {input("Provide a base number")}
-    </var>
+<program>
+<var name=base type=int>
+  {input("Provide a base number")}
+</var>
 
-    <var name=exponent type=int>
-      {input("Provide an exponent number")}
-    </var>
-    <var name=raiseToExponent type=Function>
-      {exponentFactory(base)}
-    </var>
-    {print(raiseToExponent(exponent))}
-  </program>
+<var name=exponent type=int>
+  {input("Provide an exponent number")}
+</var>
+<var name=raiseToExponent type=Function>
+  {exponentFactory(base)}
+</var>
+{print(raiseToExponent(exponent))}
+</program>

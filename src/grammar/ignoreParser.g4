@@ -3,6 +3,7 @@ parser grammar ignoreParser;
 options {
 	tokenVocab = ignoreLexer;
 }
+comma: COMMA;
 
 literalNumeric: (LITERAL_INT | LITERAL_FLOAT);
 literal:
@@ -11,8 +12,7 @@ literal:
 	| LITERAL_STRING
 	| LITERAL_BOOL;
 
-
-argumentList: expr+;
+argumentList: expr (COMMA expr)*;
 functionCall:
 	NAME OPEN_PAREN argumentList? CLOSE_PAREN;
 // paramName: type. Could change to NAME : NAME = literal for default values of params.
