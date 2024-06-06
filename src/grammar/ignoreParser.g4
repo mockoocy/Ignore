@@ -14,7 +14,7 @@ literal:
 
 argumentList: expr (COMMA expr)*;
 functionCall:
-	NAME OPEN_PAREN argumentList? CLOSE_PAREN;
+	NAME OPEN_PAREN argumentList? CLOSE_PAREN?;
 // paramName: type. Could change to NAME : NAME = literal for default values of params.
 function:
     FUNCTION_TAG_OPEN FUNCTION_NAME (FUNCTION_PARAM)* (FUNCTION_RET_TYPE)? END_TAG block FUNCTION_TAG_END;
@@ -76,4 +76,4 @@ expr:
 	| functionCall
 	| NOT expr
 	| NAME;
-wrapped_expr: OPEN_CURLY expr CLOSE_CURLY;
+wrapped_expr: OPEN_CURLY expr CLOSE_CURLY?;

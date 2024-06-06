@@ -10,7 +10,7 @@
   </var>
     <if condition={n==0||n==1}>
       <return>
-        {inna(inna())}
+        {inna
       </return>
     </if>
     <return>

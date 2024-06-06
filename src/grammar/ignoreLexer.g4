@@ -77,7 +77,6 @@ LITERAL_FLOAT: DIGIT+ '.' DIGIT*;
 
 OPERATOR_COMPARE: ( '==' | '!=' | '>=' | '>' | '<' | '<=');
 OPERATOR_LOGIC: ('&&' | '||');
-
 EXPR_COMMENT: '/*' .*? '*/' -> skip;
 
 CLOSE_CURLY: '}' -> pushMode(DEFAULT_MODE);

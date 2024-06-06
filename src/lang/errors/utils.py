@@ -10,24 +10,22 @@ class SpecialFormatters(StrEnum):
 def underline_word(word: str):
     return SpecialFormatters.START_UNDERLINE + word + SpecialFormatters.END_UNDERLINE
 
-def underline(filepath: str, token: CommonToken):
+def underline(filepath: str, line: int, col:int, text: str):
     # Shows the line with syntax error, the exact character gets underlined.
     # line and col are 0-indexed
     with open(filepath) as file:
-        text = file.read().splitlines()
+        filetext = file.read().splitlines()
     # Get the line
-    line = token.line -1 # By default line is 1-indexed
-    col = token.column
-    length = len(token.text)
-    line_text = text[line]
+    length = len(text)
+    line_text = filetext[line]
 
     # Add spaces before and after the underlined character
     prev_line = ""
     next_line = ""
     if line > 0:
-        prev_line = '\n' + text[line - 1] + '\n'
-    if line +1 < len(text):
-        next_line = '\n' + text[line + 1]
+        prev_line = '\n' + filetext[line - 1] + '\n'
+    if line +1 < len(filetext):
+        next_line = '\n' + filetext[line + 1]
     return (prev_line +
         line_text[:col] + 
         underline_word(line_text[col: col+length]) + 
@@ -35,8 +33,23 @@ def underline(filepath: str, token: CommonToken):
         next_line
     ) 
 
-    # Print the line with the underlined character
+def underline_whole_line(filepath: str, line: int, text: str):
+    with open(filepath) as file:
+        filetext = file.read().splitlines()
+    # Get the line
+    length = len(text)
+    line_text = filetext[line]
+    prev_line = ""
+    next_line = ""
+    if line > 0:
+        prev_line = '\n' + filetext[line - 1] + '\n'
+    if line +1 < len(filetext):
+        next_line = '\n' + filetext[line + 1]
 
+    return (prev_line +
+        underline_word(line_text) + 
+        next_line
+    ) 
 
 @dataclass
 class IgnoreException(Exception):
@@ -50,5 +63,20 @@ class IgnoreException(Exception):
         col = self.token.column
         return f"""{underline_word(self.exception_type.__name__)}: {self.message} 
 in file {self.filename} at line: {line}, col: {col}
-{underline(self.filename, self.token)}
+{underline(self.filename, line - 1, col, self.token.text)}
+"""
+    
+
+@dataclass
+class IgnoreLexerException(Exception):
+    exception_type: Type[BaseException]
+    message: str
+    filename: str
+    line: int
+    text: str
+
+    def __str__(self) -> str:
+        return f"""{underline_word(self.exception_type.__name__)}: {self.message} 
+in file {self.filename} at line: {self.line}
+{underline_whole_line(self.filename, self.line -1, self.text)}
 """

@@ -14,6 +14,8 @@ def first_phase(filename: str) -> Tuple[ignoreParser.ProgramContext, VarDeclDict
     # populates variables
     input_stream = FileStream(filename, encoding="utf-8")
     lexer = ignoreLexer(input_stream)
+    lexer.removeErrorListeners()
+    lexer.addErrorListener(IgnoreErrorListener(filename))
     stream = CommonTokenStream(lexer)
     parser = ignoreParser(stream)
     parser.removeErrorListeners()

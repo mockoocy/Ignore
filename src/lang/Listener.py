@@ -209,6 +209,14 @@ class Listener(ignoreParserListener):
 
     @override
     def enterFunctionCall(self, ctx: ignoreParser.FunctionCallContext):
+        if not ctx.CLOSE_PAREN():
+            raise IgnoreException(
+                SyntaxError,
+                "You forgot to close parenthesis!",
+                self.filename,
+                ctx.OPEN_PAREN().getSymbol()
+            )
+
         function_name = ctx.NAME().getText()
         function_name_token = ctx.NAME().getSymbol()
         function = self.env_stack[-1].create_snapshot()[function_name]
@@ -238,3 +246,15 @@ class Listener(ignoreParserListener):
                 self.filename,
                 function_name_token
             )
+        
+    @override
+    def enterWrapped_expr(self, ctx: ignoreParser.Wrapped_exprContext):
+        if not ctx.OPEN_CURLY():
+            raise IgnoreException(
+                ValueError,
+                "Unclosed curly bracket!",
+                self.filename,
+                ctx.OPEN_CURLY().getSymbol()
+            )
+        return super().enterWrapped_expr(ctx)
+    
