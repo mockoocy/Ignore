@@ -8,13 +8,13 @@
   <var name=a type=int>
     {-10}
   </var>
-    <if condition={n == 0 || n == 1}>
+    <if condition={n==0||n==1}>
       <return>
-        {inna(inna())} // ilosc argumentow!!
+        {inna(inna())}
       </return>
     </if>
     <return>
-      {n * factorial(n - 1)} // spacje!
+      {n*factorial(n-1)} 
     </return>
   </function>
   {print(factorial(4))}

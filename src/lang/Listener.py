@@ -234,7 +234,7 @@ class Listener(ignoreParserListener):
         if len(params) != len(arguments):
             raise IgnoreException(
                 ValueError,
-                "Invalid number of arguments (LISTENER)",
+                "Invalid number of arguments!",
                 self.filename,
                 function_name_token
             )
