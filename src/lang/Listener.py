@@ -122,7 +122,7 @@ class Listener(ignoreParserListener):
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
         current_stack = self.env_stack[-1] if len(self.env_stack) > 0 else None
-        if len(self.env_stack) > 0:
+        if len(self.loop_stack) == 0:
             for child in ctx.getChildren():
                 if not isinstance(child, TerminalNodeImpl) or child.getSymbol().type != ignoreParser.BREAK:
                     continue
