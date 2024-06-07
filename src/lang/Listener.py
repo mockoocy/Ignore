@@ -21,6 +21,7 @@ class Listener(ignoreParserListener):
         self.env_stack: List[Environment] = [deepcopy(global_env)]
         self.variables: VarDeclDict = {}
         self.loop_stack: List[bool] = [] # used to keep track if we are inside a loop to restrict break statement.
+        self.function_stack: List[bool] = [] # tracks if we are inside function. True if encountered a return statement outside.
         """
             stores our var decls. For now format: name -> value.
             May move to format name -> variableSpecification 
@@ -173,6 +174,7 @@ class Listener(ignoreParserListener):
 
     @override
     def enterFunction(self, ctx: ignoreParser.FunctionContext):
+        self.function_stack.append(False)
         function_name = ctx.FUNCTION_NAME().getText()[5:]
         params = self._extract_function_params(ctx)
         body = ctx.block()
@@ -182,19 +184,34 @@ class Listener(ignoreParserListener):
             if ctx.FUNCTION_RET_TYPE()
             else None
         )
-        if return_type is None and any((isinstance(child, ignoreParser.ReturnStmtContext) for child in body.getChildren())):
-            raise IgnoreException(
-                ValueError,
-                f"Attempting to return from function that does not define return type",
-                self.filename,
-                body.returnStmt()[0].RETURN_TAG().getSymbol()
-            )
-        
         self._add_new_function(function_name, params, body, return_type, ctx)
 
     @override
     def exitFunction(self, ctx: ignoreParser.FunctionContext):
+        function = self.variables[ctx]
+        assert isinstance(function, FunctionInfo)
+        if function.return_type and not self.function_stack[-1]:
+            raise IgnoreException(
+                ValueError,
+                "function with return type provided, does not return value",
+                self.filename,
+                ctx.FUNCTION_RET_TYPE().getSymbol()
+            )
+        elif function.return_type is None and self.function_stack[-1]:
+            raise IgnoreException(
+                TypeError,
+                "attempted to return a value from function without a return type",
+                self.filename,
+                ctx.FUNCTION_NAME().getSymbol()
+            )
+        self.function_stack.pop()
         return super().exitFunction(ctx)
+
+    @override
+    def enterReturnStmt(self, ctx: ignoreParser.ReturnStmtContext):
+        self.function_stack[-1] = True
+
+        return super().enterReturnStmt(ctx)
 
     @override
     def enterWhile_loop(self, ctx: ignoreParser.While_loopContext):

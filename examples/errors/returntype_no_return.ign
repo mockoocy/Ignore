@@ -1,0 +1,8 @@
+<function name=test returnType=int>
+  {print("something")}
+</function>
+
+
+<program>
+  {test()}
+</program>
