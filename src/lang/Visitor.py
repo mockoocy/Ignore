@@ -63,7 +63,7 @@ class Visitor(ignoreParserVisitor):
             self.current_env = Environment(enclosing=prev_env, variables={})
             for child in ctx.getChildren():
                 self.visit(child)
-            if ctx.BREAK():
+            if ctx.break_():
                 EarlyExit.break_from_loop()
         finally:
             self.current_env = prev_env

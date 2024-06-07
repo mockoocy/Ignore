@@ -78,5 +78,5 @@ class IgnoreLexerException(Exception):
     def __str__(self) -> str:
         return f"""{underline_word(self.exception_type.__name__)}: {self.message} 
 in file {self.filename} at line: {self.line}
-{underline_whole_line(self.filename, self.line -1, self.text)}
+{underline_whole_line(self.filename, self.line, self.text)}
 """

@@ -4,7 +4,6 @@ options {
 	tokenVocab = ignoreLexer;
 }
 comma: COMMA;
-
 literalNumeric: (LITERAL_INT | LITERAL_FLOAT);
 literal:
 	LITERAL_INT
@@ -30,8 +29,7 @@ while_loop: WHILE_TAG loop_condition END_TAG block WHILE_END;
 for_loop: FOR_TAG (var)? loop_condition (var_assign)? END_TAG block FOR_END;
 
 loop_condition: CONDITION_EQ OPEN_CURLY (condition) CLOSE_CURLY;
-
-
+break: BREAK;
 
 condition: expr | LITERAL_BOOL;
 if:
@@ -63,7 +61,7 @@ statement:
 	| for_loop
 	| while_loop;
 
-block: (statement | returnStmt | BREAK)+;
+block: (statement | returnStmt | break)+;
 
 expr:
 	OPEN_PAREN expr CLOSE_PAREN
@@ -76,4 +74,4 @@ expr:
 	| functionCall
 	| NOT expr
 	| NAME;
-wrapped_expr: OPEN_CURLY expr CLOSE_CURLY?;
+wrapped_expr: OPEN_CURLY expr CLOSE_CURLY;

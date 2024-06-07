@@ -125,6 +125,15 @@ class ignoreParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ignoreParser#break.
+    def enterBreak(self, ctx:ignoreParser.BreakContext):
+        pass
+
+    # Exit a parse tree produced by ignoreParser#break.
+    def exitBreak(self, ctx:ignoreParser.BreakContext):
+        pass
+
+
     # Enter a parse tree produced by ignoreParser#condition.
     def enterCondition(self, ctx:ignoreParser.ConditionContext):
         pass

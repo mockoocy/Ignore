@@ -74,6 +74,11 @@ class ignoreParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ignoreParser#break.
+    def visitBreak(self, ctx:ignoreParser.BreakContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ignoreParser#condition.
     def visitCondition(self, ctx:ignoreParser.ConditionContext):
         return self.visitChildren(ctx)

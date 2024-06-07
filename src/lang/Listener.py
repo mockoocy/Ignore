@@ -119,6 +119,16 @@ class Listener(ignoreParserListener):
             + "\x1b[0m"
         )
 
+    @override
+    def enterBreak(self, ctx: ignoreParser.BreakContext):
+        if len(self.loop_stack) == 0:
+            raise IgnoreException(
+                SyntaxError,
+                "Break statement outside of loop",
+                self.filename,
+                ctx.BREAK().getSymbol()
+            )
+        return super().enterBreak(ctx)
 
     @override
     def enterBlock(self, ctx: ignoreParser.BlockContext):
@@ -247,14 +257,3 @@ class Listener(ignoreParserListener):
                 function_name_token
             )
         
-    @override
-    def enterWrapped_expr(self, ctx: ignoreParser.Wrapped_exprContext):
-        if not ctx.OPEN_CURLY():
-            raise IgnoreException(
-                ValueError,
-                "Unclosed curly bracket!",
-                self.filename,
-                ctx.OPEN_CURLY().getSymbol()
-            )
-        return super().enterWrapped_expr(ctx)
-    
