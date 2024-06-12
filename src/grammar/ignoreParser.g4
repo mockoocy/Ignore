@@ -11,7 +11,7 @@ literal:
 	| LITERAL_STRING
 	| LITERAL_BOOL;
 
-argumentList: expr+;
+argumentList: expr (COMMA expr)*;
 functionCall:
 	NAME OPEN_PAREN argumentList? CLOSE_PAREN?;
 // paramName: type. Could change to NAME : NAME = literal for default values of params.

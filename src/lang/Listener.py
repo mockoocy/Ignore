@@ -78,6 +78,7 @@ class Listener(ignoreParserListener):
 
     def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
         function_param = ctx.FUNCTION_PARAM()
+        # print(function_param.getText())
         if not (params := list(map(lambda param_node: self._extract_function_param(param_node), function_param))):
             return {}
         if len(params) != len(set(params)):
