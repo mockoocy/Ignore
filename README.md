@@ -35,7 +35,7 @@ generate #Powershell
 To run the program type the following thing:
 
 ```bash
-python run.py <filename>
+python ignore.py <filename>
 ```
 
 or use one of these ommands:
