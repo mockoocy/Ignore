@@ -17,12 +17,23 @@ class IgnoreErrorListener(ErrorListener):
         self.parsed_file: str = filepath
         super().__init__()
 
+    def _raise_unmatched_symbol(self, err: LexerNoViableAltException):
+        symbol = err.input.getText(err.startIndex, err.startIndex)
+        line = err.input.getText(0, err.startIndex).count('\n')
+        raise IgnoreLexerException(
+            SyntaxError,
+            f"unmatched symbol: '{symbol}'",
+            self.parsed_file,
+            line,
+            symbol
+        )
 
     @override 
     def syntaxError(self, resolver: ignoreParser | ignoreLexer, offendingSymbol: CommonToken, line: int , column: int, msg: str, err):
         if (type(resolver) == ignoreLexer and type(err) == LexerNoViableAltException):
+            symbol = err.input.getText(err.startIndex, err.startIndex)
+            
             if msg and ErrorMessages.TOKEN_RECOGNITION in msg:
-                symbol = err.input.getText(err.startIndex, err.startIndex)
                 if symbol == '"':
                     quote_line = err.input.getText(0, err.startIndex).count('\n')
                     raise IgnoreLexerException(
@@ -32,6 +43,9 @@ class IgnoreErrorListener(ErrorListener):
                         quote_line,
                         symbol
                     )
+                else:
+                    self._raise_unmatched_symbol(err)
+
 
         if msg and ErrorMessages.MISMATCHED_INPUT in msg and isinstance(err, InputMismatchException):
             TAG_EXPR_OVERLAPS =  ("<", ">", "/")

@@ -1,5 +1,5 @@
 <program> 
-  <function name=multiply_string string_to_multiply:string times:int returnType=string > 
+  <function name=multiply_string string_to_multiply:string, times:int returnType=string > 
     <return>
         {string_to_multiply * times}
     </return>
