@@ -1,0 +1,14 @@
+<program> 
+  <function name=multiply_string string_to_multiply:string times:int returnType=string>
+    <return>
+        {string_to_multiply * times}
+    </return>
+  </function>
+  <function name=concat_strings first:string second:string returnType=string>
+    <return>
+        {first + second}
+    </return>
+  </function>
+
+  {print(concat_strings(multiply_string("ha", 3), multiply_string("ho", 2)))}
+</program>

@@ -78,7 +78,6 @@ class Listener(ignoreParserListener):
 
     def _extract_function_params(self, ctx: ignoreParser.FunctionContext) -> Dict[str, str]:
         function_param = ctx.FUNCTION_PARAM()
-        print(list(map(TerminalNodeImpl.getText, function_param)))
         if not (params := list(map(lambda param_node: self._extract_function_param(param_node), function_param))):
             return {}
         if len(params) != len(set(params)):
@@ -250,7 +249,7 @@ class Listener(ignoreParserListener):
         function = self.env_stack[-1].create_snapshot()[function_name]
         arguments = []
         if arguments_list := ctx.argumentList():
-            arguments = arguments_list.getText().split(",")
+            arguments = arguments_list.expr() or []
         params = {}
         if isinstance(function, FunctionInfo):
             params = function.params or {}
