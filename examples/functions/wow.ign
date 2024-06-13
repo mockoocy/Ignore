@@ -9,6 +9,5 @@
         {first + second}
     </return>
   </function>
-
-  {print(concat_strings(multiply_string("ha", 3), multiply_string("ho", 2)))}
+  {print("siema" - 2)}
 </program>

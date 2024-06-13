@@ -1,0 +1,6 @@
+<program>
+  <function name=rec>
+    {rec()}
+  </function>
+  {rec()}
+</program>

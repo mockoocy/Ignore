@@ -33,6 +33,7 @@ class Visitor(ignoreParserVisitor):
         except EarlyExit as early_exit:
             return early_exit.value
 
+
     @override
     def visitLiteral(self, ctx: ignoreParser.LiteralContext):
         literal = ctx
@@ -119,19 +120,28 @@ class Visitor(ignoreParserVisitor):
                 function_name_token # for better error handling
             )
         result = None
-        if isinstance(function, BuiltIn):
-            result =  self._evaluate_builtin_call(function, arguments)
-        elif isinstance(function, FunctionInfo):
-            result =  self._evaluate_function_call(function, arguments, function_name_token)
-        elif isinstance(function, VariableInfo):
-            result =  self._evaluate_function_call(function.value, arguments, function_name_token)
-        else:
+        try:
+            if isinstance(function, BuiltIn):
+                result =  self._evaluate_builtin_call(function, arguments)
+            elif isinstance(function, FunctionInfo):
+                result =  self._evaluate_function_call(function, arguments, function_name_token)
+            elif isinstance(function, VariableInfo):
+                result =  self._evaluate_function_call(function.value, arguments, function_name_token)
+            else:
+                raise IgnoreException(
+                    ValueError,
+                    f" {function_name} is not a function",
+                    self.filename,
+                    function_name_token
+                )
+        except RecursionError:
             raise IgnoreException(
                 ValueError,
-                f" {function_name} is not a function",
+                f"maximum recursion depth exceeded!",
                 self.filename,
                 function_name_token
             )
+
         type_caster = lambda x: x
         if isinstance(function, FunctionInfo) and (return_type := function.return_type):
             type_caster = Valid_Types[return_type]
@@ -187,37 +197,44 @@ class Visitor(ignoreParserVisitor):
         # Now we surely deal with a binary operation
         left = self.visitExpr(expr.expr(0))
         right = self.visitExpr(expr.expr(1))
-
-        if expr.ADD() is not None:
-            return left + right
-        elif expr.SUB() is not None:
-            return left - right
-        elif expr.MUL() is not None:
-            return left * right
-        elif expr.DIV() is not None:
-            return left / right  # division by zero?!
-        elif expr.MOD() is not None:
-            return left % right
-        elif expr.INT_DIV() is not None:
-            return left // right
-        # case of comparision, maybe should switch these to be EQ, NEQ, LT, etc. instead of this check
-        elif str(expr.OPERATOR_COMPARE()) == "==":
-            return left == right
-        elif str(expr.OPERATOR_COMPARE()) == "!=":
-            return left != right
-        elif str(expr.OPERATOR_COMPARE()) == ">":
-            return left > right
-        elif str(expr.OPERATOR_COMPARE()) == "<":
-            return left < right
-        elif str(expr.OPERATOR_COMPARE()) == ">=":
-            return left >= right
-        elif str(expr.OPERATOR_COMPARE()) == "<=":
-            return left <= right
-        elif (op_logic :=expr.OPERATOR_LOGIC()) is not None:
-            if str(op_logic) == "&&":
-                return left and right
-            elif str(op_logic) == "||":
-                return left or right
+        try: 
+            if (operator := expr.ADD()) is not None:
+                return left + right
+            elif (operator := expr.SUB()) is not None:
+                return left - right
+            elif (operator := expr.MUL()) is not None:
+                return left * right
+            elif (operator := expr.DIV()) is not None:
+                return left / right  # division by zero?!
+            elif (operator := expr.MOD()) is not None:
+                return left % right
+            elif (operator := expr.INT_DIV()) is not None:
+                return left // right
+            # case of comparision, maybe should switch these to be EQ, NEQ, LT, etc. instead of this check
+            elif str(operator := expr.OPERATOR_COMPARE()) == "==":
+                return left == right
+            elif str(operator := expr.OPERATOR_COMPARE()) == "!=":
+                return left != right
+            elif str(operator := expr.OPERATOR_COMPARE()) == ">":
+                return left > right
+            elif str(operator := expr.OPERATOR_COMPARE()) == "<":
+                return left < right
+            elif str(operator := expr.OPERATOR_COMPARE()) == ">=":
+                return left >= right
+            elif str(operator := expr.OPERATOR_COMPARE()) == "<=":
+                return left <= right
+            elif (operator := expr.OPERATOR_LOGIC()) is not None:
+                if str(operator) == "&&":
+                    return left and right
+                elif str(operator) == "||":
+                    return left or right
+        except TypeError as ex:
+            raise IgnoreException(
+                TypeError,
+                str(ex),
+                self.filename,
+                operator.getSymbol()
+            )
 
 
     @override
